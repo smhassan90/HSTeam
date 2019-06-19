@@ -3,5 +3,4 @@
     <string name="login">LOGIN</string>
     <string name="hintCode">Employee Code</string>
     <string name="basicInformation">Basic Information</string>
-    <string name="newUser">New User Data</string>
 </resources>

@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.greenstar.hsteam.R;
@@ -116,6 +119,70 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
     // Matrix4 - New Users Method Mix
     //Declaration ends
 
+    /*
+        Declare all variables of form
+    */
+    //Section 1 Declaration
+    EditText etCurrentUser, etMethodSwitcher, etMisoCases, etPACCases, etEverUsersLess, etEverUsersGreater, etNeverUsers, etDeliveriesConducted;
+
+    TextView tvNewUsers, tvFPClients, tvCondomClients, tvPillClients, tvIUDClients, tvImplantClients, tvInjectableClients;
+    TextView tvVSCClients, tvPPIUDClients, tvTotalInjectableClients;
+
+    EditText etOneMonth, etTwoMonths, etThreeMonths, etPACLTMAdopted, etPostPACFPAdopted;
+
+    //Section 2 Declaration
+    EditText etIUDRemovedSide, etIUDRemovedDesire, etIUDRemovedAdverse, etIUDRemovedOther;
+    TextView tvTotalIUDRemovalCases;
+
+    //Section 3 declaration
+    EditText etPlacentalInsertion, etImmediatePostPartumInsertion, etImmediateExpulsion, etDelayedExpulsion;
+
+    //Section 4 declaration
+    RadioGroup rgIECMaterial;
+    RadioButton rbIECMaterialYes, rbIECMaterialNo;
+
+    RadioGroup rgLastQAT;
+    RadioButton rbLastQATYes, rbLastQATNo;
+
+    RadioGroup rgRecordBook;
+    RadioButton rbRecordBookYes, rbRecordBookNo;
+
+    RadioGroup rgDetailFilled;
+    RadioButton rbDetailFilledYes, rbDetailFilledNo;
+
+    RadioGroup rgTrainingCert;
+    RadioButton rbTrainingCertYes, rbTrainingCertNo;
+
+    RadioGroup rgAdverseEvent;
+    RadioButton rbAdverseEventYes, rbAdverseEventNo;
+
+    RadioGroup rgFlipChart;
+    RadioButton rbFlipChartYes, rbFlipChartNo;
+
+    //Section 5
+    RadioGroup rgAutoclave;
+    RadioButton rbAutoclaveYes, rbAutoclaveNo;
+
+    RadioGroup rgChlorine;
+    RadioButton rbChlorineYes, rbChlorineNo;
+
+    RadioGroup rgInstrument;
+    RadioButton rbInstrumentYes, rbInstrumentNo;
+
+    RadioGroup rgBoilingInst;
+    RadioButton rbBoilingInstYes, rbBoilingInstNo;
+
+    RadioGroup rgGloveUse;
+    RadioButton rbGloveUseYes, rbGloveUseNo;
+
+    RadioGroup rgSafetyBox;
+    RadioButton rbSafetyBoxYes, rbSafetyBoxNo;
+
+    RadioGroup rgDustbin;
+    RadioButton rbDustbinYes, rbDustbinNo;
+    /*
+        End declaration
+    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -130,7 +197,135 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         // Total FP clients initialize elements in a matrix
         initializeMatrix1Elements();
 
+        initializeSection1();
+
     }
+
+    /*
+    Initialize elements of section 1
+     */
+    private void initializeSection1(){
+
+        etCurrentUser = findViewById(R.id.etTotalCurrentUser);
+        etMethodSwitcher = findViewById(R.id.etMethodSwitcher);
+        etMisoCases = findViewById(R.id.etMisoCases);
+        etPACCases = findViewById(R.id.etPACCases);
+        etEverUsersLess = findViewById(R.id.etEverUserLess);
+        etEverUsersGreater = findViewById(R.id.etEverUserGreater);
+        etNeverUsers = findViewById(R.id.etNeverUser);
+        etDeliveriesConducted = findViewById(R.id.etDeliveriesConducted);
+        etOneMonth = findViewById(R.id.etOneMonth);
+        etTwoMonths = findViewById(R.id.etTwoMonth);
+        etThreeMonths = findViewById(R.id.etThreeMonths);
+        etPACLTMAdopted = findViewById(R.id.etPACLTMAdopted);
+        etPostPACFPAdopted = findViewById(R.id.etPACFPAdopted);
+
+        tvNewUsers = findViewById(R.id.tvTotalNewUsers);
+        tvFPClients = findViewById(R.id.tvTotalFPClients);
+        tvCondomClients = findViewById(R.id.tvTotalCondomClients);
+        tvPillClients = findViewById(R.id.tvTotalPillClients);
+        tvIUDClients = findViewById(R.id.tvTotalIUDClients);
+        tvImplantClients = findViewById(R.id.tvTotalInjectablesClients);
+        tvVSCClients = findViewById(R.id.tvTotalVSCClients);
+        tvPPIUDClients = findViewById(R.id.tvTotalPPIUCDClients);
+        tvTotalInjectableClients = findViewById(R.id.tvTotalInjectablesClients);
+    }
+
+
+    /*
+    Initialize elements of section 2
+     */
+    private void initializeSection2(){
+
+        etIUDRemovedSide = findViewById(R.id.etIUDRemovedSide);
+        etIUDRemovedDesire = findViewById(R.id.etIUDRemovedDesire);
+        etIUDRemovedAdverse = findViewById(R.id.etIUDRemovedAdverse);
+        etIUDRemovedOther = findViewById(R.id.etIUDRemovedOther);
+
+        tvTotalIUDRemovalCases = findViewById(R.id.tvTotalIUDClients);
+    }
+
+    /*
+    Initialize elements of section 3
+     */
+    private void initializeSection3(){
+
+        etPlacentalInsertion = findViewById(R.id.etPlacentalInsertion);
+        etImmediatePostPartumInsertion = findViewById(R.id.etImmediatePostPartumInsertion);
+        etImmediateExpulsion = findViewById(R.id.etImmediateExpulsion);
+        etDelayedExpulsion = findViewById(R.id.etDelayedExpulsion);
+    }
+
+    /*
+    Initialize elements of section 4
+    Yes/NO
+     */
+    private void initializeSection4(){
+
+        rgIECMaterial = findViewById(R.id.rgIECMaterial);
+        rbIECMaterialYes = findViewById(R.id.rbIECMaterialYes);
+        rbIECMaterialNo = findViewById(R.id.rbIECMaterialNo);
+
+        rgLastQAT = findViewById(R.id.rgLastQAT);
+        rbLastQATNo = findViewById(R.id.rbLastQATNo);
+        rbLastQATYes = findViewById(R.id.rbLastQATYes);
+
+        rgRecordBook = findViewById(R.id.rgRecordBook);
+        rbRecordBookYes = findViewById(R.id.rbRecordBookYes);
+        rbRecordBookNo = findViewById(R.id.rbRecordBookNo);
+
+        rgDetailFilled = findViewById(R.id.rgDetailFilled);
+        rbDetailFilledYes = findViewById(R.id.rbDetailFilledYes);
+        rbDetailFilledNo = findViewById(R.id.rbDetailFilledNo);
+
+        rgTrainingCert = findViewById(R.id.rgTrainingCert);
+        rbTrainingCertYes = findViewById(R.id.rbTrainingCertYes);
+        rbTrainingCertNo = findViewById(R.id.rbTrainingCertNo);
+
+        rgAdverseEvent = findViewById(R.id.rgAdverseEvent);
+        rbAdverseEventYes = findViewById(R.id.rbAdverseEventYes);
+        rbAdverseEventNo = findViewById(R.id.rbAdverseEventNo);
+
+        rgFlipChart = findViewById(R.id.rgFlipChart);
+        rbFlipChartYes = findViewById(R.id.rbFlipChartYes);
+        rbFlipChartNo = findViewById(R.id.rbFlipChartNo);
+    }
+
+    /*
+    Initialize elements of section 5
+    Yes/NO
+     */
+    private void initializeSection5(){
+
+        rgIECMaterial = findViewById(R.id.rgIECMaterial);
+        rbIECMaterialYes = findViewById(R.id.rbIECMaterialYes);
+        rbIECMaterialNo = findViewById(R.id.rbIECMaterialNo);
+
+        rgLastQAT = findViewById(R.id.rgLastQAT);
+        rbLastQATNo = findViewById(R.id.rbLastQATNo);
+        rbLastQATYes = findViewById(R.id.rbLastQATYes);
+
+        rgRecordBook = findViewById(R.id.rgRecordBook);
+        rbRecordBookYes = findViewById(R.id.rbRecordBookYes);
+        rbRecordBookNo = findViewById(R.id.rbRecordBookNo);
+
+        rgDetailFilled = findViewById(R.id.rgDetailFilled);
+        rbDetailFilledYes = findViewById(R.id.rbDetailFilledYes);
+        rbDetailFilledNo = findViewById(R.id.rbDetailFilledNo);
+
+        rgTrainingCert = findViewById(R.id.rgTrainingCert);
+        rbTrainingCertYes = findViewById(R.id.rbTrainingCertYes);
+        rbTrainingCertNo = findViewById(R.id.rbTrainingCertNo);
+
+        rgAdverseEvent = findViewById(R.id.rgAdverseEvent);
+        rbAdverseEventYes = findViewById(R.id.rbAdverseEventYes);
+        rbAdverseEventNo = findViewById(R.id.rbAdverseEventNo);
+
+        rgFlipChart = findViewById(R.id.rgFlipChart);
+        rbFlipChartYes = findViewById(R.id.rbFlipChartYes);
+        rbFlipChartNo = findViewById(R.id.rbFlipChartNo);
+    }
+
 
     /*
         Total FP clients initialize elements in a matrix1

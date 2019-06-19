@@ -71,7 +71,7 @@
                         style="@style/text_style"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:text="1.1 PROVIDER CLIENT SERVICE DELIVERY DATA"/>
+                        android:text="1. PROVIDER CLIENT SERVICE DELIVERY DATA"/>
                 </LinearLayout>
 
                 <include android:id="@+id/glMatrix1" android:layout_width="match_parent" android:layout_height="match_parent" layout="@layout/matrix1"/>
@@ -138,12 +138,14 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
-                            android:text="Total # of Interval IUCD Inserted (Greenstar and Non Greenstar)"/>
+                            android:text="Total # of Current Users"/>
                         <EditText
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
+                            android:inputType="number"
+                            android:id="@+id/etTotalCurrentUser"
+                            android:text="0">
                         </EditText>
                     </TableRow>
                     <TableRow
@@ -159,12 +161,14 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
-                            android:text="Total # of Deliveries conducted"/>
+                            android:text="Total # of Method Switchers"/>
                         <EditText
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
+                            android:inputType="number"
+                            android:id="@+id/etMethodSwitcher"
+                            android:text="0">
                         </EditText>
                     </TableRow>
                     <TableRow
@@ -180,12 +184,14 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
-                            android:text="Total # of PPIUCD insertion done"/>
+                            android:text="Total # of Miso Cases"/>
                         <EditText
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
+                            android:id="@+id/etMisoCases"
+                            android:inputType="number"
+                            android:text="0">
                         </EditText>
                     </TableRow>
                     <TableRow
@@ -201,12 +207,14 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
-                            android:text="Total # of condom clients"/>
+                            android:text="Total # of PAC Cases"/>
                         <EditText
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
+                            android:inputType="number"
+                            android:id="@+id/etPACCases"
+                            android:text="0">
                         </EditText>
                     </TableRow>
                     <TableRow
@@ -222,19 +230,325 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
-                            android:text="Total # of PPIUCD expelled"/>
+                            android:text="Total # of Ever Users (less than 12 months)"/>
                         <EditText
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
+                            android:id="@+id/etEverUserLess"
+                            android:inputType="number"
+                            android:text="0">
                         </EditText>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total # of Ever Users (greater than 12 months)"/>
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:id="@+id/etEverUserGreater"
+                            android:inputType="number"
+                            android:text="0">
+                        </EditText>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total # of Never Users"/>
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:inputType="number"
+                            android:id="@+id/etNeverUser"
+                            android:text="0">
+                        </EditText>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:padding="@dimen/padding_10"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total New Users"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:id="@+id/tvTotalNewUsers"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="3"
+                            android:text="0">
+                        </TextView>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total Deliveries Conducted"/>
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:inputType="number"
+                            android:id="@+id/etDeliveriesConducted"
+                            android:text="0">
+                        </EditText>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:padding="@dimen/padding_10"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total FP Clients"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:id="@+id/tvTotalFPClients"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="3"
+                            android:text="0">
+                        </TextView>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:padding="@dimen/padding_10"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total Condom Clients"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:id="@+id/tvTotalCondomClients"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="3"
+                            android:text="0">
+                        </TextView>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:padding="@dimen/padding_10"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total Pill Clients "/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:id="@+id/tvTotalPillClients"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="3"
+                            android:text="0">
+                        </TextView>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:padding="@dimen/padding_10"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total IUD Clients "/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:id="@+id/tvTotalIUDClients"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="3"
+                            android:text="0">
+                        </TextView>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10"
+                        android:padding="@dimen/padding_10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total Implant Clients "/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:id="@+id/tvTotalImplantClients"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="3"
+                            android:text="0">
+                        </TextView>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10"
+                        android:padding="@dimen/padding_10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total Injectable Client"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:id="@+id/tvTotalInjectablesClientsSum"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="3"
+                            android:text="0">
+                        </TextView>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10"
+                        android:padding="@dimen/padding_10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total VSC Clients "/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:id="@+id/tvTotalVSCClients"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="3"
+                            android:text="0">
+                        </TextView>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10"
+                        android:padding="@dimen/padding_10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total # of PPIUD Clients"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:id="@+id/tvTotalPPIUCDClients"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="3"
+                            android:text="0">
+                        </TextView>
                     </TableRow>
                     <LinearLayout
                         android:background="@drawable/customborder"
                         android:layout_marginTop="@dimen/form_field_padding"
                         android:paddingBottom="@dimen/form_field_padding"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        >
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -248,108 +562,16 @@
                                 android:textColor="@color/black"
                                 android:gravity="center_vertical"
                                 android:layout_weight="7"
-                                android:text="Total # FP PAC cases"/>
+                                android:text="Total # of Injectable Clients "/>
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 style="@style/text_style"
+                                android:id="@+id/tvTotalInjectablesClients"
                                 android:textColor="@color/black"
                                 android:gravity="center_vertical"
                                 android:layout_weight="3"
-                                android:text="100">
-                            </TextView>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/form_field_padding"
-                            android:background="@drawable/customborder"
-                            android:weightSum="10">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="7"
-                                android:text="Miso"/>
-                            <EditText
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:text="100">
-                            </EditText>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/form_field_padding"
-                            android:background="@drawable/customborder"
-                            android:weightSum="10">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="7"
-                                android:text="MVA cases"/>
-                            <EditText
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:text="100">
-                            </EditText>
-                        </TableRow>
-                    </LinearLayout>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of Post PAC FP"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-                    <LinearLayout
-                        android:background="@drawable/customborder"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:paddingBottom="@dimen/form_field_padding"
-                        android:orientation="vertical">
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/form_field_padding"
-
-                            android:weightSum="10">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="7"
-                                android:text="Total # of Injectable clients"/>
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="3"
-                                android:text="100">
+                                android:text="0">
                             </TextView>
                         </TableRow>
                         <TableRow
@@ -370,7 +592,9 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="3"
-                                android:text="100">
+                                android:id="@+id/etOneMonth"
+                                android:inputType="number"
+                                android:text="0">
                             </EditText>
                         </TableRow>
                         <TableRow
@@ -391,7 +615,9 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="3"
-                                android:text="100">
+                                android:inputType="number"
+                                android:id="@+id/etTwoMonth"
+                                android:text="0">
                             </EditText>
                         </TableRow>
                         <TableRow
@@ -412,52 +638,12 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="3"
+                                android:inputType="number"
+                                android:id="@+id/etThreeMonths"
                                 android:text="100">
                             </EditText>
                         </TableRow>
                     </LinearLayout>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of Post PAC LTM adopted (within 24 hours)"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of method switchers"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -476,7 +662,9 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
+                            android:id="@+id/etPACLTMAdopted"
+                            android:inputType="number"
+                            android:text="0">
                         </EditText>
                     </TableRow>
                     <TableRow
@@ -497,73 +685,11 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
+                            android:inputType="number"
+                            android:id="@+id/etPACFPAdopted"
+                            android:text="0">
                         </EditText>
                     </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of Pill clients"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of Sino II implants done"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of Post-partum clients"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-
                 </TableLayout>
             </LinearLayout>
 
@@ -584,21 +710,8 @@
                         style="@style/medium_text_style"
                         android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:text="@string/newUser"
+                        android:text="2. IUD Discontinuation"
                         android:id="@+id/tvNewUser"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/table_header_size"
-                    android:background="@color/orange"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/text_style"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:text="New User Data"/>
                 </LinearLayout>
 
                 <TableLayout
@@ -617,12 +730,14 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
-                            android:text="Total # of Interval IUCD Inserted (Greenstar and Non Greenstar)"/>
+                            android:text="2.1 # of IUD removed due to side effects"/>
                         <EditText
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
+                            android:inputType="number"
+                            android:id="@+id/etIUDRemovedSide"
+                            android:text="0">
                         </EditText>
                     </TableRow>
                     <TableRow
@@ -638,12 +753,14 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
-                            android:text="Total # of Deliveries conducted"/>
+                            android:text="2.2 # of IUD removed due to desire for pregnancy"/>
                         <EditText
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
+                            android:inputType="number"
+                            android:id="@+id/etIUDRemovedDesire"
+                            android:text="0">
                         </EditText>
                     </TableRow>
                     <TableRow
@@ -659,12 +776,14 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
-                            android:text="Total # of PPIUCD insertion done"/>
+                            android:text="2.3 # of IUD removed due to adverse events"/>
                         <EditText
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
+                            android:inputType="number"
+                            android:id="@+id/etIUDRemovedAdverse"
+                            android:text="0">
                         </EditText>
                     </TableRow>
                     <TableRow
@@ -680,12 +799,14 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
-                            android:text="Total # of condom clients"/>
+                            android:text="2.4 # of IUD removed for any other reasons"/>
                         <EditText
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
+                            android:inputType="number"
+                            android:id="@+id/etIUDRemovedOther"
+                            android:text="0">
                         </EditText>
                     </TableRow>
                     <TableRow
@@ -701,351 +822,826 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
-                            android:text="Total # of PPIUCD expelled"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-                    <LinearLayout
-                        android:background="@drawable/customborder"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:paddingBottom="@dimen/form_field_padding"
-                        android:orientation="vertical">
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/form_field_padding"
-
-                            android:weightSum="10">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="7"
-                                android:text="Total # FP PAC cases"/>
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="3"
-                                android:text="100">
-                            </TextView>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/form_field_padding"
-                            android:background="@drawable/customborder"
-                            android:weightSum="10">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="7"
-                                android:text="Miso"/>
-                            <EditText
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:text="100">
-                            </EditText>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/form_field_padding"
-                            android:background="@drawable/customborder"
-                            android:weightSum="10">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="7"
-                                android:text="MVA cases"/>
-                            <EditText
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:text="100">
-                            </EditText>
-                        </TableRow>
-                    </LinearLayout>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
+                            android:text="2.5 Total IUD Removal Cases"/>
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of Post PAC FP"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
+                            android:id="@+id/tvTotalIUDRemoved"
+                            android:text="0">
+                        </TextView>
                     </TableRow>
-                    <LinearLayout
-                        android:background="@drawable/customborder"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:paddingBottom="@dimen/form_field_padding"
-                        android:orientation="vertical">
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/form_field_padding"
-
-                            android:weightSum="10">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="7"
-                                android:text="Total # of Injectable clients"/>
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="3"
-                                android:text="100">
-                            </TextView>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/form_field_padding"
-                            android:background="@drawable/customborder"
-                            android:weightSum="10">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="7"
-                                android:text="One Month"/>
-                            <EditText
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:text="100">
-                            </EditText>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/form_field_padding"
-                            android:background="@drawable/customborder"
-                            android:weightSum="10">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="7"
-                                android:text="Two Months"/>
-                            <EditText
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:text="100">
-                            </EditText>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/form_field_padding"
-                            android:background="@drawable/customborder"
-                            android:weightSum="10">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                style="@style/text_style"
-                                android:textColor="@color/black"
-                                android:gravity="center_vertical"
-                                android:layout_weight="7"
-                                android:text="Three Months"/>
-                            <EditText
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="3"
-                                android:text="100">
-                            </EditText>
-                        </TableRow>
-                    </LinearLayout>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of Post PAC LTM adopted (within 24 hours)"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of method switchers"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of PAC LTM adopted (within 01 week)"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of Post PAC FP (STM) adopted"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of Pill clients"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of Sino II implants done"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/form_field_padding"
-                        android:background="@drawable/customborder"
-                        android:weightSum="10">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            style="@style/text_style"
-                            android:textColor="@color/black"
-                            android:gravity="center_vertical"
-                            android:layout_weight="7"
-                            android:text="Total # of Post-partum clients"/>
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:text="100">
-                        </EditText>
-                    </TableRow>
-
                 </TableLayout>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/lightBlue"
+                android:padding="@dimen/form_field_padding"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/table_header_size"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/medium_text_style"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="3. PPIUD Insertion and Expulsion"/>
+                </LinearLayout>
 
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="3.1 Placental Insertion (within 10 mins)"/>
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:id="@+id/etPlacentalInsertion"
+                            android:inputType="number"
+                            android:text="0">
+                        </EditText>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="3.2 Immediate post-partum insertion (within 10 mins to 48 hours)"/>
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:inputType="number"
+                            android:id="@+id/etImmediatePostPartumInsertion"
+                            android:text="0">
+                        </EditText>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="3.3 Immediate expulsion (within 24 hours)"/>
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:id="@+id/etImmediateExpulsion"
+                            android:inputType="number"
+                            android:text="0">
+                        </EditText>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="3.4 Delayed expulsion (up to 3 months)"/>
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:id="@+id/etDelayedExpulsion"
+                            android:inputType="number"
+                            android:text="100">
+                        </EditText>
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/lightBlue"
+                android:padding="@dimen/form_field_padding"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/table_header_size"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/medium_text_style"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="Inspection during the visit"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/table_header_size"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/medium_text_style"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="4. IEC (Visible) "/>
+                </LinearLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="4.1 IEC material (PPIUCD, PAC etc.) "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgIECMaterial"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbIECMaterialYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbIECMaterialNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="4.2 Copy of last QAT available with action plan "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgLastQAT"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbLastQATYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbLastQATNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="4.3 Client Record Book  "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgRecordBook"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbRecordBookYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbRecordBookNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="4.4 Clients details completely filled  "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgDetailFilled"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbDetailFilledYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbDetailFilledNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="4.5 Training certificates/Academic"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgTrainingCert"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbTrainingCertYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbTrainingCertNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="4.6 Adverse event referral system "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgAdverseEvent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbAdverseEventYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbAdverseEventNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="4.7 Counselling Flip Chart "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgFlipChart"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbFlipChartYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbFlipChartNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/lightBlue"
+                android:padding="@dimen/form_field_padding"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/table_header_size"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/medium_text_style"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="5. Sterilization/Supplies/Instruments** "/>
+                </LinearLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="5.1 Autoclave /Boiler with lid  "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgAutoclave"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbAutoclaveYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbAutoclaveNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="5.2 0.5% chlorine used for decontamination of instruments "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgChlorine"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbChlorineYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbChlorineNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="5.3 Instruments stored as per QAT protocol  "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgInstrument"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbInstrumentYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbInstrumentNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="5.4 Boiling of instruments for 20 minutes  "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgBoilingInst"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbBoilingInstYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbBoilingInstNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="5.5 Gloves in use"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgGloveUse"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbGloveUseYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbGloveUseNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="5.6 Safety Box in use "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgSafetyBox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbSafetyBoxYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbSafetyBoxNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="5.7 Dustbin and Polythene Bags for Waste Disposal "/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical" >
+
+                            <RadioGroup
+                                android:id="@+id/rgDustbin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <RadioButton
+                                    android:id="@+id/rbDustbinYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes"
+                                    style="@style/text_style"
+                                    android:checked="true" />
+
+                                <RadioButton
+                                    android:id="@+id/rbDustbinNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/text_style"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
