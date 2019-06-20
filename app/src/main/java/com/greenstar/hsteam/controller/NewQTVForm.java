@@ -2,6 +2,8 @@ package com.greenstar.hsteam.controller;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +20,9 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
      */
     final static int COLUMN_LENGTH=6;
     final static int ROW_LENGTH=7;
+
+    final static int COLUMN_EDITTEXT_LENGTH =5;
+    final static int ROW_EDITTEXT_LENGTH=4;
 
     private static final int[] tvTotalRowsIds = {R.id.total1, R.id.total2, R.id.total3, R.id.total4, R.id.total5,
             R.id.total6, R.id.total7, R.id.total8};
@@ -184,6 +189,20 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         End declaration
     */
 
+    /*
+        Section6
+    */
+    private static final int[][] etMatrixIDS = {
+            {R.id.et11, R.id.et12, R.id.et13, R.id.et14, R.id.et15},
+            {R.id.et21, R.id.et12, R.id.et13, R.id.et14, R.id.et15},
+            {R.id.et31, R.id.et12, R.id.et13, R.id.et14, R.id.et15},
+            {R.id.et41, R.id.et12, R.id.et13, R.id.et14, R.id.et15}
+    };
+
+    EditText etMatrixAvailabilityStock[][] = new EditText[ROW_EDITTEXT_LENGTH][COLUMN_EDITTEXT_LENGTH];
+    EditText etMatrixStockPurchase[][] = new EditText[ROW_EDITTEXT_LENGTH][COLUMN_EDITTEXT_LENGTH];
+    View glAvailabilityStock,glStockPurchase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -193,12 +212,232 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         glMatrix2 = findViewById(R.id.glMatrix2);
         glMatrix3 = findViewById(R.id.glMatrix3);
         glMatrix4 = findViewById(R.id.glMatrix4);
+        glAvailabilityStock = findViewById(R.id.glAvailabilityStock);
+        glStockPurchase = findViewById(R.id.glStockPurchase);
 
         // Total FP clients initialize elements in a matrix
         initializeMatrix1Elements();
 
         initializeSection1();
+        initializeSection2();
+        initializeSection3();
+        initializeSection4();
+        initializeSection5();
+        initializeSection6();
 
+        attachingListeners();
+
+    }
+    //Greater , never user
+    private void calculateTotalNewUsers(String greater, String never){
+        int total = 0;
+
+        if(greater.length()>0){
+            total+=Integer.valueOf(greater);
+        }
+        if(never.length()>0){
+            total+=Integer.valueOf(never);
+        }
+        tvNewUsers.setText(String.valueOf(total));
+
+    }
+
+    /*
+
+     */
+    private void attachingListeners(){
+        etEverUsersGreater.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                    //Greater, Never
+                    calculateTotalNewUsers(s.toString(),etNeverUsers.getText().toString());
+            }
+        });
+
+        etNeverUsers.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    //Greater, Never
+                    calculateTotalNewUsers(etEverUsersGreater.getText().toString(), s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        etOneMonth.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Greater, Never
+                calculateTotalInjectables();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        etTwoMonths.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Greater, Never
+                calculateTotalInjectables();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        etThreeMonths.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Greater, Never
+                calculateTotalInjectables();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        etIUDRemovedSide.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Greater, Never
+                calculateTotalIUDRemoval();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        etIUDRemovedDesire.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Greater, Never
+                calculateTotalIUDRemoval();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        etIUDRemovedAdverse.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Greater, Never
+                calculateTotalIUDRemoval();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        etIUDRemovedOther.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Greater, Never
+                calculateTotalIUDRemoval();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+    }
+
+    private void calculateTotalInjectables(){
+        int total = 0;
+
+        if(etOneMonth.getText().toString().length()>0){
+            total+=Integer.valueOf(etOneMonth.getText().toString());
+        }
+
+        if(etTwoMonths.getText().toString().length()>0){
+            total+=Integer.valueOf(etTwoMonths.getText().toString());
+        }
+
+        if(etThreeMonths.getText().toString().length()>0){
+            total+=Integer.valueOf(etThreeMonths.getText().toString());
+        }
+        tvTotalInjectableClients.setText(String.valueOf(total));
+    }
+
+    private void calculateTotalIUDRemoval(){
+        int total = 0;
+
+        if(etIUDRemovedOther.getText().toString().length()>0){
+            total += Integer.valueOf(etIUDRemovedOther.getText().toString());
+        }
+
+        if(etIUDRemovedAdverse.getText().toString().length()>0){
+            total += Integer.valueOf(etIUDRemovedAdverse.getText().toString());
+        }
+
+        if(etIUDRemovedDesire.getText().toString().length()>0){
+            total += Integer.valueOf(etIUDRemovedDesire.getText().toString());
+        }
+
+        if(etIUDRemovedSide.getText().toString().length()>0){
+            total += Integer.valueOf(etIUDRemovedSide.getText().toString());
+        }
+        tvTotalIUDRemovalCases.setText(String.valueOf(total));
     }
 
     /*
@@ -225,7 +464,8 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         tvCondomClients = findViewById(R.id.tvTotalCondomClients);
         tvPillClients = findViewById(R.id.tvTotalPillClients);
         tvIUDClients = findViewById(R.id.tvTotalIUDClients);
-        tvImplantClients = findViewById(R.id.tvTotalInjectablesClients);
+        tvImplantClients = findViewById(R.id.tvTotalImplantClients);
+        tvInjectableClients = findViewById(R.id.tvTotalInjectablesClientsSum);
         tvVSCClients = findViewById(R.id.tvTotalVSCClients);
         tvPPIUDClients = findViewById(R.id.tvTotalPPIUCDClients);
         tvTotalInjectableClients = findViewById(R.id.tvTotalInjectablesClients);
@@ -242,7 +482,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         etIUDRemovedAdverse = findViewById(R.id.etIUDRemovedAdverse);
         etIUDRemovedOther = findViewById(R.id.etIUDRemovedOther);
 
-        tvTotalIUDRemovalCases = findViewById(R.id.tvTotalIUDClients);
+        tvTotalIUDRemovalCases = findViewById(R.id.tvTotalIUDRemoved);
     }
 
     /*
@@ -297,33 +537,48 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
      */
     private void initializeSection5(){
 
-        rgIECMaterial = findViewById(R.id.rgIECMaterial);
-        rbIECMaterialYes = findViewById(R.id.rbIECMaterialYes);
-        rbIECMaterialNo = findViewById(R.id.rbIECMaterialNo);
+        rgAutoclave = findViewById(R.id.rgAutoclave);
+        rbAutoclaveYes = findViewById(R.id.rbAutoclaveYes);
+        rbAutoclaveNo = findViewById(R.id.rbAutoclaveNo);
 
-        rgLastQAT = findViewById(R.id.rgLastQAT);
-        rbLastQATNo = findViewById(R.id.rbLastQATNo);
-        rbLastQATYes = findViewById(R.id.rbLastQATYes);
+        rgChlorine = findViewById(R.id.rgChlorine);
+        rbChlorineYes = findViewById(R.id.rbChlorineYes);
+        rbChlorineNo = findViewById(R.id.rbChlorineNo);
 
-        rgRecordBook = findViewById(R.id.rgRecordBook);
-        rbRecordBookYes = findViewById(R.id.rbRecordBookYes);
-        rbRecordBookNo = findViewById(R.id.rbRecordBookNo);
+        rgInstrument = findViewById(R.id.rgInstrument);
+        rbInstrumentYes = findViewById(R.id.rbInstrumentYes);
+        rbInstrumentNo = findViewById(R.id.rbInstrumentNo);
 
-        rgDetailFilled = findViewById(R.id.rgDetailFilled);
-        rbDetailFilledYes = findViewById(R.id.rbDetailFilledYes);
-        rbDetailFilledNo = findViewById(R.id.rbDetailFilledNo);
+        rgBoilingInst = findViewById(R.id.rgBoilingInst);
+        rbBoilingInstYes = findViewById(R.id.rbBoilingInstYes);
+        rbBoilingInstNo = findViewById(R.id.rbBoilingInstNo);
 
-        rgTrainingCert = findViewById(R.id.rgTrainingCert);
-        rbTrainingCertYes = findViewById(R.id.rbTrainingCertYes);
-        rbTrainingCertNo = findViewById(R.id.rbTrainingCertNo);
+        rgGloveUse = findViewById(R.id.rgGloveUse);
+        rbGloveUseYes = findViewById(R.id.rbGloveUseYes);
+        rbGloveUseNo = findViewById(R.id.rbGloveUseNo);
 
-        rgAdverseEvent = findViewById(R.id.rgAdverseEvent);
-        rbAdverseEventYes = findViewById(R.id.rbAdverseEventYes);
-        rbAdverseEventNo = findViewById(R.id.rbAdverseEventNo);
+        rgSafetyBox = findViewById(R.id.rgSafetyBox);
+        rbSafetyBoxYes = findViewById(R.id.rbSafetyBoxYes);
+        rbSafetyBoxNo = findViewById(R.id.rbSafetyBoxNo);
 
-        rgFlipChart = findViewById(R.id.rgFlipChart);
-        rbFlipChartYes = findViewById(R.id.rbFlipChartYes);
-        rbFlipChartNo = findViewById(R.id.rbFlipChartNo);
+        rgDustbin = findViewById(R.id.rgDustbin);
+        rbDustbinYes = findViewById(R.id.rbDustbinYes);
+        rbDustbinNo = findViewById(R.id.rbDustbinNo);
+    }
+
+    /*
+    Initialize elements of section 6
+    Matrix edit text
+     */
+    private void initializeSection6(){
+
+        for(int i=0; i<ROW_EDITTEXT_LENGTH;i++){
+            for(int j=0; j<COLUMN_EDITTEXT_LENGTH;j++){
+                //Edit Text Matrix initialization
+                etMatrixAvailabilityStock[i][j] = glAvailabilityStock.findViewById(etMatrixIDS[i][j]);
+                etMatrixStockPurchase[i][j] = glStockPurchase.findViewById(etMatrixIDS[i][j]);
+            }
+        }
     }
 
 
@@ -493,6 +748,27 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         }
 
         totalRow1[ROW_LENGTH].setText(String.valueOf(count));
+
+        //Total result of matrix1
+        tvFPClients.setText(String.valueOf(count));
+
+        //Matrix1 column 1 total
+        tvCondomClients.setText(totalColumn1[0].getText().toString());
+
+        //Matrix1 column 2 total
+        tvPillClients.setText(totalColumn1[1].getText().toString());
+
+        //Matrix1 column 3 total
+        tvIUDClients.setText(totalColumn1[2].getText().toString());
+
+        //Matrix1 column 4 total
+        tvImplantClients.setText(totalColumn1[3].getText().toString());
+
+        //Matrix1 column 4 total
+        tvInjectableClients.setText(totalColumn1[4].getText().toString());
+
+        //Matrix1 column 5 total
+        tvVSCClients.setText(totalColumn1[5].getText().toString());
     }
 
 
@@ -526,6 +802,9 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         }
 
         totalRow2[ROW_LENGTH].setText(String.valueOf(count));
+
+        //Total of matrix2
+        tvPPIUDClients.setText(String.valueOf(count));
     }
 
     /*

@@ -139,7 +139,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Current Users"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -162,7 +162,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Method Switchers"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -185,7 +185,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Miso Cases"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -208,7 +208,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of PAC Cases"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -231,7 +231,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Ever Users (less than 12 months)"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -254,7 +254,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Ever Users (greater than 12 months)"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -277,7 +277,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Never Users"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -326,7 +326,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total Deliveries Conducted"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -588,7 +588,7 @@
                                 android:gravity="center_vertical"
                                 android:layout_weight="7"
                                 android:text="One Month"/>
-                            <EditText
+                            <EditText android:maxLength="@string/lenDigit"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="3"
@@ -611,7 +611,7 @@
                                 android:gravity="center_vertical"
                                 android:layout_weight="7"
                                 android:text="Two Months"/>
-                            <EditText
+                            <EditText android:maxLength="@string/lenDigit"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="3"
@@ -634,13 +634,13 @@
                                 android:gravity="center_vertical"
                                 android:layout_weight="7"
                                 android:text="Three Months"/>
-                            <EditText
+                            <EditText android:maxLength="@string/lenDigit"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="3"
                                 android:inputType="number"
                                 android:id="@+id/etThreeMonths"
-                                android:text="100">
+                                android:text="0">
                             </EditText>
                         </TableRow>
                     </LinearLayout>
@@ -658,7 +658,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of PAC LTM adopted (within 01 week)"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -681,7 +681,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Post PAC FP (STM) adopted"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -692,7 +692,6 @@
                     </TableRow>
                 </TableLayout>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -731,7 +730,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="2.1 # of IUD removed due to side effects"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -754,7 +753,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="2.2 # of IUD removed due to desire for pregnancy"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -777,7 +776,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="2.3 # of IUD removed due to adverse events"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -800,7 +799,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="2.4 # of IUD removed for any other reasons"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -870,7 +869,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="3.1 Placental Insertion (within 10 mins)"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -893,7 +892,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="3.2 Immediate post-partum insertion (within 10 mins to 48 hours)"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -916,7 +915,7 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="3.3 Immediate expulsion (within 24 hours)"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
@@ -939,13 +938,13 @@
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="3.4 Delayed expulsion (up to 3 months)"/>
-                        <EditText
+                        <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:id="@+id/etDelayedExpulsion"
                             android:inputType="number"
-                            android:text="100">
+                            android:text="0">
                         </EditText>
                     </TableRow>
                 </TableLayout>
@@ -1642,6 +1641,66 @@
                     </TableRow>
                 </TableLayout>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/lightBlue"
+                android:padding="@dimen/form_field_padding"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/table_header_size"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/medium_text_style"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="6.1 Availability of Stock"/>
+                </LinearLayout>
+                <include android:id="@+id/glAvailabilityStock" android:layout_width="match_parent" android:layout_height="match_parent" layout="@layout/grid_availability_stock"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/lightBlue"
+                android:padding="@dimen/form_field_padding"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/table_header_size"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/medium_text_style"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="6.2 Stock Purchase"/>
+                </LinearLayout>
+                <include android:id="@+id/glStockPurchase" android:layout_width="match_parent" android:layout_height="match_parent" layout="@layout/grid_stock_purchase"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/lightBlue"
+                android:padding="@dimen/form_field_padding"
+                >
+                <EditText android:maxLength="@string/lenDigit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/customborder"
+                    android:padding="@dimen/padding_10"
+                    android:id="@+id/etComments"
+                    android:hint="Comments"
+                    android:text="">
+                </EditText>
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

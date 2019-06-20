@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="6">
+            <LinearLayout
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text=""
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/cellTextColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="Greenstar"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/cellTextColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="Govt."
+                    android:gravity="center"
+                    android:textColor="@color/cellTextColor"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="MSS"
+                    android:textColor="@color/cellTextColor"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="DKT"
+                    android:textColor="@color/cellTextColor"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="Other"
+                    android:gravity="center"
+                    android:textColor="@color/cellTextColor"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="6">
+            <LinearLayout
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="Multiload (Nos)"
+                    android:gravity="center"
+                    android:textColor="@color/cellTextColor"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et11"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et12"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et13"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et14"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et15"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="6">
+            <LinearLayout
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="Safeload (Nos)"
+                    android:gravity="center"
+                    android:textColor="@color/cellTextColor"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et21"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et22"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et23"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et24"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et25"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="6">
+            <LinearLayout
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="Implant (Nos)"
+                    android:gravity="center"
+                    android:textColor="@color/cellTextColor"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et31"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et32"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et33"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et34"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et35"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="6">
+            <LinearLayout
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="Expired Stock"
+                    android:gravity="center"
+                    android:textColor="@color/cellTextColor"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et41"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et42"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et43"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et44"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+            <EditText android:maxLength="@string/lenDigit"
+                android:layout_column="1"
+                android:id="@+id/et45"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height">
+
+            </EditText>
+        </TableRow>
+
+    </TableLayout>
+</android.support.constraint.ConstraintLayout>
