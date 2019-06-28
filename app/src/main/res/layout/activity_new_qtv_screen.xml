@@ -9,36 +9,59 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvReportingMonth"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvStaffCodeName"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvSupervisorName"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvRegion"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvProjectCode"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvOutletCodeName"/>
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/spProviderCodeName">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/lightBlue"
+                android:padding="@dimen/form_field_padding"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/medium_text_style"
+                    android:textStyle="bold"
+                    android:textColor="@color/darkGreen"
+                    android:id="@+id/tvReportingMonth"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/medium_text_style"
+                    android:textStyle="bold"
+                    android:textColor="@color/darkGreen"
+                    android:id="@+id/tvStaffCodeName"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/text_style"
+                    android:textStyle="bold"
+                    android:textColor="@color/darkGreen"
+                    android:id="@+id/tvSupervisorName"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/text_style"
+                    android:textStyle="bold"
+                    android:textColor="@color/darkGreen"
+                    android:id="@+id/tvRegion"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/medium_text_style"
+                    android:textStyle="bold"
+                    android:textColor="@color/darkGreen"
+                    android:id="@+id/tvProjectCode"/>
 
-            </Spinner>
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/spProviderCodeName"
+                    android:prompt="@string/providers"
+                    android:layout_width="fill_parent"
+                    style="@style/spinner_style"
+
+                    android:layout_height="@dimen/spinner_height"
+                    android:autofillHints="@string/providers"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -1699,6 +1722,14 @@
                     android:hint="Comments"
                     android:text="">
                 </EditText>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spinner_height"
+                    android:background="@drawable/customborder"
+                    android:id="@+id/btnSubmit"
+                    style="@style/text_style"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/submit"/>
             </LinearLayout>
 
         </LinearLayout>

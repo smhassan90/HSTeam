@@ -1,20 +1,42 @@
 package com.greenstar.hsteam.controller;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.greenstar.hsteam.R;
+import com.greenstar.hsteam.adapters.ProviderAdapter;
+import com.greenstar.hsteam.db.AppDatabase;
+import com.greenstar.hsteam.model.Providers;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewQTVForm extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
+    /*
+    First Section declaration
+     */
+    TextView tvReportingMonth, tvStaffCodeName, tvSupervisorName, tvRegion, tvProjectCode;
+    SearchableSpinner spProviderCodeName;
+    List<Providers> providers = new ArrayList<>();
+    AppDatabase db =null;
+    ProviderAdapter providerAdapter = null;
+    Button btnSubmit;
+    EditText etComments;
     /*
     Matrix Common elements initialization STARTS
      */
@@ -194,9 +216,9 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
     */
     private static final int[][] etMatrixIDS = {
             {R.id.et11, R.id.et12, R.id.et13, R.id.et14, R.id.et15},
-            {R.id.et21, R.id.et12, R.id.et13, R.id.et14, R.id.et15},
-            {R.id.et31, R.id.et12, R.id.et13, R.id.et14, R.id.et15},
-            {R.id.et41, R.id.et12, R.id.et13, R.id.et14, R.id.et15}
+            {R.id.et21, R.id.et22, R.id.et23, R.id.et24, R.id.et25},
+            {R.id.et31, R.id.et32, R.id.et33, R.id.et34, R.id.et35},
+            {R.id.et41, R.id.et42, R.id.et43, R.id.et44, R.id.et45}
     };
 
     EditText etMatrixAvailabilityStock[][] = new EditText[ROW_EDITTEXT_LENGTH][COLUMN_EDITTEXT_LENGTH];
@@ -207,6 +229,20 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_qtv_screen);
+        db = AppDatabase.getAppDatabase(this);
+
+        //First section initialization
+        tvReportingMonth = findViewById(R.id.tvReportingMonth);
+        tvStaffCodeName = findViewById(R.id.tvStaffCodeName);
+        tvSupervisorName = findViewById(R.id.tvSupervisorName);
+        tvRegion = findViewById(R.id.tvRegion);
+        tvProjectCode = findViewById(R.id.tvProjectCode);
+        spProviderCodeName = findViewById(R.id.spProviderCodeName);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        etComments = findViewById(R.id.etComments);
+        populateFirstSection();
+        //End of First section initialization
+
 
         glMatrix1 = findViewById(R.id.glMatrix1);
         glMatrix2 = findViewById(R.id.glMatrix2);
@@ -228,6 +264,49 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         attachingListeners();
 
     }
+
+    private void populateFirstSection(){
+        SharedPreferences prefs = this.getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE);
+        String region = prefs.getString("region", "");
+        String AMName = prefs.getString("AMName", "");
+        String name = prefs.getString("name", "");
+
+        tvSupervisorName.setText(AMName.toString());
+        tvStaffCodeName.setText(name.toString());
+        tvRegion.setText(region.toString());
+
+        //Providers spinner populate
+        providers = db.getProvidersDAO().getAll();
+
+        Providers first = new Providers();
+        first.setCode("0");
+        first.setName("Please Select");
+        providers.add(0, first);
+        providerAdapter = new ProviderAdapter(this, R.layout.provider_town_list, R.id.tvProviderNamess, providers);
+        spProviderCodeName.setAdapter(providerAdapter);
+    }
+
+    private void attachFocusListener(final EditText[] editText){
+        for(int i =0;i<editText.length;i++){
+            final int loop = i;
+            editText[i].setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean hasFocus) {
+                    if (hasFocus) {
+                        if("0".equals(editText[loop].getText().toString())){
+                            editText[loop].setText("");
+                        }
+                    } else {
+                        if("".equals(editText[loop].getText().toString())){
+                            editText[loop].setText("0");
+                        }
+                    }
+                }
+            });
+        }
+
+    }
+
     //Greater , never user
     private void calculateTotalNewUsers(String greater, String never){
         int total = 0;
@@ -458,6 +537,9 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         etThreeMonths = findViewById(R.id.etThreeMonths);
         etPACLTMAdopted = findViewById(R.id.etPACLTMAdopted);
         etPostPACFPAdopted = findViewById(R.id.etPACFPAdopted);
+        EditText[] arr = {etCurrentUser,etMethodSwitcher,etMisoCases, etPACCases,etEverUsersLess,etEverUsersGreater,
+                etNeverUsers, etDeliveriesConducted , etOneMonth ,etTwoMonths,etThreeMonths , etPACLTMAdopted, etPostPACFPAdopted};
+        attachFocusListener(arr);
 
         tvNewUsers = findViewById(R.id.tvTotalNewUsers);
         tvFPClients = findViewById(R.id.tvTotalFPClients);
@@ -481,6 +563,9 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         etIUDRemovedDesire = findViewById(R.id.etIUDRemovedDesire);
         etIUDRemovedAdverse = findViewById(R.id.etIUDRemovedAdverse);
         etIUDRemovedOther = findViewById(R.id.etIUDRemovedOther);
+        EditText[] arr = {etIUDRemovedSide,etIUDRemovedDesire,etIUDRemovedAdverse, etIUDRemovedOther};
+        attachFocusListener(arr);
+
 
         tvTotalIUDRemovalCases = findViewById(R.id.tvTotalIUDRemoved);
     }
@@ -494,6 +579,9 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         etImmediatePostPartumInsertion = findViewById(R.id.etImmediatePostPartumInsertion);
         etImmediateExpulsion = findViewById(R.id.etImmediateExpulsion);
         etDelayedExpulsion = findViewById(R.id.etDelayedExpulsion);
+
+        EditText[] arr = {etPlacentalInsertion,etImmediatePostPartumInsertion,etImmediateExpulsion, etDelayedExpulsion};
+        attachFocusListener(arr);
     }
 
     /*
@@ -571,14 +659,20 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
     Matrix edit text
      */
     private void initializeSection6(){
-
+        EditText[] editTexts = new EditText[40];
+        int loop=0;
         for(int i=0; i<ROW_EDITTEXT_LENGTH;i++){
             for(int j=0; j<COLUMN_EDITTEXT_LENGTH;j++){
                 //Edit Text Matrix initialization
                 etMatrixAvailabilityStock[i][j] = glAvailabilityStock.findViewById(etMatrixIDS[i][j]);
                 etMatrixStockPurchase[i][j] = glStockPurchase.findViewById(etMatrixIDS[i][j]);
+                editTexts[loop] = etMatrixAvailabilityStock[i][j];
+                loop++;
+                editTexts[loop] = etMatrixStockPurchase[i][j];
+                loop++;
             }
         }
+        attachFocusListener(editTexts);
     }
 
 
@@ -624,7 +718,30 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        if(v.getId()==R.id.btnSubmit){
+            if(isValid()){
+                saveFormData();
+            }
+        }
         handleMatrixClick(v.getId());
+    }
+
+    private boolean isValid(){
+        boolean isValid = true;
+        if(spProviderCodeName.getSelectedItemPosition()==0){
+            isValid = false;
+            Toast.makeText(this,"Please select Provider",Toast.LENGTH_SHORT).show();
+        }else if("".equals(etComments.getText().toString())){
+            isValid = false;
+            Toast.makeText(this,"Please write comments",Toast.LENGTH_SHORT).show();
+        }
+
+        return  isValid;
+
+    }
+
+    private void saveFormData(){
+        
     }
 
     /*

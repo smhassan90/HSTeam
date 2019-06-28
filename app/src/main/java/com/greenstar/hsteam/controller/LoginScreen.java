@@ -1,18 +1,24 @@
 package com.greenstar.hsteam.controller;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.greenstar.hsteam.R;
+import com.greenstar.hsteam.dal.HSData;
+import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.utils.HttpUtils;
+import com.greenstar.hsteam.utils.Util;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -22,9 +28,13 @@ import cz.msebera.android.httpclient.Header;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
     ProgressDialog dialog = null;
+    AppDatabase db =null;
+    Activity activity = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity=this;
+        db = AppDatabase.getAppDatabase(this);
 
         setContentView(R.layout.activity_login_screen);
         Button btnLogin = (Button)this.findViewById(R.id.btnLogin);
@@ -47,27 +57,36 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         }else{
             Toast.makeText(this,"Employee code cannot be empty", Toast.LENGTH_LONG).show();
         }
-
     }
 
     private void loginHit(final String code){
         RequestParams rp = new RequestParams();
         rp.add("code", code);
         rp.add("uniqueId",HttpUtils.getUniqueId());
+        rp.add("staffType", Codes.STAFFTYPE);
         dialog.show();
         HttpUtils.get("login", rp, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 String message = "";
-                String  codeReceived = "";
+                String codeReceived = "";
                 String data =null;
                 String token="";
+                String staffName="";
+                JSONObject params = new JSONObject();
                 try{
                     message = response.get("message").toString();
                     codeReceived = response.get("status").toString();
                     data =  response.get("data").toString();
                     token = response.get("token").toString();
+                    staffName = response.get("staffName").toString();
+                    params.put("token",token);
+                    params.put("message", message);
+                    params.put("data", data);
+                    params.put("staffName",staffName);
+                    params.put("status",codeReceived);
+
                 }catch(Exception e){
 
                 }finally {
@@ -75,11 +94,15 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 }
                 Toast.makeText(LoginScreen.this, message, Toast.LENGTH_LONG).show();
                 if(Codes.ALL_OK.equals(codeReceived)){
-                    Toast.makeText(getApplicationContext(), "Done",Toast.LENGTH_SHORT).show();
-//                    saveData(code,token);
-//                    Intent myIntent = new Intent(Login.this, Menu.class);
-//                    Login.this.startActivity(myIntent);
-//                    finish();
+                    Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences.Editor editor =  activity.getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE).edit();
+
+                    editor.putString("token", token);
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.apply();
+
+                    saveData(params);
                 }
             }
 
@@ -89,21 +112,22 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
                 Toast.makeText(getApplicationContext(),"Something went wrong", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 Toast.makeText(getApplicationContext(),"Something went wrong", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
     }
-    public void saveData(String code, String token){
-        SharedPreferences.Editor editor = getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE).edit();
-        editor.putString("name", "Chandio");
-        editor.putString("code", code);
-        editor.putString("token", token);
-        editor.putBoolean("isLoggedIn",true);
-        editor.apply();
+    public void saveData(JSONObject params){
+        Util.saveData(params,this);
+        Intent intent = new Intent(this, Menu.class);
+        this.startActivity(intent);
+        finish();
     }
+
 }

@@ -4,4 +4,11 @@
     <string name="hintCode">Employee Code</string>
     <string name="basicInformation">Basic Information</string>
     <string name="lenDigit">5</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="performSync">Perform Sync</string>
+    <string name="submittedForms">Submitted Forms</string>
+    <string name="profile">Profile</string>
+    <string name="QTV">QTV</string>
+    <string name="providers">Providers</string>
+    <string name="submit">Submit</string>
 </resources>

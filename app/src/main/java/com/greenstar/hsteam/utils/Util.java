@@ -1,26 +1,46 @@
 package com.greenstar.hsteam.utils;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-
 import com.google.gson.Gson;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
-import org.json.JSONArray;
+import com.greenstar.hsteam.controller.Codes;
+import com.greenstar.hsteam.dal.HSData;
+import com.greenstar.hsteam.db.AppDatabase;
 import org.json.JSONObject;
 
-import java.util.List;
-
-import cz.msebera.android.httpclient.Header;
+import static android.content.Context.MODE_PRIVATE;
 
 public class Util {
    // static WebserviceResponse responseListener;
+
+    public static void saveData(JSONObject params, Activity activity){
+        AppDatabase db =null;
+        db = AppDatabase.getAppDatabase(activity);
+        String data = "";
+        String status = "";
+        try{
+            data = (String) params.get("data");
+            status = (String) params.get("status");
+        }catch(Exception e){
+            Log.e("Error","Error while saving data after login");
+        }
+
+        if(Codes.ALL_OK.equals(status)){
+            HSData dataObj = new Gson().fromJson(data, HSData.class) ;
+
+            SharedPreferences.Editor editor =  activity.getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE).edit();
+            editor.putString("name", dataObj.getName());
+            editor.putString("AMName", dataObj.getAMName());
+            editor.putString("region", dataObj.getRegion());
+            editor.apply();
+
+            db.getProvidersDAO().nukeTable();
+            db.getProvidersDAO().insertMultiple(dataObj.getProviders());
+            db.close();
+        }
+
+    }
     /*
     public static String saveDataFromJSON(String data, Context context){
 
