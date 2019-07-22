@@ -1,5 +1,6 @@
 package com.greenstar.hsteam.controller;
 
+import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -9,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -20,17 +22,24 @@ import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.adapters.ProviderAdapter;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.model.Providers;
+import com.greenstar.hsteam.model.QTVForm;
+import com.greenstar.hsteam.utils.Util;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class NewQTVForm extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
-
+    final Calendar myCalendar = Calendar.getInstance();
+    DatePickerDialog.OnDateSetListener date =null;
     /*
     First Section declaration
      */
-    TextView tvReportingMonth, tvStaffCodeName, tvSupervisorName, tvRegion, tvProjectCode;
+    TextView tvStaffCodeName, tvSupervisorName, tvRegion, tvProjectCode;
+    EditText etReportingMonth;
     SearchableSpinner spProviderCodeName;
     List<Providers> providers = new ArrayList<>();
     AppDatabase db =null;
@@ -230,15 +239,28 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_qtv_screen);
         db = AppDatabase.getAppDatabase(this);
-
         //First section initialization
-        tvReportingMonth = findViewById(R.id.tvReportingMonth);
+        etReportingMonth = findViewById(R.id.etReportingMonth);
+        updateVisitDate();
+        etReportingMonth.setOnClickListener(this);
+        date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateVisitDate();
+            }
+
+        };
         tvStaffCodeName = findViewById(R.id.tvStaffCodeName);
         tvSupervisorName = findViewById(R.id.tvSupervisorName);
         tvRegion = findViewById(R.id.tvRegion);
         tvProjectCode = findViewById(R.id.tvProjectCode);
         spProviderCodeName = findViewById(R.id.spProviderCodeName);
         btnSubmit = findViewById(R.id.btnSubmit);
+        btnSubmit.setOnClickListener(this);
         etComments = findViewById(R.id.etComments);
         populateFirstSection();
         //End of First section initialization
@@ -263,6 +285,13 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
         attachingListeners();
 
+    }
+
+    private void updateVisitDate() {
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+
+        etReportingMonth.setText(sdf.format(myCalendar.getTime()));
     }
 
     private void populateFirstSection(){
@@ -519,6 +548,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         tvTotalIUDRemovalCases.setText(String.valueOf(total));
     }
 
+
     /*
     Initialize elements of section 1
      */
@@ -718,7 +748,11 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.btnSubmit){
+        if(v.getId()==R.id.etReportingMonth){
+            new DatePickerDialog(this, date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        }else if(v.getId()==R.id.btnSubmit){
             if(isValid()){
                 saveFormData();
             }
@@ -731,17 +765,545 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         if(spProviderCodeName.getSelectedItemPosition()==0){
             isValid = false;
             Toast.makeText(this,"Please select Provider",Toast.LENGTH_SHORT).show();
-        }else if("".equals(etComments.getText().toString())){
-            isValid = false;
-            Toast.makeText(this,"Please write comments",Toast.LENGTH_SHORT).show();
         }
-
         return  isValid;
 
     }
 
     private void saveFormData(){
-        
+        QTVForm qtvForm = new QTVForm();
+        qtvForm.setChoName(tvStaffCodeName.getText().toString());
+        qtvForm.setRegion(tvRegion.getText().toString());
+        Providers provider = (Providers) spProviderCodeName.getSelectedItem();
+        qtvForm.setProviderCode(provider.getCode());
+        qtvForm.setProviderName(provider.getName());
+        /*
+        Count condoms of 1st matrix
+         */
+        String count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix1[i][0].getText().toString();
+        }
+        qtvForm.setDeliveryDataCondoms(String.valueOf(count));
+
+        /*
+        Count pills of 1st matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix1[i][1].getText().toString();
+        }
+        qtvForm.setDeliveryDataPills(count);
+
+        /*
+        Count IUD of 1st matrix
+         */
+        count ="";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix1[i][2].getText().toString();
+        }
+        qtvForm.setDeliveryDataIUCD(count);
+
+        /*
+        Count Implants of 1st matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix1[i][3].getText().toString();
+        }
+        qtvForm.setDeliveryDataImplants(count);
+
+        /*
+        Count Injectables of 1st matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix1[i][4].getText().toString();
+        }
+        qtvForm.setDeliveryDataInjectables(count);
+
+        /*
+        Count VSC of 1st matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix1[i][5].getText().toString();
+        }
+        qtvForm.setDeliveryDataVSC(count);
+
+        /*
+        Count total column of 1st matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += totalRow1[i].getText().toString();
+        }
+        qtvForm.setDeliveryDataTotalColumn(String.valueOf(count));
+
+        /*
+        Count total Row of 1st matrix
+         */
+        count="";
+        for(int i=0; i<COLUMN_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += Integer.valueOf(totalColumn1[i].getText().toString());
+        }
+        qtvForm.setDeliveryDataTotalRow(String.valueOf(count));
+
+        //Total of all total of matrix 1
+        qtvForm.setDeliveryDataTotal(Integer.valueOf(totalRow1[ROW_LENGTH-1].getText().toString()));
+
+        /*
+        Count condoms of 2nd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix2[i][0].getText().toString();
+        }
+        qtvForm.setPostPartumCondoms(String.valueOf(count));
+
+        /*
+        Count pills of 2nd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix2[i][1].getText().toString();
+        }
+        qtvForm.setPostPartumPills(count);
+
+        /*
+        Count IUD of 2nd matrix
+         */
+        count ="";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix2[i][2].getText().toString();
+        }
+        qtvForm.setPostPartumIUCD(count);
+
+        /*
+        Count Implants of 2nd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix2[i][3].getText().toString();
+        }
+        qtvForm.setPostPartumImplants(count);
+
+        /*
+        Count Injectables of 2nd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix2[i][4].getText().toString();
+        }
+        qtvForm.setPostPartumInjectables(count);
+
+        /*
+        Count VSC of 2nd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix2[i][5].getText().toString();
+        }
+        qtvForm.setPostPartumVSC(count);
+
+        /*
+        Count total column of 2nd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += totalRow2[i].getText().toString();
+        }
+        qtvForm.setPostPartumTotalColumn(String.valueOf(count));
+
+        /*
+        Count total Row of 2nd matrix
+         */
+        count = "";
+        for(int i=0; i<COLUMN_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += Integer.valueOf(totalColumn2[i].getText().toString());
+        }
+        qtvForm.setPostPartumTotalRow(String.valueOf(count));
+
+        //Total of all total of matrix 2
+        qtvForm.setPostPartumTotal(Integer.valueOf(totalRow1[ROW_LENGTH-1].getText().toString()));
+
+        /*
+        Count condoms of 3rd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix3[i][0].getText().toString();
+        }
+        qtvForm.setPostPACCondoms(String.valueOf(count));
+
+        /*
+        Count pills of 3rd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix3[i][1].getText().toString();
+        }
+        qtvForm.setPostPACPills(count);
+
+        /*
+        Count IUD of 3rd matrix
+         */
+        count ="";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix3[i][2].getText().toString();
+        }
+        qtvForm.setPostPACIUCD(count);
+
+        /*
+        Count Implants of 3rd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix3[i][3].getText().toString();
+        }
+        qtvForm.setPostPACImplants(count);
+
+        /*
+        Count Injectables of 3rd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix3[i][4].getText().toString();
+        }
+        qtvForm.setPostPACInjectables(count);
+
+        /*
+        Count VSC of 3rd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix3[i][5].getText().toString();
+        }
+        qtvForm.setPostPACVSC(count);
+
+        /*
+        Count total column of 3rd matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += totalRow3[i].getText().toString();
+        }
+        qtvForm.setPostPACTotalColumn(String.valueOf(count));
+
+        /*
+        Count total Row of 3rd matrix
+         */
+        count="";
+        for(int i=0; i<COLUMN_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += Integer.valueOf(totalColumn3[i].getText().toString());
+        }
+        qtvForm.setPostPACTotalRow(String.valueOf(count));
+
+        //Total of all total of matrix 3
+        qtvForm.setPostPACTotal(Integer.valueOf(totalRow1[ROW_LENGTH-1].getText().toString()));
+
+
+
+        /*
+        Count condoms of 4th matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix4[i][0].getText().toString();
+        }
+        qtvForm.setNewUserCondoms(String.valueOf(count));
+
+        /*
+        Count pills of 4th matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix4[i][1].getText().toString();
+        }
+        qtvForm.setNewUserPills(count);
+
+        /*
+        Count IUD of 4th matrix
+         */
+        count ="";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix4[i][2].getText().toString();
+        }
+        qtvForm.setNewUserIUCD(count);
+
+        /*
+        Count Implants of 4th matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix4[i][3].getText().toString();
+        }
+        qtvForm.setNewUserImplants(count);
+
+        /*
+        Count Injectables of 4th matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix4[i][4].getText().toString();
+        }
+        qtvForm.setNewUserInjectables(count);
+
+        /*
+        Count VSC of 4th matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += btnMatrix4[i][5].getText().toString();
+        }
+        qtvForm.setNewUserVSC(count);
+
+        /*
+        Count total column of 4th matrix
+         */
+        count = "";
+        for(int i=0; i<ROW_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += totalRow4[i].getText().toString();
+        }
+        qtvForm.setNewUserTotalColumn(String.valueOf(count));
+
+        /*
+        Count total Row of 4th matrix
+         */
+        count="";
+        for(int i=0; i<COLUMN_LENGTH;i++){
+            if(count!="")
+                count += "-";
+            count += Integer.valueOf(totalColumn4[i].getText().toString());
+        }
+        qtvForm.setNewUserTotalRow(String.valueOf(count));
+
+        //Total of all total of matrix 4
+        qtvForm.setNewUserTotal(Integer.valueOf(totalRow4[ROW_LENGTH-1].getText().toString()));
+
+        qtvForm.setTotalCurrentUsers(Integer.valueOf(etCurrentUser.getText().toString()));
+        qtvForm.setTotalMethodSwitcher(Integer.valueOf(etMethodSwitcher.getText().toString()));
+        qtvForm.setTotalMisoCases(Integer.valueOf(etMisoCases.getText().toString()));
+        qtvForm.setTotalPACCases(Integer.valueOf(etPACCases.getText().toString()));
+        qtvForm.setTotalEverUsersLess(Integer.valueOf(etEverUsersLess.getText().toString()));
+        qtvForm.setTotalEverUsersGreater(Integer.valueOf(etEverUsersGreater.getText().toString()));
+        qtvForm.setTotalNeverUsers(Integer.valueOf(etNeverUsers.getText().toString()));
+        qtvForm.setTotalNewUsers(Integer.valueOf(tvNewUsers.getText().toString()));
+        qtvForm.setTotalDeliveryConducted(Integer.valueOf(etDeliveriesConducted.getText().toString()));
+        qtvForm.setTotalFPClients(Integer.valueOf(tvFPClients.getText().toString()));
+        qtvForm.setTotalCondomClients(Integer.valueOf(tvCondomClients.getText().toString()));
+        qtvForm.setTotalPillsClient(Integer.valueOf(tvPillClients.getText().toString()));
+        qtvForm.setTotalIUDClients(Integer.valueOf(tvIUDClients.getText().toString()));
+        qtvForm.setTotalImplantClients(Integer.valueOf(tvImplantClients.getText().toString()));
+        qtvForm.setTotalInjectableClients(Integer.valueOf(tvInjectableClients.getText().toString()));
+        qtvForm.setTotalVSCClients(Integer.valueOf(tvVSCClients.getText().toString()));
+        qtvForm.setTotalPPIUDClients(Integer.valueOf(tvPPIUDClients.getText().toString()));
+        qtvForm.setTotalInjectableClients(Integer.valueOf(tvInjectableClients.getText().toString()));
+        qtvForm.setOneMonthInjectables(Integer.valueOf(etOneMonth.getText().toString()));
+        qtvForm.setTwoMonthsInjectables(Integer.valueOf(etTwoMonths.getText().toString()));
+        qtvForm.setThreeMonthsInjectables(Integer.valueOf(etThreeMonths.getText().toString()));
+        qtvForm.setTotalPACLTM(Integer.valueOf(etPACLTMAdopted.getText().toString()));
+        qtvForm.setTotalPostPAC(Integer.valueOf(etPostPACFPAdopted.getText().toString()));
+
+        //2nd Section
+        qtvForm.setIUDRemovedSideEffects(Integer.valueOf(etIUDRemovedSide.getText().toString()));
+        qtvForm.setIUDRemovedDesire(Integer.valueOf(etIUDRemovedDesire.getText().toString()));
+        qtvForm.setIUDRemovedAdverse(Integer.valueOf(etIUDRemovedAdverse.getText().toString()));
+        qtvForm.setIUDRemovedOther(Integer.valueOf(etIUDRemovedOther.getText().toString()));
+        qtvForm.setTotalIUDRemovedCases(Integer.valueOf(tvTotalIUDRemovalCases.getText().toString()));
+
+        //3rd Section
+        qtvForm.setPlacentalInsertion(Integer.valueOf(etPlacentalInsertion.getText().toString()));
+        qtvForm.setImmediatePostPartum(Integer.valueOf(etImmediatePostPartumInsertion.getText().toString()));
+        qtvForm.setImmediateExpulsion(Integer.valueOf(etImmediateExpulsion.getText().toString()));
+        qtvForm.setDelayedExpulsion(Integer.valueOf(etImmediateExpulsion.getText().toString()));
+
+        //4th Section
+        qtvForm.setIECMaterial(rbIECMaterialYes.isSelected()==true?1:0);
+        qtvForm.setLastQATAvailable(rbLastQATYes.isSelected()==true?1:0);
+        qtvForm.setClientRecordBook(rbRecordBookYes.isSelected()==true?1:0);
+        qtvForm.setClientDetails(rbDetailFilledYes.isSelected()==true?1:0);
+        qtvForm.setTrainingCertificates(rbTrainingCertYes.isSelected()==true?1:0);
+        qtvForm.setAdverseEventReferrals(rbAdverseEventYes.isSelected()==true?1:0);
+        qtvForm.setCounselingFlipChart(rbFlipChartYes.isSelected()==true?1:0);
+
+        //5th Section
+        qtvForm.setAutoClave(rbAutoclaveYes.isSelected()==true?1:0);
+        qtvForm.setChlorineUsed(rbChlorineYes.isSelected()==true?1:0);
+        qtvForm.setInstrumentStored(rbInstrumentYes.isSelected()==true?1:0);
+        qtvForm.setBoilingInstrument(rbBoilingInstYes.isSelected()==true?1:0);
+        qtvForm.setGlovesInUse(rbGloveUseYes.isSelected()==true?1:0);
+        qtvForm.setSafetyBoxInUse(rbSafetyBoxYes.isSelected()==true?1:0);
+        qtvForm.setDustbinDisposable(rbDustbinYes.isSelected()==true?1:0);
+
+        //6.1 Section etMatrixAvailabilityStock
+
+        //Greenstar Column
+        count="";
+        for(int i=0;i<ROW_EDITTEXT_LENGTH;i++){
+            if(!"".equals(count))
+                count+="-";
+            count+=etMatrixAvailabilityStock[i][0].getText().toString();
+        }
+        qtvForm.setAvailabilityGreenstar(count);
+
+        //Govt. Column
+        count="";
+        for(int i=0;i<ROW_EDITTEXT_LENGTH;i++){
+            if(!"".equals(count))
+                count+="-";
+            count+=etMatrixAvailabilityStock[i][1].getText().toString();
+        }
+        qtvForm.setAvailabilityGovt(count);
+
+        //MSS. Column
+        count="";
+        for(int i=0;i<ROW_EDITTEXT_LENGTH;i++){
+            if(!"".equals(count))
+                count+="-";
+            count+=etMatrixAvailabilityStock[i][2].getText().toString();
+        }
+        qtvForm.setAvailabilityMSS(count);
+
+        //DKT. Column
+        count="";
+        for(int i=0;i<ROW_EDITTEXT_LENGTH;i++){
+            if(!"".equals(count))
+                count+="-";
+            count+=etMatrixAvailabilityStock[i][3].getText().toString();
+        }
+        qtvForm.setAvailabilityDKT(count);
+
+        //Other. Column
+        count="";
+        for(int i=0;i<ROW_EDITTEXT_LENGTH;i++){
+            if(!"".equals(count))
+                count+="-";
+            count+=etMatrixAvailabilityStock[i][4].getText().toString();
+        }
+        qtvForm.setAvailabilityOther(count);
+
+        //6.2 Section etMatrixStockPurchase
+
+        //Greenstar Column
+        count="";
+        for(int i=0;i<ROW_EDITTEXT_LENGTH;i++){
+            if(!"".equals(count))
+                count+="-";
+            count+=etMatrixStockPurchase[i][0].getText().toString();
+        }
+        qtvForm.setStockGreenstar(count);
+
+        //Govt. Column
+        count="";
+        for(int i=0;i<ROW_EDITTEXT_LENGTH;i++){
+            if(!"".equals(count))
+                count+="-";
+            count+=etMatrixStockPurchase[i][1].getText().toString();
+        }
+        qtvForm.setStockGovt(count);
+
+        //MSS. Column
+        count="";
+        for(int i=0;i<ROW_EDITTEXT_LENGTH;i++){
+            if(!"".equals(count))
+                count+="-";
+            count+=etMatrixStockPurchase[i][2].getText().toString();
+        }
+        qtvForm.setStockMSS(count);
+
+        //DKT. Column
+        count="";
+        for(int i=0;i<ROW_EDITTEXT_LENGTH;i++){
+            if(!"".equals(count))
+                count+="-";
+            count+=etMatrixStockPurchase[i][3].getText().toString();
+        }
+        qtvForm.setStockDKT(count);
+
+        //Other. Column
+        count="";
+        for(int i=0;i<ROW_EDITTEXT_LENGTH;i++){
+            if(!"".equals(count))
+                count+="-";
+            count+=etMatrixStockPurchase[i][4].getText().toString();
+        }
+        qtvForm.setStockOther(count);
+
+        qtvForm.setComments(etComments.getText().toString());
+        String myFormat = "dd/MM/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+
+        qtvForm.setMobileSystemDate(sdf.format(myCalendar.getTime()));
+        qtvForm.setId(Util.getNextQTVFormID(this));
+        qtvForm.setVisitDate(etReportingMonth.getText().toString());
+
+        db = AppDatabase.getAppDatabase(this);
+        db.getQTVFormDAO().insert(qtvForm);
+        finish();
+
     }
 
     /*

@@ -4,19 +4,26 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 @Entity
 public class QTVForm {
     @NonNull
     @PrimaryKey
-    private int id;
+    private long id;
+    /*
+    Status = 0 means Pending
+    Status = 1 means successfully synced
+     */
+    private int status;
     private String choName;
     private String region;
-    private Date mobileSystemDate;
-    private Date visitDate;
+    private String mobileSystemDate;
+    private String visitDate;
     private int donor;
     private String providerCode;
+    private String providerName;
     /*
     Matrix 1
      */
@@ -26,8 +33,9 @@ public class QTVForm {
     private String deliveryDataImplants;
     private String deliveryDataInjectables;
     private String deliveryDataVSC;
-    private String deliveryDataTotal;
-
+    private int deliveryDataTotal;
+    private String deliveryDataTotalColumn;
+    private String deliveryDataTotalRow;
     /*
     Matrix 2
      */
@@ -37,7 +45,9 @@ public class QTVForm {
     private String postPartumImplants;
     private String postPartumInjectables;
     private String postPartumVSC;
-    private String postPartumTotal;
+    private int postPartumTotal;
+    private String postPartumTotalColumn;
+    private String postPartumTotalRow;
 
     /*
     Matrix 3
@@ -48,7 +58,9 @@ public class QTVForm {
     private String postPACImplants;
     private String postPACInjectables;
     private String postPACVSC;
-    private String postPACTotal;
+    private int postPACTotal;
+    private String postPACTotalColumn;
+    private String postPACTotalRow;
 
     /*
     Matrix 4
@@ -59,7 +71,9 @@ public class QTVForm {
     private String newUserImplants;
     private String newUserInjectables;
     private String newUserVSC;
-    private String newUserTotal;
+    private int newUserTotal;
+    private String newUserTotalColumn;
+    private String newUserTotalRow;
 
     private int totalCurrentUsers;
     private int totalMethodSwitcher;
@@ -137,11 +151,11 @@ public class QTVForm {
     private String comments;
 
     @NonNull
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(@NonNull int id) {
+    public void setId(@NonNull long id) {
         this.id = id;
     }
 
@@ -161,19 +175,19 @@ public class QTVForm {
         this.region = region;
     }
 
-    public Date getMobileSystemDate() {
+    public String getMobileSystemDate() {
         return mobileSystemDate;
     }
 
-    public void setMobileSystemDate(Date mobileSystemDate) {
+    public void setMobileSystemDate(String mobileSystemDate) {
         this.mobileSystemDate = mobileSystemDate;
     }
 
-    public Date getVisitDate() {
+    public String getVisitDate() {
         return visitDate;
     }
 
-    public void setVisitDate(Date visitDate) {
+    public void setVisitDate(String visitDate) {
         this.visitDate = visitDate;
     }
 
@@ -241,11 +255,11 @@ public class QTVForm {
         this.deliveryDataVSC = deliveryDataVSC;
     }
 
-    public String getDeliveryDataTotal() {
+    public int getDeliveryDataTotal() {
         return deliveryDataTotal;
     }
 
-    public void setDeliveryDataTotal(String deliveryDataTotal) {
+    public void setDeliveryDataTotal(int deliveryDataTotal) {
         this.deliveryDataTotal = deliveryDataTotal;
     }
 
@@ -297,11 +311,11 @@ public class QTVForm {
         this.postPartumVSC = postPartumVSC;
     }
 
-    public String getPostPartumTotal() {
+    public int getPostPartumTotal() {
         return postPartumTotal;
     }
 
-    public void setPostPartumTotal(String postPartumTotal) {
+    public void setPostPartumTotal(int postPartumTotal) {
         this.postPartumTotal = postPartumTotal;
     }
 
@@ -353,11 +367,11 @@ public class QTVForm {
         this.postPACVSC = postPACVSC;
     }
 
-    public String getPostPACTotal() {
+    public int getPostPACTotal() {
         return postPACTotal;
     }
 
-    public void setPostPACTotal(String postPACTotal) {
+    public void setPostPACTotal(int postPACTotal) {
         this.postPACTotal = postPACTotal;
     }
 
@@ -409,11 +423,11 @@ public class QTVForm {
         this.newUserVSC = newUserVSC;
     }
 
-    public String getNewUserTotal() {
+    public int getNewUserTotal() {
         return newUserTotal;
     }
 
-    public void setNewUserTotal(String newUserTotal) {
+    public void setNewUserTotal(int newUserTotal) {
         this.newUserTotal = newUserTotal;
     }
 
@@ -871,5 +885,85 @@ public class QTVForm {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public String getDeliveryDataTotalColumn() {
+        return deliveryDataTotalColumn;
+    }
+
+    public void setDeliveryDataTotalColumn(String deliveryDataTotalColumn) {
+        this.deliveryDataTotalColumn = deliveryDataTotalColumn;
+    }
+
+    public String getDeliveryDataTotalRow() {
+        return deliveryDataTotalRow;
+    }
+
+    public void setDeliveryDataTotalRow(String deliveryDataTotalRow) {
+        this.deliveryDataTotalRow = deliveryDataTotalRow;
+    }
+
+    public String getPostPartumTotalColumn() {
+        return postPartumTotalColumn;
+    }
+
+    public void setPostPartumTotalColumn(String postPartumTotalColumn) {
+        this.postPartumTotalColumn = postPartumTotalColumn;
+    }
+
+    public String getPostPartumTotalRow() {
+        return postPartumTotalRow;
+    }
+
+    public void setPostPartumTotalRow(String postPartumTotalRow) {
+        this.postPartumTotalRow = postPartumTotalRow;
+    }
+
+    public String getPostPACTotalColumn() {
+        return postPACTotalColumn;
+    }
+
+    public void setPostPACTotalColumn(String postPACTotalColumn) {
+        this.postPACTotalColumn = postPACTotalColumn;
+    }
+
+    public String getPostPACTotalRow() {
+        return postPACTotalRow;
+    }
+
+    public void setPostPACTotalRow(String postPACTotalRow) {
+        this.postPACTotalRow = postPACTotalRow;
+    }
+
+    public String getNewUserTotalColumn() {
+        return newUserTotalColumn;
+    }
+
+    public void setNewUserTotalColumn(String newUserTotalColumn) {
+        this.newUserTotalColumn = newUserTotalColumn;
+    }
+
+    public String getNewUserTotalRow() {
+        return newUserTotalRow;
+    }
+
+    public void setNewUserTotalRow(String newUserTotalRow) {
+        this.newUserTotalRow = newUserTotalRow;
+    }
+
+    public String getProviderName() {
+        return providerName;
+    }
+
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

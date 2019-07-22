@@ -24,6 +24,8 @@ import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
+import java.util.Calendar;
+
 import cz.msebera.android.httpclient.Header;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
@@ -53,7 +55,12 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         EditText etEmpCode = findViewById(R.id.etEmpCode);
         String code = etEmpCode.getText().toString();
         if(code !=null && !"".equals(code)){
-            loginHit(code);
+            if(Util.isNetworkAvailable(this)){
+                loginHit(code);
+            }else{
+                Toast.makeText(this,"Please connect to internet then try again.", Toast.LENGTH_SHORT).show();
+            }
+
         }else{
             Toast.makeText(this,"Employee code cannot be empty", Toast.LENGTH_LONG).show();
         }
@@ -74,6 +81,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 String data =null;
                 String token="";
                 String staffName="";
+                int baseID = 0;
                 JSONObject params = new JSONObject();
                 try{
                     message = response.get("message").toString();
@@ -81,6 +89,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                     data =  response.get("data").toString();
                     token = response.get("token").toString();
                     staffName = response.get("staffName").toString();
+                    baseID = Integer.valueOf(response.get("baseID").toString());
+
                     params.put("token",token);
                     params.put("message", message);
                     params.put("data", data);
@@ -100,6 +110,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
                     editor.putString("token", token);
                     editor.putBoolean("isLoggedIn", true);
+                    editor.putInt("qtvFormID",baseID );
                     editor.apply();
 
                     saveData(params);

@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     />
             </LinearLayout>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et11"
                 android:text="0"
@@ -144,7 +144,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et12"
                 android:text="0"
@@ -153,7 +153,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et13"
                 android:text="0"
@@ -162,7 +162,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et14"
                 android:text="0"
@@ -171,7 +171,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et15"
                 android:text="0"
@@ -203,7 +203,7 @@
                     android:layout_height="wrap_content"
                     />
             </LinearLayout>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et21"
                 android:text="0"
@@ -212,7 +212,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et22"
                 android:text="0"
@@ -221,7 +221,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et23"
                 android:text="0"
@@ -230,7 +230,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et24"
                 android:text="0"
@@ -239,7 +239,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et25"
                 android:text="0"
@@ -271,7 +271,7 @@
                     android:layout_height="wrap_content"
                     />
             </LinearLayout>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et31"
                 android:text="0"
@@ -280,7 +280,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et32"
                 android:text="0"
@@ -289,7 +289,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et33"
                 android:text="0"
@@ -298,7 +298,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et34"
                 android:text="0"
@@ -307,7 +307,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et35"
                 android:text="0"
@@ -339,7 +339,7 @@
                     android:layout_height="wrap_content"
                     />
             </LinearLayout>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et41"
                 android:text="0"
@@ -348,7 +348,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et42"
                 android:text="0"
@@ -357,7 +357,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et43"
                 android:text="0"
@@ -366,7 +366,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et44"
                 android:text="0"
@@ -375,7 +375,7 @@
                 android:layout_height="@dimen/grid_height">
 
             </EditText>
-            <EditText android:maxLength="@string/lenDigit"
+            <EditText android:maxLength="@string/lenDigit"  android:inputType="number"
                 android:layout_column="1"
                 android:id="@+id/et45"
                 android:text="0"
