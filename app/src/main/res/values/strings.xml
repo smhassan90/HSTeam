@@ -17,4 +17,8 @@
     <string name="pendingForms">Pending</string>
     <string name="rejectedForms">Rejected</string>
     <string name="successfulForms">Successful</string>
+    <string name="approvalStatus">Approval Status</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

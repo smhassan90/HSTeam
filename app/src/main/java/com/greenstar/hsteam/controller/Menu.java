@@ -46,7 +46,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener, Web
         llBasket = findViewById(R.id.llBasket);
         llBasket.setOnClickListener(this);
 
-        llProfile = findViewById(R.id.llProfile);
+        llProfile = findViewById(R.id.llApprovalStatus);
         llProfile.setOnClickListener(this);
 
         llQTVForm = findViewById(R.id.llForm);
@@ -56,7 +56,8 @@ public class Menu extends AppCompatActivity implements View.OnClickListener, Web
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.llDashboard){
-            Toast.makeText(this,"Development in progress...",Toast.LENGTH_SHORT).show();
+            Intent myIntent = new Intent(this, DashboardController.class);
+            startActivity(myIntent);
 
         }else if(v.getId()==R.id.llSync){
             if(Util.isNetworkAvailable(this)){
@@ -75,8 +76,9 @@ public class Menu extends AppCompatActivity implements View.OnClickListener, Web
         }else if(v.getId()==R.id.llBasket){
             Intent myIntent = new Intent(this, SubmittedForms.class);
             startActivity(myIntent);
-        }else if(v.getId()==R.id.llProfile){
-            Toast.makeText(this,"Development in progress...",Toast.LENGTH_SHORT).show();
+        }else if(v.getId()==R.id.llApprovalStatus){
+            Intent myIntent = new Intent(this, ApprovalStatus.class);
+            startActivity(myIntent);
         }else if(v.getId()==R.id.llForm){
             Intent myIntent = new Intent(activity, NewQTVForm.class);
             startActivity(myIntent);

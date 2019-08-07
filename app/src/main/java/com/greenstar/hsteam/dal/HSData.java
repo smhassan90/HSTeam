@@ -1,5 +1,9 @@
 package com.greenstar.hsteam.dal;
 
+import android.graphics.DashPathEffect;
+
+import com.greenstar.hsteam.model.ApprovalQTVForm;
+import com.greenstar.hsteam.model.Dashboard;
 import com.greenstar.hsteam.model.Providers;
 
 import java.io.Serializable;
@@ -10,8 +14,10 @@ public class HSData implements Serializable {
     private String code;
     private String AMName;
     private String region;
+    private Dashboard dashboard;
 
     List<Providers> providers;
+    List<ApprovalQTVForm> qtvForms;
 
     public String getName() {
         return name;
@@ -51,5 +57,21 @@ public class HSData implements Serializable {
 
     public void setProviders(List<Providers> providers) {
         this.providers = providers;
+    }
+
+    public List<ApprovalQTVForm> getQtvForms() {
+        return qtvForms;
+    }
+
+    public void setQtvForms(List<ApprovalQTVForm> qtvForms) {
+        this.qtvForms = qtvForms;
+    }
+
+    public Dashboard getDashboard() {
+        return dashboard;
+    }
+
+    public void setDashboard(Dashboard dashboard) {
+        this.dashboard = dashboard;
     }
 }

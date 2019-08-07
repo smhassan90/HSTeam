@@ -8,4 +8,5 @@ public interface Codes {
     final public static String STAFFTYPE = "1";
     final public static String TIMEOUT = "Timeout";
     final public static String SOMETHINGWENTWRONG = "2001";
+    final public static String myFormat = "MM/dd/yy";
 }

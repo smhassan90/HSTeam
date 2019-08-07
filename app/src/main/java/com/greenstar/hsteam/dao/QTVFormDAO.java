@@ -23,6 +23,9 @@ public interface QTVFormDAO {
     @Query("SELECT * FROM QTVForm WHERE status = 1")
     List<QTVForm> getAllSuccessfulForms();
 
+    @Query("SELECT * FROM QTVForm WHERE status = 2")
+    List<QTVForm> getAllRejectedForms();
+
     @Query("SELECT * FROM QTVForm WHERE status = 0")
     List<QTVForm> getAllPendingForms();
 
@@ -34,4 +37,8 @@ public interface QTVFormDAO {
 
     @Query("UPDATE QTVForm SET status=1 WHERE id=:id")
     public void markQTVSuccessful(int id);
+
+    @Query("UPDATE QTVForm SET status=2 WHERE id=:id")
+    public void markQTVRejected(int id);
+
 }

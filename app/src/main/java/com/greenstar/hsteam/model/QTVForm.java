@@ -98,6 +98,7 @@ public class QTVForm {
     private int totalInjectableClientsMonth;
     private int totalPACLTM;
     private int totalPostPAC;
+    private String latLong;
 
 
     //Second Section
@@ -111,6 +112,8 @@ public class QTVForm {
     //Third Section
     private int placentalInsertion;
     private int immediatePostPartum;
+    private int postPartumInsertion48Hours;
+    private int extendedPostPartumInsertion;
     private int immediateExpulsion;
     private int delayedExpulsion;
 
@@ -149,6 +152,8 @@ public class QTVForm {
     private String stockOther;
 
     private String comments;
+
+    private int approvalStatus;
 
     @NonNull
     public long getId() {
@@ -671,6 +676,22 @@ public class QTVForm {
         this.immediatePostPartum = immediatePostPartum;
     }
 
+    public int getPostPartumInsertion48Hours() {
+        return postPartumInsertion48Hours;
+    }
+
+    public void setPostPartumInsertion48Hours(int postPartumInsertion48Hours) {
+        this.postPartumInsertion48Hours = postPartumInsertion48Hours;
+    }
+
+    public int getExtendedPostPartumInsertion() {
+        return extendedPostPartumInsertion;
+    }
+
+    public void setExtendedPostPartumInsertion(int extendedPostPartumInsertion) {
+        this.extendedPostPartumInsertion = extendedPostPartumInsertion;
+    }
+
     public int getImmediateExpulsion() {
         return immediateExpulsion;
     }
@@ -965,5 +986,21 @@ public class QTVForm {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getApprovalStatus() {
+        return approvalStatus;
+    }
+
+    public void setApprovalStatus(int approvalStatus) {
+        this.approvalStatus = approvalStatus;
+    }
+
+    public String getLatLong() {
+        return latLong;
+    }
+
+    public void setLatLong(String latLong) {
+        this.latLong = latLong;
     }
 }

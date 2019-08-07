@@ -5,10 +5,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.greenstar.hsteam.controller.PendingFormsBasket;
+import com.greenstar.hsteam.controller.RejectedFormBasket;
 import com.greenstar.hsteam.controller.SuccessfulFormBasket;
 
 public class SubmittedFormAdapter extends FragmentStatePagerAdapter {
-    final int noOfTabs=2;
+    final int noOfTabs=3;
 
     public SubmittedFormAdapter(FragmentManager fm) {
         super(fm);
@@ -18,7 +19,8 @@ public class SubmittedFormAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0: return new PendingFormsBasket();
-            case 1: return new SuccessfulFormBasket();
+            case 1: return new RejectedFormBasket();
+            case 2: return new SuccessfulFormBasket();
         }
 
         return null;

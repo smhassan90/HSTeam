@@ -499,7 +499,7 @@
                 android:layout_column="1"
                 >
                 <TextView
-                    android:text="30-39 Years"
+                    android:text="30-34 Years"
                     android:gravity="center"
                     android:textColor="@color/cellTextColor"
                     android:textStyle="bold"
@@ -583,7 +583,7 @@
                 android:layout_column="1"
                 >
                 <TextView
-                    android:text="40-49 Years"
+                    android:text="35-39 Years"
                     android:gravity="center"
                     android:textColor="@color/cellTextColor"
                     android:textStyle="bold"
@@ -667,7 +667,7 @@
                 android:layout_column="1"
                 >
                 <TextView
-                    android:text=">=50 Years"
+                    android:text="40-44 Years"
                     android:gravity="center"
                     android:textColor="@color/cellTextColor"
                     android:textStyle="bold"
@@ -730,6 +730,176 @@
                 <TextView
                     android:text="0"
                     android:id="@+id/total7"
+                    android:gravity="center"
+                    android:textColor="@color/cellTextColor"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="7">
+            <LinearLayout
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="45-49 Years"
+                    android:gravity="center"
+                    android:textColor="@color/cellTextColor"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <Button
+                android:layout_column="1"
+                android:id="@+id/btn381"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+            <Button
+                android:layout_column="1"
+                android:text="0"
+                android:id="@+id/btn382"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+            <Button
+                android:layout_column="1"
+                android:text="0"
+                android:id="@+id/btn383"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+            <Button
+                android:layout_column="1"
+                android:text="0"
+                android:id="@+id/btn384"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+            <Button
+                android:layout_column="1"
+                android:text="0"
+                android:id="@+id/btn385"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+
+            <Button
+                android:layout_column="1"
+                android:text="0"
+                android:id="@+id/btn386"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+            <LinearLayout
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="0"
+                    android:id="@+id/total8"
+                    android:gravity="center"
+                    android:textColor="@color/cellTextColor"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="7">
+            <LinearLayout
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text=">=50 Years"
+                    android:gravity="center"
+                    android:textColor="@color/cellTextColor"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <Button
+                android:layout_column="1"
+                android:id="@+id/btn391"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+            <Button
+                android:layout_column="1"
+                android:text="0"
+                android:id="@+id/btn392"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+            <Button
+                android:layout_column="1"
+                android:text="0"
+                android:id="@+id/btn393"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+            <Button
+                android:layout_column="1"
+                android:text="0"
+                android:id="@+id/btn394"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+            <Button
+                android:layout_column="1"
+                android:text="0"
+                android:id="@+id/btn395"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+
+            <Button
+                android:layout_column="1"
+                android:text="0"
+                android:id="@+id/btn396"
+                android:layout_weight="1"
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height" />
+            <LinearLayout
+                android:layout_width="@dimen/grid_width"
+                android:layout_height="@dimen/grid_height"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/grid_margin"
+                android:background="@drawable/cell_shape"
+                android:layout_column="1"
+                >
+                <TextView
+                    android:text="0"
+                    android:id="@+id/total9"
                     android:gravity="center"
                     android:textColor="@color/cellTextColor"
                     android:textStyle="bold"
@@ -885,7 +1055,7 @@
                 >
                 <TextView
                     android:text="0"
-                    android:id="@+id/total8"
+                    android:id="@+id/total10"
                     android:gravity="center"
                     android:textColor="@color/cellTextColor"
                     android:textStyle="bold"

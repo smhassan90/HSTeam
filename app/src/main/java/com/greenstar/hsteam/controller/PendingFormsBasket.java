@@ -2,10 +2,12 @@ package com.greenstar.hsteam.controller;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,13 +91,33 @@ public class PendingFormsBasket extends Fragment implements QTVFormDeleteListene
         mListener = null;
     }
 
-    @Override
-    public void deleteQTVForm(long orderId) {
+    private void deleteForm(long orderId){
         db.getQTVFormDAO().deleteQtvFormById(orderId);
         Toast.makeText(getActivity(),"QTV Form deleted",Toast.LENGTH_SHORT).show();
         basketAdapter = new PendingFormAdapter(getActivity(),getData(), this);
         lvBasket.setAdapter(basketAdapter);
         basketAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void deleteQTVForm(final long orderId) {
+        new AlertDialog.Builder(getActivity())
+                .setTitle("Delete entry")
+                .setMessage("Are you sure you want to delete this form?")
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteForm(orderId);
+                    }
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
 
     }
 

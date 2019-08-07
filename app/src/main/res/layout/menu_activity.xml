@@ -124,7 +124,7 @@
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:id="@+id/llProfile">
+                android:id="@+id/llApprovalStatus">
                 <LinearLayout
                     android:layout_width="200dp"
                     android:background="@drawable/custom_button"
@@ -137,13 +137,13 @@
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:id="@+id/imgProfile"
-                        android:src="@drawable/male_profile"
+                        android:id="@+id/imgApprovalStatus"
+                        android:src="@drawable/order_basket"
                         android:layout_gravity="center"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/profile"
+                        android:text="@string/approvalStatus"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/padding_10"
                         style="@style/medium_text_style"/>
@@ -195,7 +195,16 @@
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:id="@+id/llEmpty">
+                android:id="@+id/ssss">
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:padding="@dimen/padding_10"
+                    android:layout_height="200dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    >
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
