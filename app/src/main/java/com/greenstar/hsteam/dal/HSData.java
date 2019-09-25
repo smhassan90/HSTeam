@@ -13,6 +13,7 @@ public class HSData implements Serializable {
     private String name;
     private String code;
     private String AMName;
+    private String AMCode;
     private String region;
     private Dashboard dashboard;
 
@@ -73,5 +74,13 @@ public class HSData implements Serializable {
 
     public void setDashboard(Dashboard dashboard) {
         this.dashboard = dashboard;
+    }
+
+    public String getAMCode() {
+        return AMCode;
+    }
+
+    public void setAMCode(String AMCode) {
+        this.AMCode = AMCode;
     }
 }

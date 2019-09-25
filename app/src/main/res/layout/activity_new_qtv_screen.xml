@@ -469,6 +469,56 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
+                            android:text="Total # of counseling Clients"/>
+                        <EditText android:maxLength="@string/lenDigit"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:id="@+id/etTotalCounselingClients"
+                            android:inputType="number"
+                            android:text="0">
+                        </EditText>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:padding="@dimen/padding_10"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total # of Clients"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:id="@+id/tvTotalClients"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="3"
+                            android:text="0">
+                        </TextView>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:padding="@dimen/padding_10"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
                             android:text="Total Condom Clients"/>
                         <TextView
                             android:layout_width="0dp"
@@ -756,7 +806,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:id="@+id/etPACLTMAdopted"
+                            android:id="@+id/etPACLTMAdoptedOneWeek"
                             android:inputType="number"
                             android:text="0">
                         </EditText>
@@ -774,13 +824,59 @@
                             android:textColor="@color/black"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
-                            android:text="Total # of Post PAC FP (STM) adopted"/>
+                            android:text="Total # of PAC LTM adopted (24 Hours)"/>
+                        <EditText android:maxLength="@string/lenDigit"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:id="@+id/etPACLTMAdoptedHours"
+                            android:inputType="number"
+                            android:text="0">
+                        </EditText>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total # of Post PAC FP (STM) adopted (One Week)"/>
                         <EditText android:maxLength="@string/lenDigit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:inputType="number"
-                            android:id="@+id/etPACFPAdopted"
+                            android:id="@+id/etPACFPAdoptedOneWeek"
+                            android:text="0">
+                        </EditText>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/form_field_padding"
+                        android:background="@drawable/customborder"
+                        android:weightSum="10">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            style="@style/text_style"
+                            android:textColor="@color/black"
+                            android:gravity="center_vertical"
+                            android:layout_weight="7"
+                            android:text="Total # of Post PAC FP (STM) adopted (24 Hours)"/>
+                        <EditText android:maxLength="@string/lenDigit"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:inputType="number"
+                            android:id="@+id/etPACFPAdoptedHours"
                             android:text="0">
                         </EditText>
                     </TableRow>

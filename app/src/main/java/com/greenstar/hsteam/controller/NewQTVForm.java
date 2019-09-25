@@ -41,6 +41,8 @@ import java.util.List;
 
 public class NewQTVForm extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
     final Calendar myCalendar = Calendar.getInstance();
+    String staffCode = "";
+    String AMCode="";
     //In which you need put here
     DatePickerDialog.OnDateSetListener date = null;
     /*
@@ -177,12 +179,12 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         Declare all variables of form
     */
     //Section 1 Declaration
-    EditText etCurrentUser, etMethodSwitcher, etMisoCases, etPACCases, etEverUsersLess, etEverUsersGreater, etNeverUsers, etDeliveriesConducted;
+    EditText etCurrentUser, etMethodSwitcher, etMisoCases, etPACCases, etEverUsersLess, etEverUsersGreater, etNeverUsers, etDeliveriesConducted, etTotalCounselingClients;
 
-    TextView tvNewUsers, tvFPClients, tvCondomClients, tvPillClients, tvIUDClients, tvImplantClients, tvInjectableClients;
+    TextView tvNewUsers, tvFPClients, tvTotalClients, tvCondomClients, tvPillClients, tvIUDClients, tvImplantClients, tvInjectableClients;
     TextView tvVSCClients, tvPPIUDClients, tvTotalInjectableClients;
 
-    EditText etOneMonth, etTwoMonths, etThreeMonths, etPACLTMAdopted, etPostPACFPAdopted;
+    EditText etOneMonth, etTwoMonths, etThreeMonths, etPACLTMAdoptedOneWeek, etPACLTMAdoptedHours, etPACFPAdoptedOneWeek, etPACFPAdoptedHours;
 
     //Section 2 Declaration
     EditText etIUDRemovedSide, etIUDRemovedDesire, etIUDRemovedAdverse, etIUDRemovedOther;
@@ -322,7 +324,9 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         SharedPreferences prefs = this.getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE);
         String region = prefs.getString("region", "");
         String AMName = prefs.getString("AMName", "");
+        AMCode = prefs.getString("AMCode", "");
         String name = prefs.getString("name", "");
+        staffCode = prefs.getString("staffCode", "");
 
         tvSupervisorName.setText(AMName.toString());
         tvStaffCodeName.setText(name.toString());
@@ -360,6 +364,14 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
     }
 
+    private void calculateTotalUsers(String total) {
+        if(total.length()>0) {
+            int number = Integer.valueOf(total) + Integer.valueOf(tvFPClients.getText().toString());
+            tvTotalClients.setText(String.valueOf(number));
+        }
+
+    }
+
     //Greater , never user
     private void calculateTotalNewUsers(String greater, String never) {
         int total = 0;
@@ -378,6 +390,26 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
      */
     private void attachingListeners() {
+
+        etTotalCounselingClients.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+
+                calculateTotalUsers(s.toString());
+            }
+        });
+
         etEverUsersGreater.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -587,17 +619,21 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         etEverUsersGreater = findViewById(R.id.etEverUserGreater);
         etNeverUsers = findViewById(R.id.etNeverUser);
         etDeliveriesConducted = findViewById(R.id.etDeliveriesConducted);
+        etTotalCounselingClients = findViewById(R.id.etTotalCounselingClients);
         etOneMonth = findViewById(R.id.etOneMonth);
         etTwoMonths = findViewById(R.id.etTwoMonth);
         etThreeMonths = findViewById(R.id.etThreeMonths);
-        etPACLTMAdopted = findViewById(R.id.etPACLTMAdopted);
-        etPostPACFPAdopted = findViewById(R.id.etPACFPAdopted);
+        etPACLTMAdoptedOneWeek = findViewById(R.id.etPACLTMAdoptedOneWeek);
+        etPACLTMAdoptedHours = findViewById(R.id.etPACLTMAdoptedHours);
+        etPACFPAdoptedOneWeek = findViewById(R.id.etPACFPAdoptedOneWeek);
+        etPACFPAdoptedHours = findViewById(R.id.etPACFPAdoptedHours);
         EditText[] arr = {etCurrentUser, etMethodSwitcher, etMisoCases, etPACCases, etEverUsersLess, etEverUsersGreater,
-                etNeverUsers, etDeliveriesConducted, etOneMonth, etTwoMonths, etThreeMonths, etPACLTMAdopted, etPostPACFPAdopted};
+                etNeverUsers, etDeliveriesConducted, etTotalCounselingClients, etOneMonth, etTwoMonths, etThreeMonths, etPACLTMAdoptedOneWeek, etPACLTMAdoptedHours, etPACFPAdoptedOneWeek, etPACFPAdoptedHours};
         attachFocusListener(arr);
 
         tvNewUsers = findViewById(R.id.tvTotalNewUsers);
         tvFPClients = findViewById(R.id.tvTotalFPClients);
+        tvTotalClients = findViewById(R.id.tvTotalClients);
         tvCondomClients = findViewById(R.id.tvTotalCondomClients);
         tvPillClients = findViewById(R.id.tvTotalPillClients);
         tvIUDClients = findViewById(R.id.tvTotalIUDClients);
@@ -831,6 +867,8 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         QTVForm qtvForm = new QTVForm();
         qtvForm.setChoName(tvStaffCodeName.getText().toString());
         qtvForm.setRegion(tvRegion.getText().toString());
+        qtvForm.setSupervisorCode(AMCode);
+        qtvForm.setSupervisorName(tvSupervisorName.getText().toString());
         Providers provider = (Providers) spProviderCodeName.getSelectedItem();
         qtvForm.setProviderCode(provider.getCode());
         qtvForm.setProviderName(provider.getName());
@@ -923,7 +961,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         qtvForm.setDeliveryDataTotalRow(String.valueOf(count));
 
         //Total of all total of matrix 1
-        qtvForm.setDeliveryDataTotal(Integer.valueOf(totalRow1[ROW_LENGTH - 1].getText().toString()));
+        qtvForm.setDeliveryDataTotal(Integer.valueOf(totalRow1[ROW_LENGTH].getText().toString()));
 
         /*
         Count condoms of 2nd matrix
@@ -1014,7 +1052,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         qtvForm.setPostPartumTotalRow(String.valueOf(count));
 
         //Total of all total of matrix 2
-        qtvForm.setPostPartumTotal(Integer.valueOf(totalRow1[ROW_LENGTH - 1].getText().toString()));
+        qtvForm.setPostPartumTotal(Integer.valueOf(totalRow2[ROW_LENGTH ].getText().toString()));
 
         /*
         Count condoms of 3rd matrix
@@ -1105,7 +1143,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         qtvForm.setPostPACTotalRow(String.valueOf(count));
 
         //Total of all total of matrix 3
-        qtvForm.setPostPACTotal(Integer.valueOf(totalRow1[ROW_LENGTH - 1].getText().toString()));
+        qtvForm.setPostPACTotal(Integer.valueOf(totalRow3[ROW_LENGTH].getText().toString()));
 
 
 
@@ -1198,46 +1236,50 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         qtvForm.setNewUserTotalRow(String.valueOf(count));
 
         //Total of all total of matrix 4
-        qtvForm.setNewUserTotal(Integer.valueOf(totalRow4[ROW_LENGTH - 1].getText().toString()));
+        qtvForm.setNewUserTotal(Integer.valueOf(totalRow4[ROW_LENGTH].getText().toString()));
 
-        qtvForm.setTotalCurrentUsers(Integer.valueOf(etCurrentUser.getText().toString()));
-        qtvForm.setTotalMethodSwitcher(Integer.valueOf(etMethodSwitcher.getText().toString()));
-        qtvForm.setTotalMisoCases(Integer.valueOf(etMisoCases.getText().toString()));
-        qtvForm.setTotalPACCases(Integer.valueOf(etPACCases.getText().toString()));
-        qtvForm.setTotalEverUsersLess(Integer.valueOf(etEverUsersLess.getText().toString()));
-        qtvForm.setTotalEverUsersGreater(Integer.valueOf(etEverUsersGreater.getText().toString()));
-        qtvForm.setTotalNeverUsers(Integer.valueOf(etNeverUsers.getText().toString()));
-        qtvForm.setTotalNewUsers(Integer.valueOf(tvNewUsers.getText().toString()));
-        qtvForm.setTotalDeliveryConducted(Integer.valueOf(etDeliveriesConducted.getText().toString()));
-        qtvForm.setTotalFPClients(Integer.valueOf(tvFPClients.getText().toString()));
-        qtvForm.setTotalCondomClients(Integer.valueOf(tvCondomClients.getText().toString()));
-        qtvForm.setTotalPillsClient(Integer.valueOf(tvPillClients.getText().toString()));
-        qtvForm.setTotalIUDClients(Integer.valueOf(tvIUDClients.getText().toString()));
-        qtvForm.setTotalImplantClients(Integer.valueOf(tvImplantClients.getText().toString()));
-        qtvForm.setTotalInjectableClients(Integer.valueOf(tvInjectableClients.getText().toString()));
-        qtvForm.setTotalVSCClients(Integer.valueOf(tvVSCClients.getText().toString()));
-        qtvForm.setTotalPPIUDClients(Integer.valueOf(tvPPIUDClients.getText().toString()));
-        qtvForm.setTotalInjectableClients(Integer.valueOf(tvInjectableClients.getText().toString()));
-        qtvForm.setOneMonthInjectables(Integer.valueOf(etOneMonth.getText().toString()));
-        qtvForm.setTwoMonthsInjectables(Integer.valueOf(etTwoMonths.getText().toString()));
-        qtvForm.setThreeMonthsInjectables(Integer.valueOf(etThreeMonths.getText().toString()));
-        qtvForm.setTotalPACLTM(Integer.valueOf(etPACLTMAdopted.getText().toString()));
-        qtvForm.setTotalPostPAC(Integer.valueOf(etPostPACFPAdopted.getText().toString()));
+        qtvForm.setTotalCurrentUsers(Integer.valueOf("".equals(etCurrentUser.getText().toString())?"0":etCurrentUser.getText().toString()));
+        qtvForm.setTotalMethodSwitcher(Integer.valueOf("".equals(etMethodSwitcher.getText().toString())?"0":etMethodSwitcher.getText().toString()));
+        qtvForm.setTotalMisoCases(Integer.valueOf("".equals(etMisoCases.getText().toString())?"0":etMisoCases.getText().toString()));
+        qtvForm.setTotalPACCases(Integer.valueOf("".equals(etPACCases.getText().toString())?"0":etPACCases.getText().toString()));
+        qtvForm.setTotalEverUsersLess(Integer.valueOf("".equals(etEverUsersLess.getText().toString())?"0":etEverUsersLess.getText().toString()));
+        qtvForm.setTotalEverUsersGreater(Integer.valueOf("".equals(etEverUsersGreater.getText().toString())?"0":etEverUsersGreater.getText().toString()));
+        qtvForm.setTotalNeverUsers(Integer.valueOf("".equals(etNeverUsers.getText().toString())?"0":etNeverUsers.getText().toString()));
+        qtvForm.setTotalNewUsers(Integer.valueOf("".equals(tvNewUsers.getText().toString())?"0":tvNewUsers.getText().toString()));
+        qtvForm.setTotalDeliveryConducted(Integer.valueOf("".equals(etDeliveriesConducted.getText().toString())?"0":etDeliveriesConducted.getText().toString()));
+        qtvForm.setTotalFPClients(Integer.valueOf("".equals(tvFPClients.getText().toString())?"0":tvFPClients.getText().toString()));
+        qtvForm.setTotalClients(Integer.valueOf("".equals(tvTotalClients.getText().toString())?"0":tvTotalClients.getText().toString()));
+        qtvForm.setTotalCounselingClients(Integer.valueOf("".equals(etTotalCounselingClients.getText().toString())?"0":etTotalCounselingClients.getText().toString()));
+        qtvForm.setTotalCondomClients(Integer.valueOf("".equals(tvCondomClients.getText().toString())?"0":tvCondomClients.getText().toString()));
+        qtvForm.setTotalPillsClient(Integer.valueOf("".equals(tvPillClients.getText().toString())?"0":tvPillClients.getText().toString()));
+        qtvForm.setTotalIUDClients(Integer.valueOf("".equals(tvIUDClients.getText().toString())?"0":tvIUDClients.getText().toString()));
+        qtvForm.setTotalImplantClients(Integer.valueOf("".equals(tvImplantClients.getText().toString())?"0":tvImplantClients.getText().toString()));
+        qtvForm.setTotalInjectableClients(Integer.valueOf("".equals(tvInjectableClients.getText().toString())?"0":tvInjectableClients.getText().toString()));
+        qtvForm.setTotalVSCClients(Integer.valueOf("".equals(tvVSCClients.getText().toString())?"0":tvVSCClients.getText().toString()));
+        qtvForm.setTotalPPIUDClients(Integer.valueOf("".equals(tvPPIUDClients.getText().toString())?"0":tvPPIUDClients.getText().toString()));
+        qtvForm.setTotalInjectableClients(Integer.valueOf("".equals(tvInjectableClients.getText().toString())?"0":tvInjectableClients.getText().toString()));
+        qtvForm.setOneMonthInjectables(Integer.valueOf("".equals(etOneMonth.getText().toString())?"0":etOneMonth.getText().toString()));
+        qtvForm.setTwoMonthsInjectables(Integer.valueOf("".equals(etTwoMonths.getText().toString())?"0":etTwoMonths.getText().toString()));
+        qtvForm.setThreeMonthsInjectables(Integer.valueOf("".equals(etThreeMonths.getText().toString())?"0":etThreeMonths.getText().toString()));
+        qtvForm.setTotalPACLTMAdoptedOneWeek(Integer.valueOf("".equals(etPACLTMAdoptedOneWeek.getText().toString())?"0":etPACLTMAdoptedOneWeek.getText().toString()));
+        qtvForm.setTotalPACLTMAdoptedHours(Integer.valueOf("".equals(etPACLTMAdoptedHours.getText().toString())?"0":etPACLTMAdoptedHours.getText().toString()));
+        qtvForm.setTotalPACFPAdoptedOneWeek(Integer.valueOf("".equals(etPACFPAdoptedOneWeek.getText().toString())?"0":etPACFPAdoptedOneWeek.getText().toString()));
+        qtvForm.setTotalPACFPAdoptedHours(Integer.valueOf("".equals(etPACFPAdoptedHours.getText().toString())?"0":etPACFPAdoptedHours.getText().toString()));
 
         //2nd Section
-        qtvForm.setIUDRemovedSideEffects(Integer.valueOf(etIUDRemovedSide.getText().toString()));
-        qtvForm.setIUDRemovedDesire(Integer.valueOf(etIUDRemovedDesire.getText().toString()));
-        qtvForm.setIUDRemovedAdverse(Integer.valueOf(etIUDRemovedAdverse.getText().toString()));
-        qtvForm.setIUDRemovedOther(Integer.valueOf(etIUDRemovedOther.getText().toString()));
-        qtvForm.setTotalIUDRemovedCases(Integer.valueOf(tvTotalIUDRemovalCases.getText().toString()));
+        qtvForm.setIUDRemovedSideEffects(Integer.valueOf("".equals(etIUDRemovedSide.getText().toString())?"0":etIUDRemovedSide.getText().toString()));
+        qtvForm.setIUDRemovedDesire(Integer.valueOf("".equals(etIUDRemovedDesire.getText().toString())?"0":etIUDRemovedDesire.getText().toString()));
+        qtvForm.setIUDRemovedAdverse(Integer.valueOf("".equals(etIUDRemovedAdverse.getText().toString())?"0":etIUDRemovedAdverse.getText().toString()));
+        qtvForm.setIUDRemovedOther(Integer.valueOf("".equals(etIUDRemovedOther.getText().toString())?"0":etIUDRemovedOther.getText().toString()));
+        qtvForm.setTotalIUDRemovedCases(Integer.valueOf("".equals(tvTotalIUDRemovalCases.getText().toString())?"0":tvTotalIUDRemovalCases.getText().toString()));
 
         //3rd Section
-        qtvForm.setPlacentalInsertion(Integer.valueOf(etPlacentalInsertion.getText().toString()));
-        qtvForm.setImmediatePostPartum(Integer.valueOf(etImmediatePostPartumInsertion.getText().toString()));
-        qtvForm.setPostPartumInsertion48Hours(Integer.valueOf(etPostPartumInsertion48Hours.getText().toString()));
-        qtvForm.setExtendedPostPartumInsertion(Integer.valueOf(etExtendedPostPartumInsertion.getText().toString()));
-        qtvForm.setImmediateExpulsion(Integer.valueOf(etImmediateExpulsion.getText().toString()));
-        qtvForm.setDelayedExpulsion(Integer.valueOf(etImmediateExpulsion.getText().toString()));
+        qtvForm.setPlacentalInsertion(Integer.valueOf("".equals(etPlacentalInsertion.getText().toString())?"0":etPlacentalInsertion.getText().toString()));
+        qtvForm.setImmediatePostPartum(Integer.valueOf("".equals(etImmediatePostPartumInsertion.getText().toString())?"0":etImmediatePostPartumInsertion.getText().toString()));
+        qtvForm.setPostPartumInsertion48Hours(Integer.valueOf("".equals(etPostPartumInsertion48Hours.getText().toString())?"0":etPostPartumInsertion48Hours.getText().toString()));
+        qtvForm.setExtendedPostPartumInsertion(Integer.valueOf("".equals(etExtendedPostPartumInsertion.getText().toString())?"0":etExtendedPostPartumInsertion.getText().toString()));
+        qtvForm.setImmediateExpulsion(Integer.valueOf("".equals(etImmediateExpulsion.getText().toString())?"0":etImmediateExpulsion.getText().toString()));
+        qtvForm.setDelayedExpulsion(Integer.valueOf("".equals(etImmediateExpulsion.getText().toString())?"0":etImmediateExpulsion.getText().toString()));
 
         //4th Section
         qtvForm.setIECMaterial(rbIECMaterialYes.isSelected() == true ? 1 : 0);
@@ -1359,7 +1401,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         qtvForm.setMobileSystemDate(sdf.format(myCalendar.getTime()));
         qtvForm.setId(Util.getNextQTVFormID(this));
         qtvForm.setVisitDate(etReportingMonth.getText().toString());
-
+        qtvForm.setChoCode(staffCode);
         Location location = getLastKnownLocation();
         if (location != null) {
             qtvForm.setLatLong(location.getLatitude() + "," + location.getLongitude());
@@ -1525,6 +1567,8 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         //Total result of matrix1
         tvFPClients.setText(String.valueOf(count));
 
+        tvTotalClients.setText(String.valueOf(count+("".equals(etTotalCounselingClients.getText().toString())?0:Integer.valueOf(etTotalCounselingClients.getText().toString()))));
+
         //Matrix1 column 1 total
         tvCondomClients.setText(totalColumn1[0].getText().toString());
 
@@ -1537,10 +1581,10 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         //Matrix1 column 4 total
         tvImplantClients.setText(totalColumn1[3].getText().toString());
 
-        //Matrix1 column 4 total
+        //Matrix1 column 5 total
         tvInjectableClients.setText(totalColumn1[4].getText().toString());
 
-        //Matrix1 column 5 total
+        //Matrix1 column 6 total
         tvVSCClients.setText(totalColumn1[5].getText().toString());
     }
 

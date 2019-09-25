@@ -50,6 +50,7 @@ public class Util {
             SharedPreferences.Editor editor =  activity.getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE).edit();
             editor.putString("name", dataObj.getName());
             editor.putString("AMName", dataObj.getAMName());
+            editor.putString("AMCode", dataObj.getAMCode());
             editor.putString("region", dataObj.getRegion());
             editor.apply();
             try{

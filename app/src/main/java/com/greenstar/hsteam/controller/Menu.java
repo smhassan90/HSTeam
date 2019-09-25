@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.db.AppDatabase;
+import com.greenstar.hsteam.model.Dashboard;
 import com.greenstar.hsteam.utils.Util;
 import com.greenstar.hsteam.utils.WebserviceResponse;
 
@@ -56,7 +57,8 @@ public class Menu extends AppCompatActivity implements View.OnClickListener, Web
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.llDashboard){
-            Intent myIntent = new Intent(this, DashboardController.class);
+
+           Intent myIntent = new Intent(this, DashboardController.class);
             startActivity(myIntent);
 
         }else if(v.getId()==R.id.llSync){

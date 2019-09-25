@@ -6,15 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
 import com.greenstar.hsteam.R;
-import com.greenstar.hsteam.dal.HSData;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.utils.HttpUtils;
 import com.greenstar.hsteam.utils.Util;
@@ -22,8 +18,6 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
-
-import java.util.Calendar;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -80,6 +74,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 String data =null;
                 String token="";
                 String staffName="";
+                String staffCode = "";
                 int baseID = 0;
                 JSONObject params = new JSONObject();
                 try{
@@ -88,6 +83,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                     data =  response.get("data").toString();
                     token = response.get("token").toString();
                     staffName = response.get("staffName").toString();
+                    staffCode = response.get("staffCode").toString();
                     baseID = Integer.valueOf(response.get("baseID").toString());
 
                     params.put("token",token);
@@ -110,6 +106,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                     editor.putString("token", token);
                     editor.putBoolean("isLoggedIn", true);
                     editor.putInt("qtvFormID",baseID );
+                    editor.putString("staffCode",staffCode);
                     editor.apply();
 
                     saveData(params);

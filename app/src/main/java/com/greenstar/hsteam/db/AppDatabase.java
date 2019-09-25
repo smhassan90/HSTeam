@@ -19,7 +19,7 @@ import com.greenstar.hsteam.model.Providers;
 import com.greenstar.hsteam.model.QTVForm;
 
 @Database(entities = {Providers.class, QTVForm.class, DonorProvider.class, Donors.class, ApprovalQTVForm.class, Dashboard.class},
-        version = 4)
+        version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "hsteamdb";
     private static AppDatabase INSTANCE;

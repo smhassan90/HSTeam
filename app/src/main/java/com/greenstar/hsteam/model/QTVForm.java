@@ -18,12 +18,16 @@ public class QTVForm {
      */
     private int status;
     private String choName;
+    private String choCode;
     private String region;
     private String mobileSystemDate;
     private String visitDate;
     private int donor;
     private String providerCode;
     private String providerName;
+    private String supervisorCode;
+    private String supervisorName;
+
     /*
     Matrix 1
      */
@@ -85,6 +89,8 @@ public class QTVForm {
     private int totalNewUsers;
     private int totalDeliveryConducted;
     private int totalFPClients;
+    private int totalCounselingClients;
+    private int totalClients;
     private int totalCondomClients;
     private int totalPillsClient;
     private int totalIUDClients;
@@ -96,8 +102,10 @@ public class QTVForm {
     private int twoMonthsInjectables;
     private int threeMonthsInjectables;
     private int totalInjectableClientsMonth;
-    private int totalPACLTM;
-    private int totalPostPAC;
+    private int totalPACLTMAdoptedOneWeek;
+    private int totalPACLTMAdoptedHours;
+    private int totalPACFPAdoptedOneWeek;
+    private int totalPACFPAdoptedHours;
     private String latLong;
 
 
@@ -604,22 +612,6 @@ public class QTVForm {
         this.totalInjectableClientsMonth = totalInjectableClientsMonth;
     }
 
-    public int getTotalPACLTM() {
-        return totalPACLTM;
-    }
-
-    public void setTotalPACLTM(int totalPACLTM) {
-        this.totalPACLTM = totalPACLTM;
-    }
-
-    public int getTotalPostPAC() {
-        return totalPostPAC;
-    }
-
-    public void setTotalPostPAC(int totalPostPAC) {
-        this.totalPostPAC = totalPostPAC;
-    }
-
     public int getIUDRemovedSideEffects() {
         return IUDRemovedSideEffects;
     }
@@ -980,6 +972,22 @@ public class QTVForm {
         this.providerName = providerName;
     }
 
+    public String getSupervisorCode() {
+        return supervisorCode;
+    }
+
+    public void setSupervisorCode(String supervisorCode) {
+        this.supervisorCode = supervisorCode;
+    }
+
+    public String getSupervisorName() {
+        return supervisorName;
+    }
+
+    public void setSupervisorName(String supervisorName) {
+        this.supervisorName = supervisorName;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -1002,5 +1010,61 @@ public class QTVForm {
 
     public void setLatLong(String latLong) {
         this.latLong = latLong;
+    }
+
+    public int getTotalCounselingClients() {
+        return totalCounselingClients;
+    }
+
+    public void setTotalCounselingClients(int totalCounselingClients) {
+        this.totalCounselingClients = totalCounselingClients;
+    }
+
+    public int getTotalClients() {
+        return totalClients;
+    }
+
+    public void setTotalClients(int totalClients) {
+        this.totalClients = totalClients;
+    }
+
+    public int getTotalPACLTMAdoptedOneWeek() {
+        return totalPACLTMAdoptedOneWeek;
+    }
+
+    public void setTotalPACLTMAdoptedOneWeek(int totalPACLTMAdoptedOneWeek) {
+        this.totalPACLTMAdoptedOneWeek = totalPACLTMAdoptedOneWeek;
+    }
+
+    public int getTotalPACLTMAdoptedHours() {
+        return totalPACLTMAdoptedHours;
+    }
+
+    public void setTotalPACLTMAdoptedHours(int totalPACLTMAdoptedHours) {
+        this.totalPACLTMAdoptedHours = totalPACLTMAdoptedHours;
+    }
+
+    public int getTotalPACFPAdoptedOneWeek() {
+        return totalPACFPAdoptedOneWeek;
+    }
+
+    public void setTotalPACFPAdoptedOneWeek(int totalPACFPAdoptedOneWeek) {
+        this.totalPACFPAdoptedOneWeek = totalPACFPAdoptedOneWeek;
+    }
+
+    public int getTotalPACFPAdoptedHours() {
+        return totalPACFPAdoptedHours;
+    }
+
+    public void setTotalPACFPAdoptedHours(int totalPACFPAdoptedHours) {
+        this.totalPACFPAdoptedHours = totalPACFPAdoptedHours;
+    }
+
+    public String getChoCode() {
+        return choCode;
+    }
+
+    public void setChoCode(String choCode) {
+        this.choCode = choCode;
     }
 }
