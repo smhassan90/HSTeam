@@ -333,7 +333,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         tvRegion.setText(region.toString());
 
         //Providers spinner populate
-        providers = db.getProvidersDAO().getAll();
+        providers = db.getProvidersDAO().getActiveProviders();
 
         Providers first = new Providers();
         first.setCode("0");

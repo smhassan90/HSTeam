@@ -16,6 +16,9 @@ public interface ProvidersDAO {
     @Query("SELECT * FROM Providers")
     List<Providers> getAll();
 
+    @Query("SELECT * FROM Providers where status=1")
+    List<Providers> getActiveProviders();
+
     @Query("DELETE FROM Providers")
     public void nukeTable();
 }

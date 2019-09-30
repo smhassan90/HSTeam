@@ -10,6 +10,8 @@ public class Providers {
     @PrimaryKey
     private String code;
     private String name;
+    private int status;
+    private String donor;
 
     @NonNull
     public String getCode() {
@@ -26,6 +28,22 @@ public class Providers {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getDonor() {
+        return donor;
+    }
+
+    public void setDonor(String donor) {
+        this.donor = donor;
     }
 
     @Override
