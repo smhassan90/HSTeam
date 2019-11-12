@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.adapters.PendingFormAdapter;
 import com.greenstar.hsteam.dao.QTVFormDeleteListener;
@@ -22,6 +23,8 @@ import com.greenstar.hsteam.model.QTVForm;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.fabric.sdk.android.services.common.Crash;
 
 /**
  * @author Syed Muhammad Hassan
@@ -92,11 +95,16 @@ public class PendingFormsBasket extends Fragment implements QTVFormDeleteListene
     }
 
     private void deleteForm(long orderId){
-        db.getQTVFormDAO().deleteQtvFormById(orderId);
-        Toast.makeText(getActivity(),"QTV Form deleted",Toast.LENGTH_SHORT).show();
-        basketAdapter = new PendingFormAdapter(getActivity(),getData(), this);
-        lvBasket.setAdapter(basketAdapter);
-        basketAdapter.notifyDataSetChanged();
+        try{
+            db.getQTVFormDAO().deleteQtvFormById(orderId);
+            Toast.makeText(getActivity(),"QTV Form deleted",Toast.LENGTH_SHORT).show();
+            basketAdapter = new PendingFormAdapter(getActivity(),getData(), this);
+            lvBasket.setAdapter(basketAdapter);
+            basketAdapter.notifyDataSetChanged();
+        }catch (Exception e){
+            Crashlytics.logException(e);
+        }
+
     }
 
     @Override

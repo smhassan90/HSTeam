@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.adapters.ApprovalSuccessfulFormAdapter;
 import com.greenstar.hsteam.adapters.SuccessfulFormAdapter;
@@ -49,11 +50,15 @@ public class ApprovalSuccessfulFormBasket extends Fragment {
         view = inflater.inflate(R.layout.pending_forms_basket, container, false);
         db = AppDatabase.getAppDatabase(getActivity());
         lvBasket = view.findViewById(R.id.lvBasket);
+        try{
+            List<ApprovalQTVForm> qtvForms = new ArrayList<>();
+            qtvForms = getData();
+            basketAdapter = new ApprovalSuccessfulFormAdapter(getActivity(), qtvForms);
+            lvBasket.setAdapter(basketAdapter);
+        }catch (Exception e){
+            Crashlytics.logException(e);
+        }
 
-        List<ApprovalQTVForm> qtvForms = new ArrayList<>();
-        qtvForms = getData();
-        basketAdapter = new ApprovalSuccessfulFormAdapter(getActivity(), qtvForms);
-        lvBasket.setAdapter(basketAdapter);
 
         // Inflate the layout for this fragment
         return view;

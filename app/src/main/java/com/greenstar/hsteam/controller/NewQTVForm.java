@@ -25,6 +25,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.adapters.ProviderAdapter;
 import com.greenstar.hsteam.db.AppDatabase;
@@ -844,7 +845,11 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
             }
         }
-        handleMatrixClick(v.getId());
+        try {
+            handleMatrixClick(v.getId());
+        }catch(Exception e){
+
+        }
     }
 
     private boolean isValid() {
@@ -1690,7 +1695,12 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public boolean onLongClick(View v) {
-        decrementValue(v.getId());
+        try{
+            decrementValue(v.getId());
+        }catch(Exception e){
+            Crashlytics.logException(e);
+        }
+
         return true;
     }
 

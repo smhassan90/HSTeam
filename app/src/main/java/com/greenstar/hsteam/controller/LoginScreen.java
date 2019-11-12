@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.utils.HttpUtils;
@@ -93,23 +95,27 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                     params.put("status",codeReceived);
 
                 }catch(Exception e){
-
+                    Crashlytics.logException(e);
                 }finally {
                     dialog.dismiss();
                 }
                 Toast.makeText(LoginScreen.this, message, Toast.LENGTH_LONG).show();
                 if(Codes.ALL_OK.equals(codeReceived)){
                     Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
+                    try {
+                        SharedPreferences.Editor editor = activity.getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE).edit();
 
-                    SharedPreferences.Editor editor =  activity.getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE).edit();
-
-                    editor.putString("token", token);
-                    editor.putBoolean("isLoggedIn", true);
-                    editor.putInt("qtvFormID",baseID );
-                    editor.putString("staffCode",staffCode);
-                    editor.apply();
-
-                    saveData(params);
+                        editor.putString("token", token);
+                        editor.putBoolean("isLoggedIn", true);
+                        editor.putInt("qtvFormID", baseID);
+                        editor.putString("staffCode", staffCode);
+                        editor.apply();
+                        Crashlytics.setUserName(staffName);
+                        Crashlytics.setUserIdentifier(staffCode);
+                        saveData(params);
+                    }catch(Exception e){
+                        Crashlytics.logException(e);
+                    }
                 }
             }
 

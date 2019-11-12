@@ -56,47 +56,11 @@ public class ProviderAdapter extends ArrayAdapter<Providers> implements TextWatc
         }
 
         return v;
-/*
-        View v = convertView;
-
-        if (v == null) {
-            LayoutInflater inflater = mActivity.getLayoutInflater();
-            v = inflater.inflate(R.layout.sp_provider_dialog, null);
-
-        }
-        TextView tvName = (TextView) v.findViewById(R.id.tvName);
-        TextView tvCode = (TextView) v.findViewById(R.id.tvCode);
-
-        if(list.get(position).getName()==null){
-            tvName.setText("Please Select");
-        }else{
-            tvName.setText(list.get(position).getName());
-            tvCode.setText(list.get(position).getCode());
-        }
-        return v;
-        */
     }
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-       /* View v = convertView;
 
-        if (v == null) {
-            LayoutInflater inflater = mActivity.getLayoutInflater();
-            v = inflater.inflate(R.layout.sp_provider_dialog, null);
-
-        }
-        TextView tvName = (TextView) v.findViewById(R.id.tvName);
-        TextView tvCode = (TextView) v.findViewById(R.id.tvCode);
-
-        if(list.get(position).getName()==null){
-            tvName.setText("Please Select");
-        }else{
-            tvName.setText(list.get(position).getName());
-            tvCode.setText(list.get(position).getCode());
-        }
-        return v;
-        */
        return initView(position,convertView,parent);
     }
 

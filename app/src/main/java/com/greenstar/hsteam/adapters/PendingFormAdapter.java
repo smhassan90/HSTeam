@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.dao.QTVFormDeleteListener;
 import com.greenstar.hsteam.db.AppDatabase;
@@ -72,12 +73,16 @@ public class PendingFormAdapter extends ArrayAdapter<QTVForm> implements View.On
         if(list!=null && list.size()>0){
             QTVForm i = list.get(position);
             if(i!=null){
-                tvFormId.setText("Form ID : "+ i.getId());
-                tvProviderName.setText("Provider Name : " +i.getProviderName());
-                tvProviderCode.setText("Provider Code : "+i.getProviderCode());
-                tvVisitDate.setText("Visit Date : "    + i.getVisitDate());
+                try {
+                    tvFormId.setText("Form ID : " + i.getId());
+                    tvProviderName.setText("Provider Name : " + i.getProviderName());
+                    tvProviderCode.setText("Provider Code : " + i.getProviderCode());
+                    tvVisitDate.setText("Visit Date : " + i.getVisitDate());
 
-                btnDelete.setTag(i.getId());
+                    btnDelete.setTag(i.getId());
+                }catch(Exception e){
+                    Crashlytics.logException(e);
+                }
             }else{
 
                 tvFormId.setText("There is no pending form");
