@@ -863,6 +863,18 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         } else if (Integer.valueOf(totalRow4[ROW_LENGTH].getText().toString()) < Integer.valueOf(tvNewUsers.getText().toString())) {
             isValid = false;
             Toast.makeText(this, "Total new User is greater than Total New User Method mix from matrix. Both should be equal", Toast.LENGTH_LONG).show();
+        } else if(Integer.valueOf(totalRow1[ROW_LENGTH].getText().toString()) < Integer.valueOf(totalRow2[ROW_LENGTH].getText().toString())){
+            isValid = false;
+            Toast.makeText(this, "Total FP clients matrix total is less than Post partum FP total clients matrix2. Matrix1 total should be greater than Matrix2 total.", Toast.LENGTH_LONG).show();
+        }else if(Integer.valueOf(totalRow1[ROW_LENGTH].getText().toString()) < Integer.valueOf(totalRow3[ROW_LENGTH].getText().toString())){
+            isValid = false;
+            Toast.makeText(this, "Total FP clients matrix total is less than Post PAC FP total clients matrix3. Matrix1 total should be greater than Matrix3 total.", Toast.LENGTH_LONG).show();
+        }else if(Integer.valueOf(totalRow1[ROW_LENGTH].getText().toString()) < Integer.valueOf(totalRow4[ROW_LENGTH].getText().toString())){
+            isValid = false;
+            Toast.makeText(this, "Total FP clients matrix total is less than New User total clients matrix4. Matrix1 total should be greater than Matrix4 total.", Toast.LENGTH_LONG).show();
+        }else if(Integer.valueOf(totalRow3[ROW_LENGTH].getText().toString()) > Integer.valueOf("".equals(etPACCases.getText().toString())?"0":etPACCases.getText().toString())){
+            isValid = false;
+            Toast.makeText(this, "Total PAC cases should be greater than matrix 3 total(MVA)", Toast.LENGTH_LONG).show();
         }
         return isValid;
 
