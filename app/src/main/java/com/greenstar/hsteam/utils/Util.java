@@ -38,6 +38,9 @@ public class Util {
 
         String data = "";
         String status = "";
+        int isQTVAllowed = 0;
+        int isQATAllowed = 0;
+
         String approvalStatus= "";
         try{
             data = (String) params.get("data");
@@ -54,13 +57,21 @@ public class Util {
             editor.putString("AMName", dataObj.getAMName());
             editor.putString("AMCode", dataObj.getAMCode());
             editor.putString("region", dataObj.getRegion());
+            editor.putInt("isQTVAllowed", dataObj.getIsQTVAllowed());
+            editor.putInt("isQATAllowed", dataObj.getIsQATAllowed());
+
             editor.apply();
             try{
                 db = AppDatabase.getAppDatabase(activity);
                 db.getProvidersDAO().nukeTable();
                 db.getApprovalQTVFormDAO().nukeTable();
+                db.getQuestionsDAO().nukeTable();
+                db.getAreaDAO().nukeTable();
                 db.getDashboardDAO().nukeTable();
+
                 db.getProvidersDAO().insertMultiple(dataObj.getProviders());
+                db.getAreaDAO().insertMultiple(dataObj.getAreas());
+                db.getQuestionsDAO().insertMultiple(dataObj.getQuestions());
                 if (dataObj.getQtvForms()!=null && dataObj.getQtvForms().size()>0){
                     db.getApprovalQTVFormDAO().insertMultiple(dataObj.getQtvForms());
                 }
@@ -173,6 +184,8 @@ public class Util {
                 String data = "";
                 String codeReceived = "";
                 String staffName = "";
+                int isQTVAllowed = 0;
+                int isQATAllowed = 0;
                 JSONObject params = new JSONObject();
                 List<Integer> successfulIDs = new ArrayList<>();
                 List<Integer> rejectedIDs = new ArrayList<>();
@@ -185,6 +198,8 @@ public class Util {
                     params.put("data", data);
                     params.put("staffName",staffName);
                     params.put("status",codeReceived);
+                    params.put("isQTVAllowed",isQTVAllowed);
+                    params.put("isQATAllowed", isQATAllowed);
 
                     for(int i=0;i<response.getJSONArray("rejectedIDs").length();i++){
                         rejectedIDs.add(response.getJSONArray("rejectedIDs").getInt(i));

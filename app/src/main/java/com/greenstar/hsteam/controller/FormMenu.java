@@ -3,7 +3,6 @@ package com.greenstar.hsteam.controller;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,14 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.db.AppDatabase;
-import com.greenstar.hsteam.model.Dashboard;
 import com.greenstar.hsteam.utils.Util;
 import com.greenstar.hsteam.utils.WebserviceResponse;
 
@@ -28,42 +24,34 @@ import org.json.JSONObject;
 import java.util.Date;
 
 import io.fabric.sdk.android.Fabric;
-import io.fabric.sdk.android.services.common.Crash;
 
-public class Menu extends AppCompatActivity implements View.OnClickListener, WebserviceResponse {
+public class FormMenu extends AppCompatActivity implements View.OnClickListener, WebserviceResponse {
 
-        LinearLayout llSync;
-        LinearLayout llBasket;
-        LinearLayout llProfile;
-        LinearLayout llDashboard;
-        LinearLayout llQTVForm;
-        ProgressDialog progressBar = null;
-        AppDatabase db =null;
-        Activity activity;
+    LinearLayout llQTVForm;
+    LinearLayout llQATForm;
+    LinearLayout llSync;
+
+    ProgressDialog progressBar = null;
+    AppDatabase db =null;
+    Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_activity);
+        setContentView(R.layout.form_menu_activity);
 
         Fabric.with(this, new Crashlytics());
 
         activity = this;
         db = AppDatabase.getAppDatabase(this);
 
-        llDashboard = findViewById(R.id.llDashboard);
-        llDashboard.setOnClickListener(this);
+        llQTVForm = findViewById(R.id.llQTVForm);
+        llQTVForm.setOnClickListener(this);
+
+        llQATForm = findViewById(R.id.llQATForm);
+        llQATForm.setOnClickListener(this);
 
         llSync = findViewById(R.id.llSync);
         llSync.setOnClickListener(this);
-
-        llBasket = findViewById(R.id.llBasket);
-        llBasket.setOnClickListener(this);
-
-        llProfile = findViewById(R.id.llApprovalStatus);
-        llProfile.setOnClickListener(this);
-
-        llQTVForm = findViewById(R.id.llForm);
-        llQTVForm.setOnClickListener(this);
     }
 
     @Override
@@ -106,10 +94,27 @@ public class Menu extends AppCompatActivity implements View.OnClickListener, Web
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.llDashboard){
+        SharedPreferences editor = this.getSharedPreferences(Codes.PREF_NAME, Context.MODE_PRIVATE);
+        int isQTVAllowed = editor.getInt("isQTVAllowed",0);
+        int isQATAllowed = editor.getInt("isQATAllowed",0);
 
-           Intent myIntent = new Intent(this, DashboardController.class);
-            startActivity(myIntent);
+
+        if(v.getId()==R.id.llQTVForm){
+            if(isQTVAllowed==1){
+                Intent myIntent = new Intent(this, QTVMenu.class);
+                startActivity(myIntent);
+            }else{
+                Toast.makeText(this,"You are not allowed to perform QTV. Please contact your supervisor",Toast.LENGTH_LONG).show();
+            }
+
+
+        }else if(v.getId()==R.id.llQATForm){
+            if(isQATAllowed==1){
+                Intent myIntent = new Intent(this, QATMenu.class);
+                startActivity(myIntent);
+            }else{
+                Toast.makeText(this,"You are not allowed to perform QAT. Please contact your supervisor",Toast.LENGTH_LONG).show();
+            }
 
         }else if(v.getId()==R.id.llSync){
             try{
@@ -129,15 +134,6 @@ public class Menu extends AppCompatActivity implements View.OnClickListener, Web
                 Crashlytics.logException(e);
             }
 
-        }else if(v.getId()==R.id.llBasket){
-            Intent myIntent = new Intent(this, SubmittedForms.class);
-            startActivity(myIntent);
-        }else if(v.getId()==R.id.llApprovalStatus){
-            Intent myIntent = new Intent(this, ApprovalStatus.class);
-            startActivity(myIntent);
-        }else if(v.getId()==R.id.llForm){
-            Intent myIntent = new Intent(activity, NewQTVForm.class);
-            startActivity(myIntent);
         }
     }
 
@@ -176,6 +172,5 @@ public class Menu extends AppCompatActivity implements View.OnClickListener, Web
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
         progressBar.dismiss();
-
     }
 }

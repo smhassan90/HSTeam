@@ -138,7 +138,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
     public void saveData(JSONObject params){
         Util.saveData(params,this);
-        Intent intent = new Intent(this, Menu.class);
+        Intent intent = new Intent(this, FormMenu.class);
         this.startActivity(intent);
         finish();
     }

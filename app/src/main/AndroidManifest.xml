@@ -23,7 +23,22 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.Menu">
+        <activity android:name=".controller.FormMenu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".controller.QTVMenu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".controller.QATMenu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".controller.QATForm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
