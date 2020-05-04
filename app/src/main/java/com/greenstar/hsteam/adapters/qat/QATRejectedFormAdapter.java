@@ -1,4 +1,4 @@
-package com.greenstar.hsteam.adapters;
+package com.greenstar.hsteam.adapters.qat;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -13,17 +13,17 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.db.AppDatabase;
-import com.greenstar.hsteam.model.approval.ApprovalQTVForm;
+import com.greenstar.hsteam.model.QATFormHeader;
+import com.greenstar.hsteam.model.QTVForm;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApprovalPendingFormAdapter extends ArrayAdapter<ApprovalQTVForm> {
+public class QATRejectedFormAdapter extends ArrayAdapter<QATFormHeader> {
     private Activity mActivity;
-    private List<ApprovalQTVForm> list = new ArrayList<>();
+    private List<QATFormHeader> list = new ArrayList<>();
     AppDatabase db =null;
-
-    public ApprovalPendingFormAdapter(@NonNull Activity activity, List<ApprovalQTVForm> list) {
+    public QATRejectedFormAdapter(@NonNull Activity activity, List<QATFormHeader> list) {
         super(activity, 0, 0, list);
         db = AppDatabase.getAppDatabase(activity);
         mActivity = activity;
@@ -37,7 +37,7 @@ public class ApprovalPendingFormAdapter extends ArrayAdapter<ApprovalQTVForm> {
 
     @Nullable
     @Override
-    public ApprovalQTVForm getItem(int position) {
+    public QATFormHeader getItem(int position) {
         return list.get(position);
     }
 
@@ -52,7 +52,7 @@ public class ApprovalPendingFormAdapter extends ArrayAdapter<ApprovalQTVForm> {
         View v = convertView;
         if (v == null) {
             LayoutInflater inflater = mActivity.getLayoutInflater();
-            v = inflater.inflate(R.layout.successful_form, null);
+            v = inflater.inflate(R.layout.rejected_form, null);
         }
         LinearLayout llInnerBasket = v.findViewById(R.id.llInnerBasket);
 
@@ -61,27 +61,26 @@ public class ApprovalPendingFormAdapter extends ArrayAdapter<ApprovalQTVForm> {
         TextView tvProviderCode = (TextView) v.findViewById(R.id.tvProviderCode);
         TextView tvVisitDate = (TextView) v.findViewById(R.id.tvVisitDate);
         if(list!=null && list.size()>0){
-            ApprovalQTVForm i = list.get(position);
+            QATFormHeader i = list.get(position);
             if(i!=null){
-                try{
-                    tvFormId.setText("Form ID : "+ i.getId());
-                    tvProviderName.setText("Provider Name : " +i.getProviderName());
-                    tvProviderCode.setText("Provider Code : "+i.getProviderCode());
-                    tvVisitDate.setText("Visit Date : "    + i.getVisitDate());
+                try {
+                    tvFormId.setText("Form ID : " + i.getId());
+                    tvProviderName.setText("Provider Name : " + i.getProviderName());
+                    tvProviderCode.setText("Provider Code : " + i.getProviderCode());
+                    tvVisitDate.setText("Visit Date : " + i.getDateOfAssessment());
                 }catch(Exception e){
                     Crashlytics.logException(e);
                 }
-
             }else{
 
-                tvFormId.setText("There is no Pending form");
+                tvFormId.setText("There is no Rejected form");
                 tvProviderName.setVisibility(View.GONE);
                 tvProviderCode.setVisibility(View.GONE);
                 tvVisitDate.setVisibility(View.GONE);
             }
 
         }else{
-            tvFormId.setText("There is no Pending form");
+            tvFormId.setText("There is no Rejected form");
             tvProviderName.setVisibility(View.GONE);
             tvProviderCode.setVisibility(View.GONE);
             tvVisitDate.setVisibility(View.GONE);

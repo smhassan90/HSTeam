@@ -7,16 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
-import com.greenstar.hsteam.dao.QTVFormDeleteListener;
+import com.greenstar.hsteam.dao.FormDeleteListener;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.model.QTVForm;
 
@@ -27,8 +25,8 @@ public class PendingFormAdapter extends ArrayAdapter<QTVForm> implements View.On
     private Activity mActivity;
     private List<QTVForm> list = new ArrayList<>();
     AppDatabase db =null;
-    QTVFormDeleteListener deleteForm = null;
-    public PendingFormAdapter(@NonNull Activity activity,  List<QTVForm> list, QTVFormDeleteListener deleteForm) {
+    FormDeleteListener deleteForm = null;
+    public PendingFormAdapter(@NonNull Activity activity,  List<QTVForm> list, FormDeleteListener deleteForm) {
         super(activity, 0, 0, list);
         db = AppDatabase.getAppDatabase(activity);
         mActivity = activity;
@@ -109,7 +107,7 @@ public class PendingFormAdapter extends ArrayAdapter<QTVForm> implements View.On
             Object obj =  v.getTag()==null?"0":v.getTag();
             long formId = (long)obj;
             if(formId!=0){
-                deleteForm.deleteQTVForm(formId);
+                deleteForm.deleteForm(formId);
             }else{
                 Toast.makeText(mActivity, "Something went wrong while deleting Form",Toast.LENGTH_SHORT).show();
             }

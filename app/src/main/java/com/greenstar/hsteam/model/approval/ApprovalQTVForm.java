@@ -1,4 +1,4 @@
-package com.greenstar.hsteam.model;
+package com.greenstar.hsteam.model.approval;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
@@ -12,7 +12,7 @@ public class ApprovalQTVForm {
     private long id;
     /*
     Status = 0 means Pending
-    Status = 1 means successfully synced
+    Status = 1 means successfully approved
      */
     private int status;
     private String visitDate;

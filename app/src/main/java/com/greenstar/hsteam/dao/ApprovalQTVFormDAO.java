@@ -4,8 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.greenstar.hsteam.model.ApprovalQTVForm;
-import com.greenstar.hsteam.model.QTVForm;
+import com.greenstar.hsteam.model.approval.ApprovalQTVForm;
 
 import java.util.List;
 

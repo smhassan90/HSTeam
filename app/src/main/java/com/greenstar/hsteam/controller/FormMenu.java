@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
+import com.greenstar.hsteam.controller.qat.QATMenu;
+import com.greenstar.hsteam.controller.qtv.QTVMenu;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.utils.Util;
 import com.greenstar.hsteam.utils.WebserviceResponse;

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -13,7 +12,9 @@ import com.google.gson.Gson;
 import com.greenstar.hsteam.controller.Codes;
 import com.greenstar.hsteam.dal.HSData;
 import com.greenstar.hsteam.db.AppDatabase;
-import com.greenstar.hsteam.model.ApprovalQTVForm;
+import com.greenstar.hsteam.model.QATAreaDetail;
+import com.greenstar.hsteam.model.QATFormHeader;
+import com.greenstar.hsteam.model.QATFormQuestion;
 import com.greenstar.hsteam.model.QTVForm;
 import com.greenstar.hsteam.model.SyncObject;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -69,9 +70,16 @@ public class Util {
                 db.getAreaDAO().nukeTable();
                 db.getDashboardDAO().nukeTable();
 
+                db.getApprovalQATFormDAO().nukeTable();
+                db.getApprovalQATAreaDAO().nukeTable();
+                db.getApprovalQATFormQuestionDAO().nukeTable();
+
                 db.getProvidersDAO().insertMultiple(dataObj.getProviders());
                 db.getAreaDAO().insertMultiple(dataObj.getAreas());
                 db.getQuestionsDAO().insertMultiple(dataObj.getQuestions());
+                db.getApprovalQATFormDAO().insertMultiple(dataObj.getApprovalQATForms());
+                db.getApprovalQATAreaDAO().insertMultiple(dataObj.getApprovalQATAreas());
+                db.getApprovalQATFormQuestionDAO().insertMultiple(dataObj.getApprovalQATFormQuestions());
                 if (dataObj.getQtvForms()!=null && dataObj.getQtvForms().size()>0){
                     db.getApprovalQTVFormDAO().insertMultiple(dataObj.getQtvForms());
                 }
@@ -85,6 +93,7 @@ public class Util {
             }
         }
     }
+
     public void pullMapping(final Context context){
         SharedPreferences editor = context.getSharedPreferences(Codes.PREF_NAME, Context.MODE_PRIVATE);
         String code = editor.getString("code","");
@@ -171,8 +180,15 @@ public class Util {
         AppDatabase db = AppDatabase.getAppDatabase(context);
 
         List<QTVForm> qtvForms = db.getQTVFormDAO().getAllPendingForms();
+        List<QATFormHeader> qatFormHeaders = db.getQatFormHeaderDAO().getAllPending();
+        List<Long> ids = getAllFormIds(qatFormHeaders);
+        List<QATFormQuestion> qatFormQuestions = db.getQatFormQuestionDAO().getAllPending(ids);
+        List<QATAreaDetail> qatAreaDetails = db.getAreaDetailDAO().getAllPending(ids);
         SyncObject syncObject = new SyncObject();
         syncObject.setQtvForms(qtvForms);
+        syncObject.setQatAreaDetails(qatAreaDetails);
+        syncObject.setQatFormHeaders(qatFormHeaders);
+        syncObject.setQatFormQuestions(qatFormQuestions);
 
         final String data = new Gson().toJson(syncObject);
         rp.add("data",data);
@@ -189,6 +205,9 @@ public class Util {
                 JSONObject params = new JSONObject();
                 List<Integer> successfulIDs = new ArrayList<>();
                 List<Integer> rejectedIDs = new ArrayList<>();
+
+                List<Long> successfulQATIDs = new ArrayList<>();
+                List<Long> rejectedQATIDs = new ArrayList<>();
                 try {
                     message = response.get("message").toString();
                     codeReceived = response.get("status").toString();
@@ -207,6 +226,13 @@ public class Util {
                     for(int i=0;i<response.getJSONArray("successfulIDs").length();i++){
                         successfulIDs.add(response.getJSONArray("successfulIDs").getInt(i));
                     }
+
+                    for(int i=0;i<response.getJSONArray("rejectedQATIDs").length();i++){
+                        rejectedQATIDs.add(response.getJSONArray("rejectedQATIDs").getLong(i));
+                    }
+                    for(int i=0;i<response.getJSONArray("successfulQATIDs").length();i++){
+                        successfulQATIDs.add(response.getJSONArray("successfulQATIDs").getLong(i));
+                    }
                 }catch(Exception e){
                     Toast.makeText(context,"Something went wrong while sync",Toast.LENGTH_SHORT).show();
                     Crashlytics.log("Sync Issue at "+ new Date());
@@ -214,6 +240,7 @@ public class Util {
                 }
                 if(Codes.ALL_OK.equals(codeReceived)){
                     updateData(successfulIDs, rejectedIDs, context);
+                    updateQATForms(rejectedQATIDs,successfulQATIDs,context);
                     saveData(params, context);
                 }
                 responseListener.responseAlert(response.toString());
@@ -255,6 +282,20 @@ public class Util {
         }
     }
 
+    private void updateQATForms(List<Long> rejectedQATIDs, List<Long> successfulQATIDs, Activity activity) {
+        AppDatabase db = AppDatabase.getAppDatabase(activity);
+        try {
+            for (long id : successfulQATIDs) {
+                db.getQatFormHeaderDAO().markQATSuccessful(id);
+            }
+            for (long id : rejectedQATIDs) {
+                db.getQTVFormDAO().markQTVRejected(id);
+            }
+        }catch(Exception e){
+            Crashlytics.logException(e);
+        }
+    }
+
     public WebserviceResponse getResponseListener() {
         return responseListener;
     }
@@ -263,12 +304,22 @@ public class Util {
         this.responseListener = responseListener;
     }
 
-    public static int getNextQTVFormID(Activity activity){
+    public static long getNextID(Activity activity, int type){
         SharedPreferences editor = activity.getSharedPreferences(Codes.PREF_NAME, Context.MODE_PRIVATE);
-        int qtvFormID =  editor.getInt("qtvFormID",0);
+        String idType = "";
+
+        if(type==Codes.QTVFORM){
+            idType = "qtvFormID";
+        }else if(type==Codes.QATFORM){
+            idType = "qatFormID";
+        }
+        long qtvFormID = 0;
+
+
+        qtvFormID = editor.getLong(idType,0);
         qtvFormID++;
         SharedPreferences.Editor edit =editor.edit();
-        edit.putInt("qtvFormID",qtvFormID);
+        edit.putLong(idType,qtvFormID);
         edit.apply();
 
         return qtvFormID;
@@ -279,5 +330,13 @@ public class Util {
                 = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private List<Long> getAllFormIds(List<QATFormHeader> qatFormHeaders){
+        List<Long> formIds = new ArrayList<>();
+        for(QATFormHeader qatFormHeader : qatFormHeaders){
+            formIds.add(qatFormHeader.getId());
+        }
+        return formIds;
     }
 }

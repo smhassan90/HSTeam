@@ -1,4 +1,4 @@
-package com.greenstar.hsteam.controller;
+package com.greenstar.hsteam.controller.qtv;
 
 import android.Manifest;
 import android.app.Activity;
@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.adapters.ProviderAdapter;
+import com.greenstar.hsteam.controller.Codes;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.model.Providers;
 import com.greenstar.hsteam.model.QTVForm;
@@ -1416,7 +1417,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         SimpleDateFormat sdf = new SimpleDateFormat(Codes.myFormat);
 
         qtvForm.setMobileSystemDate(sdf.format(myCalendar.getTime()));
-        qtvForm.setId(Util.getNextQTVFormID(this));
+        qtvForm.setId(Util.getNextID(this,Codes.QTVFORM));
         qtvForm.setVisitDate(etReportingMonth.getText().toString());
         qtvForm.setChoCode(staffCode);
         Location location = getLastKnownLocation();

@@ -8,13 +8,14 @@ import java.util.UUID;
 public class HttpUtils {
     //private static final String BASE_URL = "http://203.101.170.211:8081/mis/";
     //private static final String BASE_URL = "http://192.168.0.98:8080/";
-    private static final String BASE_URL = "http://192.168.4.18:8080/";
-    //private static final String BASE_URL = "http://192.168.8.102:8080/";
+   private static final String BASE_URL = "http://192.168.1.105:8080/";
+    //private static final String BASE_URL = "http://192.168.8.101:8080/";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-       client.get(getAbsoluteUrl(url), params, responseHandler);
+        client.setTimeout(20000);
+        client.get(getAbsoluteUrl(url), params, responseHandler);
     }
 
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {

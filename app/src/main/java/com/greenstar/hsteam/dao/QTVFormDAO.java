@@ -39,6 +39,6 @@ public interface QTVFormDAO {
     public void markQTVSuccessful(int id);
 
     @Query("UPDATE QTVForm SET status=2 WHERE id=:id")
-    public void markQTVRejected(int id);
+    public void markQTVRejected(long id);
 
 }

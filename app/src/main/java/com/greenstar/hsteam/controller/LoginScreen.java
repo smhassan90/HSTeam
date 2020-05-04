@@ -77,7 +77,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 String token="";
                 String staffName="";
                 String staffCode = "";
-                int baseID = 0;
+                long baseID = 0;
+
                 JSONObject params = new JSONObject();
                 try{
                     message = response.get("message").toString();
@@ -86,7 +87,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                     token = response.get("token").toString();
                     staffName = response.get("staffName").toString();
                     staffCode = response.get("staffCode").toString();
-                    baseID = Integer.valueOf(response.get("baseID").toString());
+                    baseID = Long.valueOf(response.get("baseID").toString());
 
                     params.put("token",token);
                     params.put("message", message);
@@ -107,7 +108,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
                         editor.putString("token", token);
                         editor.putBoolean("isLoggedIn", true);
-                        editor.putInt("qtvFormID", baseID);
+                        editor.putLong("qtvFormID", baseID);
+                        editor.putLong("qatFormID", baseID);
                         editor.putString("staffCode", staffCode);
                         editor.apply();
                         Crashlytics.setUserName(staffName);

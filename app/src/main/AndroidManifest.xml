@@ -28,38 +28,52 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.QTVMenu">
+        <activity android:name=".controller.qtv.QTVMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.QATMenu">
+        <activity android:name=".controller.qat.QATMenu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+        <activity android:name=".controller.qat.QATForm">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+        <activity android:name=".controller.qat.TCForm">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+        <activity android:name=".controller.qtv.NewQTVForm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.QATForm">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".controller.NewQTVForm">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".controller.SubmittedForms"
+        <activity android:name=".controller.qtv.SubmittedForms"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.ApprovalStatus">
+        <activity android:name=".controller.qat.QATSubmittedForms"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.DashboardController">
+        <activity android:name=".controller.qtv.ApprovalStatus">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".controller.qtv.DashboardController">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

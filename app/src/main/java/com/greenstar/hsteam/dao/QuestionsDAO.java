@@ -20,6 +20,9 @@ public interface QuestionsDAO {
     @Query("SELECT * FROM Question where status=1")
     List<Question> getActiveQuestions();
 
+    @Query("SELECT * FROM Question where status=1 AND areaId=:areaId")
+    List<Question> getActiveQuestionsOfArea(int areaId);
+
     @Query("DELETE FROM Question")
     public void nukeTable();
 }

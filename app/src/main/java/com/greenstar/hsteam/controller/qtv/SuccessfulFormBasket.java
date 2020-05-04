@@ -1,4 +1,4 @@
-package com.greenstar.hsteam.controller;
+package com.greenstar.hsteam.controller.qtv;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,24 +11,30 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.greenstar.hsteam.R;
-import com.greenstar.hsteam.adapters.ApprovalRejectedFormAdapter;
+import com.greenstar.hsteam.adapters.SuccessfulFormAdapter;
 import com.greenstar.hsteam.db.AppDatabase;
-import com.greenstar.hsteam.model.ApprovalQTVForm;
+import com.greenstar.hsteam.model.QTVForm;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApprovalRejectedFormBasket extends Fragment {
+
+/**
+ * @author Syed Muhammad Hassan
+ * 16th July, 2019
+ */
+
+public class SuccessfulFormBasket extends Fragment {
     View view= null;
     ListView lvBasket;
-    ApprovalRejectedFormAdapter basketAdapter;
+    SuccessfulFormAdapter basketAdapter;
     AppDatabase db =null;
-    List<ApprovalQTVForm> qtvForms = new ArrayList<>();
+    List<QTVForm> qtvForms = new ArrayList<>();
 
-    private ApprovalRejectedFormBasket.OnFragmentInteractionListener mListener;
+    private SuccessfulFormBasket.OnFragmentInteractionListener mListener;
     Activity activity;
 
-    public ApprovalRejectedFormBasket() {
+    public SuccessfulFormBasket() {
     }
 
     @Override
@@ -36,8 +42,8 @@ public class ApprovalRejectedFormBasket extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-    private List<ApprovalQTVForm> getData(){
-        List<ApprovalQTVForm> qtvForms = db.getApprovalQTVFormDAO().getAllRejectedForms();
+    private List<QTVForm> getData(){
+        List<QTVForm> qtvForms = db.getQTVFormDAO().getAllSuccessfulForms();
 
         return qtvForms ;
     }
@@ -49,9 +55,9 @@ public class ApprovalRejectedFormBasket extends Fragment {
         db = AppDatabase.getAppDatabase(getActivity());
         lvBasket = view.findViewById(R.id.lvBasket);
 
-        List<ApprovalQTVForm> qtvForms = new ArrayList<>();
+        List<QTVForm> qtvForms = new ArrayList<>();
         qtvForms = getData();
-        basketAdapter = new ApprovalRejectedFormAdapter(getActivity(),qtvForms);
+        basketAdapter = new SuccessfulFormAdapter(getActivity(),qtvForms);
         lvBasket.setAdapter(basketAdapter);
 
         // Inflate the layout for this fragment
@@ -67,8 +73,8 @@ public class ApprovalRejectedFormBasket extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof ApprovalRejectedFormBasket.OnFragmentInteractionListener) {
-            mListener = (ApprovalRejectedFormBasket.OnFragmentInteractionListener) context;
+        if (context instanceof PendingFormsBasket.OnFragmentInteractionListener) {
+            mListener = (SuccessfulFormBasket.OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");

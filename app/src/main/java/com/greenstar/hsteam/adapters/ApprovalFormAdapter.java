@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.greenstar.hsteam.controller.ApprovalPendingFormBasket;
-import com.greenstar.hsteam.controller.ApprovalRejectedFormBasket;
-import com.greenstar.hsteam.controller.ApprovalSuccessfulFormBasket;
+import com.greenstar.hsteam.controller.qtv.ApprovalPendingFormBasket;
+import com.greenstar.hsteam.controller.qtv.ApprovalRejectedFormBasket;
+import com.greenstar.hsteam.controller.qtv.ApprovalSuccessfulFormBasket;
 
 public class ApprovalFormAdapter extends FragmentStatePagerAdapter {
     final int noOfTabs=3;

@@ -1,4 +1,4 @@
-package com.greenstar.hsteam.controller;
+package com.greenstar.hsteam.controller.qtv;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
+import com.greenstar.hsteam.controller.Codes;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.utils.Util;
 import com.greenstar.hsteam.utils.WebserviceResponse;
@@ -25,20 +26,20 @@ import java.util.Date;
 
 import io.fabric.sdk.android.Fabric;
 
-public class QATMenu extends AppCompatActivity implements View.OnClickListener, WebserviceResponse {
+public class QTVMenu extends AppCompatActivity implements View.OnClickListener, WebserviceResponse {
 
-    LinearLayout llSync;
-    LinearLayout llBasket;
-    LinearLayout llProfile;
-    LinearLayout llDashboard;
-    LinearLayout llQATForm;
-    ProgressDialog progressBar = null;
-    AppDatabase db =null;
-    Activity activity;
+        LinearLayout llSync;
+        LinearLayout llBasket;
+        LinearLayout llProfile;
+        LinearLayout llDashboard;
+        LinearLayout llQTVForm;
+        ProgressDialog progressBar = null;
+        AppDatabase db =null;
+        Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.qat_menu_activity);
+        setContentView(R.layout.menu_activity);
 
         Fabric.with(this, new Crashlytics());
 
@@ -57,8 +58,8 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
         llProfile = findViewById(R.id.llApprovalStatus);
         llProfile.setOnClickListener(this);
 
-        llQATForm = findViewById(R.id.llForm);
-        llQATForm.setOnClickListener(this);
+        llQTVForm = findViewById(R.id.llForm);
+        llQTVForm.setOnClickListener(this);
     }
 
     @Override
@@ -103,7 +104,7 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
     public void onClick(View v) {
         if(v.getId()==R.id.llDashboard){
 
-            Intent myIntent = new Intent(this, DashboardController.class);
+           Intent myIntent = new Intent(this, DashboardController.class);
             startActivity(myIntent);
 
         }else if(v.getId()==R.id.llSync){
@@ -131,7 +132,7 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
             Intent myIntent = new Intent(this, ApprovalStatus.class);
             startActivity(myIntent);
         }else if(v.getId()==R.id.llForm){
-            Intent myIntent = new Intent(activity, QATForm.class);
+            Intent myIntent = new Intent(activity, NewQTVForm.class);
             startActivity(myIntent);
         }
     }

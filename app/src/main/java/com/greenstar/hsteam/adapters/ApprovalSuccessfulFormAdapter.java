@@ -13,8 +13,7 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.db.AppDatabase;
-import com.greenstar.hsteam.model.ApprovalQTVForm;
-import com.greenstar.hsteam.model.QTVForm;
+import com.greenstar.hsteam.model.approval.ApprovalQTVForm;
 
 import java.util.ArrayList;
 import java.util.List;

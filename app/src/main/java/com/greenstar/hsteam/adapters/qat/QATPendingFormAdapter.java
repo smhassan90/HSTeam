@@ -1,4 +1,4 @@
-package com.greenstar.hsteam.adapters;
+package com.greenstar.hsteam.adapters.qat;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -7,26 +7,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
+import com.greenstar.hsteam.dao.FormDeleteListener;
 import com.greenstar.hsteam.db.AppDatabase;
-import com.greenstar.hsteam.model.approval.ApprovalQTVForm;
+import com.greenstar.hsteam.model.QATFormHeader;
+import com.greenstar.hsteam.model.QTVForm;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApprovalPendingFormAdapter extends ArrayAdapter<ApprovalQTVForm> {
+public class QATPendingFormAdapter extends ArrayAdapter<QATFormHeader> implements View.OnClickListener {
     private Activity mActivity;
-    private List<ApprovalQTVForm> list = new ArrayList<>();
+    private List<QATFormHeader> list = new ArrayList<>();
     AppDatabase db =null;
-
-    public ApprovalPendingFormAdapter(@NonNull Activity activity, List<ApprovalQTVForm> list) {
+    FormDeleteListener deleteForm = null;
+    public QATPendingFormAdapter(@NonNull Activity activity,  List<QATFormHeader> list, FormDeleteListener deleteForm) {
         super(activity, 0, 0, list);
         db = AppDatabase.getAppDatabase(activity);
         mActivity = activity;
+        this.deleteForm = deleteForm;
         this.list = list;
     }
 
@@ -37,7 +42,7 @@ public class ApprovalPendingFormAdapter extends ArrayAdapter<ApprovalQTVForm> {
 
     @Nullable
     @Override
-    public ApprovalQTVForm getItem(int position) {
+    public QATFormHeader getItem(int position) {
         return list.get(position);
     }
 
@@ -50,9 +55,10 @@ public class ApprovalPendingFormAdapter extends ArrayAdapter<ApprovalQTVForm> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
+        View view=null;
         if (v == null) {
             LayoutInflater inflater = mActivity.getLayoutInflater();
-            v = inflater.inflate(R.layout.successful_form, null);
+            v = inflater.inflate(R.layout.pending_form, null);
         }
         LinearLayout llInnerBasket = v.findViewById(R.id.llInnerBasket);
 
@@ -60,32 +66,52 @@ public class ApprovalPendingFormAdapter extends ArrayAdapter<ApprovalQTVForm> {
         TextView tvProviderName = (TextView) v.findViewById(R.id.tvProviderName);
         TextView tvProviderCode = (TextView) v.findViewById(R.id.tvProviderCode);
         TextView tvVisitDate = (TextView) v.findViewById(R.id.tvVisitDate);
+        ImageView btnDelete = v.findViewById(R.id.btnDelete);
+
+        btnDelete.setOnClickListener(this);
         if(list!=null && list.size()>0){
-            ApprovalQTVForm i = list.get(position);
+            QATFormHeader i = list.get(position);
             if(i!=null){
-                try{
-                    tvFormId.setText("Form ID : "+ i.getId());
-                    tvProviderName.setText("Provider Name : " +i.getProviderName());
-                    tvProviderCode.setText("Provider Code : "+i.getProviderCode());
-                    tvVisitDate.setText("Visit Date : "    + i.getVisitDate());
+                try {
+                    tvFormId.setText("Form ID : " + i.getId());
+                    tvProviderName.setText("Provider Name : " + i.getProviderName());
+                    tvProviderCode.setText("Provider Code : " + i.getProviderCode());
+                    tvVisitDate.setText("Visit Date : " + i.getDateOfAssessment());
+
+                    btnDelete.setTag(i.getId());
                 }catch(Exception e){
                     Crashlytics.logException(e);
                 }
-
             }else{
 
-                tvFormId.setText("There is no Pending form");
+                tvFormId.setText("There is no pending form");
                 tvProviderName.setVisibility(View.GONE);
                 tvProviderCode.setVisibility(View.GONE);
                 tvVisitDate.setVisibility(View.GONE);
+                btnDelete.setVisibility(View.GONE);
             }
 
         }else{
-            tvFormId.setText("There is no Pending form");
+            tvFormId.setText("There is no pending form");
             tvProviderName.setVisibility(View.GONE);
             tvProviderCode.setVisibility(View.GONE);
             tvVisitDate.setVisibility(View.GONE);
+            btnDelete.setVisibility(View.GONE);
         }
+
         return v;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.btnDelete){
+            Object obj =  v.getTag()==null?"0":v.getTag();
+            long formId = (long)obj;
+            if(formId!=0){
+                deleteForm.deleteForm(formId);
+            }else{
+                Toast.makeText(mActivity, "Something went wrong while deleting Form",Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

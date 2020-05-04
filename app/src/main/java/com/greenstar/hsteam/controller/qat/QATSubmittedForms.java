@@ -1,4 +1,4 @@
-package com.greenstar.hsteam.controller;
+package com.greenstar.hsteam.controller.qat;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,10 +7,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.greenstar.hsteam.R;
-import com.greenstar.hsteam.adapters.ApprovalFormAdapter;
+import com.greenstar.hsteam.adapters.qat.QATSubmittedFormAdapter;
 
-public class ApprovalStatus extends AppCompatActivity implements ApprovalPendingFormBasket.OnFragmentInteractionListener,
-        ApprovalSuccessfulFormBasket.OnFragmentInteractionListener, ApprovalRejectedFormBasket.OnFragmentInteractionListener{
+public class QATSubmittedForms extends AppCompatActivity implements QATPendingFormsBasket.OnFragmentInteractionListener,
+        QATSuccessfulFormBasket.OnFragmentInteractionListener, QATRejectedFormBasket.OnFragmentInteractionListener{
     TabLayout tlStatusTab = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +24,8 @@ public class ApprovalStatus extends AppCompatActivity implements ApprovalPending
         tlStatusTab.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager vpStatus = findViewById(R.id.vpStatusPager);
-        ApprovalFormAdapter approvalFormAdapter = new ApprovalFormAdapter(getSupportFragmentManager());
-        vpStatus.setAdapter(approvalFormAdapter);
+        QATSubmittedFormAdapter submittedFormAdapter = new QATSubmittedFormAdapter(getSupportFragmentManager());
+        vpStatus.setAdapter(submittedFormAdapter);
         vpStatus.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tlStatusTab));
         tlStatusTab.setOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override

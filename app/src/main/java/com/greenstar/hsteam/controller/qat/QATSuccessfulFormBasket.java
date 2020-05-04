@@ -1,4 +1,4 @@
-package com.greenstar.hsteam.controller;
+package com.greenstar.hsteam.controller.qat;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,33 +9,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.adapters.SuccessfulFormAdapter;
+import com.greenstar.hsteam.adapters.qat.QATSuccessfulFormAdapter;
+import com.greenstar.hsteam.controller.qtv.PendingFormsBasket;
+import com.greenstar.hsteam.controller.qtv.SuccessfulFormBasket;
 import com.greenstar.hsteam.db.AppDatabase;
+import com.greenstar.hsteam.model.QATFormHeader;
 import com.greenstar.hsteam.model.QTVForm;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * @author Syed Muhammad Hassan
- * 16th July, 2019
- */
-
-public class SuccessfulFormBasket extends Fragment {
+public class QATSuccessfulFormBasket extends Fragment {
     View view= null;
     ListView lvBasket;
-    SuccessfulFormAdapter basketAdapter;
+    QATSuccessfulFormAdapter basketAdapter;
     AppDatabase db =null;
-    List<QTVForm> qtvForms = new ArrayList<>();
+    List<QATFormHeader> forms = new ArrayList<>();
 
-    private SuccessfulFormBasket.OnFragmentInteractionListener mListener;
+    private QATSuccessfulFormBasket.OnFragmentInteractionListener mListener;
     Activity activity;
 
-    public SuccessfulFormBasket() {
+    public QATSuccessfulFormBasket() {
     }
 
     @Override
@@ -43,8 +40,8 @@ public class SuccessfulFormBasket extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-    private List<QTVForm> getData(){
-        List<QTVForm> qtvForms = db.getQTVFormDAO().getAllSuccessfulForms();
+    private List<QATFormHeader> getData(){
+        List<QATFormHeader> qtvForms = db.getQatFormHeaderDAO().getAllSuccessful();
 
         return qtvForms ;
     }
@@ -56,9 +53,9 @@ public class SuccessfulFormBasket extends Fragment {
         db = AppDatabase.getAppDatabase(getActivity());
         lvBasket = view.findViewById(R.id.lvBasket);
 
-        List<QTVForm> qtvForms = new ArrayList<>();
-        qtvForms = getData();
-        basketAdapter = new SuccessfulFormAdapter(getActivity(),qtvForms);
+        List<QATFormHeader> qatFormHeaders = new ArrayList<>();
+        qatFormHeaders = getData();
+        basketAdapter = new QATSuccessfulFormAdapter(getActivity(),qatFormHeaders);
         lvBasket.setAdapter(basketAdapter);
 
         // Inflate the layout for this fragment
@@ -74,8 +71,8 @@ public class SuccessfulFormBasket extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof PendingFormsBasket.OnFragmentInteractionListener) {
-            mListener = (SuccessfulFormBasket.OnFragmentInteractionListener) context;
+        if (context instanceof QATPendingFormsBasket.OnFragmentInteractionListener) {
+            mListener = (QATSuccessfulFormBasket.OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");

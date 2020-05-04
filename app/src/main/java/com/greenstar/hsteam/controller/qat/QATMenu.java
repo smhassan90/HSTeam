@@ -1,9 +1,8 @@
-package com.greenstar.hsteam.controller;
+package com.greenstar.hsteam.controller.qat;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,14 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
+import com.greenstar.hsteam.controller.Codes;
+import com.greenstar.hsteam.controller.qtv.ApprovalStatus;
+import com.greenstar.hsteam.controller.qtv.DashboardController;
+import com.greenstar.hsteam.controller.qtv.SubmittedForms;
 import com.greenstar.hsteam.db.AppDatabase;
-import com.greenstar.hsteam.model.Dashboard;
 import com.greenstar.hsteam.utils.Util;
 import com.greenstar.hsteam.utils.WebserviceResponse;
 
@@ -28,22 +28,21 @@ import org.json.JSONObject;
 import java.util.Date;
 
 import io.fabric.sdk.android.Fabric;
-import io.fabric.sdk.android.services.common.Crash;
 
-public class QTVMenu extends AppCompatActivity implements View.OnClickListener, WebserviceResponse {
+public class QATMenu extends AppCompatActivity implements View.OnClickListener, WebserviceResponse {
 
-        LinearLayout llSync;
-        LinearLayout llBasket;
-        LinearLayout llProfile;
-        LinearLayout llDashboard;
-        LinearLayout llQTVForm;
-        ProgressDialog progressBar = null;
-        AppDatabase db =null;
-        Activity activity;
+    LinearLayout llSync;
+    LinearLayout llBasket;
+    LinearLayout llProfile;
+    LinearLayout llDashboard;
+    LinearLayout llQATForm;
+    ProgressDialog progressBar = null;
+    AppDatabase db =null;
+    Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_activity);
+        setContentView(R.layout.qat_menu_activity);
 
         Fabric.with(this, new Crashlytics());
 
@@ -62,8 +61,8 @@ public class QTVMenu extends AppCompatActivity implements View.OnClickListener, 
         llProfile = findViewById(R.id.llApprovalStatus);
         llProfile.setOnClickListener(this);
 
-        llQTVForm = findViewById(R.id.llForm);
-        llQTVForm.setOnClickListener(this);
+        llQATForm = findViewById(R.id.llForm);
+        llQATForm.setOnClickListener(this);
     }
 
     @Override
@@ -108,7 +107,7 @@ public class QTVMenu extends AppCompatActivity implements View.OnClickListener, 
     public void onClick(View v) {
         if(v.getId()==R.id.llDashboard){
 
-           Intent myIntent = new Intent(this, DashboardController.class);
+            Intent myIntent = new Intent(this, DashboardController.class);
             startActivity(myIntent);
 
         }else if(v.getId()==R.id.llSync){
@@ -130,13 +129,16 @@ public class QTVMenu extends AppCompatActivity implements View.OnClickListener, 
             }
 
         }else if(v.getId()==R.id.llBasket){
-            Intent myIntent = new Intent(this, SubmittedForms.class);
+            Intent myIntent = new Intent(this, QATSubmittedForms.class);
             startActivity(myIntent);
         }else if(v.getId()==R.id.llApprovalStatus){
             Intent myIntent = new Intent(this, ApprovalStatus.class);
             startActivity(myIntent);
         }else if(v.getId()==R.id.llForm){
-            Intent myIntent = new Intent(activity, NewQTVForm.class);
+            Intent myIntent = new Intent(activity, QATForm.class);
+            startActivity(myIntent);
+        }else if(v.getId()==R.id.llTechnicalCompetence){
+            Intent myIntent = new Intent(activity, QATForm.class);
             startActivity(myIntent);
         }
     }

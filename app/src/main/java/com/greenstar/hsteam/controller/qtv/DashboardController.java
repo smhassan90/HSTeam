@@ -1,4 +1,4 @@
-package com.greenstar.hsteam.controller;
+package com.greenstar.hsteam.controller.qtv;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

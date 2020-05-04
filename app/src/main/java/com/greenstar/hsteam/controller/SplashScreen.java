@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.greenstar.hsteam.controller.qat.QATMenu;
+import com.greenstar.hsteam.controller.qtv.QTVMenu;
 
 import io.fabric.sdk.android.Fabric;
 

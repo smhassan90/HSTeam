@@ -8,4 +8,8 @@ public interface Codes {
     final public static String TIMEOUT = "Timeout";
     final public static String SOMETHINGWENTWRONG = "2001";
     final public static String myFormat = "MM/dd/yy";
+    final public static int QTVFORM = 1;
+    final public static int QATFORM = 2;
+    final public static int QATAREA = 3;
+    final public static int QATQUESTION = 4;
 }

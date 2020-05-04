@@ -1,6 +1,9 @@
 package com.greenstar.hsteam.dal;
 
-import com.greenstar.hsteam.model.ApprovalQTVForm;
+import com.greenstar.hsteam.model.approval.ApprovalQATArea;
+import com.greenstar.hsteam.model.approval.ApprovalQATForm;
+import com.greenstar.hsteam.model.approval.ApprovalQATFormQuestion;
+import com.greenstar.hsteam.model.approval.ApprovalQTVForm;
 import com.greenstar.hsteam.model.Area;
 import com.greenstar.hsteam.model.Dashboard;
 import com.greenstar.hsteam.model.Providers;
@@ -21,6 +24,9 @@ public class HSData implements Serializable {
 
     List<Providers> providers;
     List<ApprovalQTVForm> qtvForms;
+    List<ApprovalQATArea> approvalQATAreas;
+    List<ApprovalQATForm> approvalQATForms;
+    List<ApprovalQATFormQuestion> approvalQATFormQuestions;
     List<Question> questions;
     List<Area> areas;
 
@@ -118,5 +124,29 @@ public class HSData implements Serializable {
 
     public void setIsQATAllowed(int isQATAllowed) {
         this.isQATAllowed = isQATAllowed;
+    }
+
+    public List<ApprovalQATArea> getApprovalQATAreas() {
+        return approvalQATAreas;
+    }
+
+    public void setApprovalQATAreas(List<ApprovalQATArea> approvalQATAreas) {
+        this.approvalQATAreas = approvalQATAreas;
+    }
+
+    public List<ApprovalQATForm> getApprovalQATForms() {
+        return approvalQATForms;
+    }
+
+    public void setApprovalQATForms(List<ApprovalQATForm> approvalQATForms) {
+        this.approvalQATForms = approvalQATForms;
+    }
+
+    public List<ApprovalQATFormQuestion> getApprovalQATFormQuestions() {
+        return approvalQATFormQuestions;
+    }
+
+    public void setApprovalQATFormQuestions(List<ApprovalQATFormQuestion> approvalQATFormQuestions) {
+        this.approvalQATFormQuestions = approvalQATFormQuestions;
     }
 }
