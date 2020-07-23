@@ -113,6 +113,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
+                            android:textColor="@color/black"
                             android:id="@+id/tvSupervisorCode"
                             android:text="">
                         </TextView>
@@ -136,6 +137,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
+                            android:textColor="@color/black"
                             android:id="@+id/tvSupervisorName"
                             android:text="">
                         </TextView>
@@ -159,6 +161,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
+                            android:textColor="@color/black"
                             android:id="@+id/tvRegion"
                             android:text="">
                         </TextView>
@@ -240,6 +243,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>
@@ -274,7 +278,7 @@
                                         android:layout_height="wrap_content" >
 
                                         <RadioButton
-                                            android:id="@+id/rgCDPFYes"
+                                            android:id="@+id/rbCDPFYes"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Yes"
@@ -285,6 +289,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>
@@ -346,6 +351,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>
@@ -380,7 +386,7 @@
                                         android:layout_height="wrap_content" >
 
                                         <RadioButton
-                                            android:id="@+id/rgPFPNCCYes"
+                                            android:id="@+id/rbPFPNCCYes"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Yes"
@@ -391,6 +397,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>
@@ -457,6 +464,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 style="@style/text_style"
+                                                android:checked="true"
                                                 android:text="No" />
                                         </RadioGroup>
                                     </LinearLayout>
@@ -488,7 +496,7 @@
                                             android:layout_height="wrap_content" >
 
                                             <RadioButton
-                                                android:id="@+id/rgGTCPFYes"
+                                                android:id="@+id/rbGTCPFYes"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="Yes"
@@ -499,6 +507,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 style="@style/text_style"
+                                                android:checked="true"
                                                 android:text="No" />
                                         </RadioGroup>
                                     </LinearLayout>
@@ -559,6 +568,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 style="@style/text_style"
+                                                android:checked="true"
                                                 android:text="No" />
                                         </RadioGroup>
                                     </LinearLayout>
@@ -589,7 +599,7 @@
                                             android:layout_height="wrap_content" >
 
                                             <RadioButton
-                                                android:id="@+id/rgMisoPFYes"
+                                                android:id="@+id/rbMisoPFYes"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="Yes"
@@ -600,6 +610,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 style="@style/text_style"
+                                                android:checked="true"
                                                 android:text="No" />
                                         </RadioGroup>
                                     </LinearLayout>
@@ -658,6 +669,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 style="@style/text_style"
+                                                android:checked="true"
                                                 android:text="No" />
                                         </RadioGroup>
                                     </LinearLayout>
@@ -688,7 +700,7 @@
                                             android:layout_height="wrap_content" >
 
                                             <RadioButton
-                                                android:id="@+id/rgMVAPFYes"
+                                                android:id="@+id/rbMVAPFYes"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="Yes"
@@ -699,6 +711,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 style="@style/text_style"
+                                                android:checked="true"
                                                 android:text="No" />
                                         </RadioGroup>
                                     </LinearLayout>
@@ -757,6 +770,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 style="@style/text_style"
+                                                android:checked="true"
                                                 android:text="No" />
                                         </RadioGroup>
                                     </LinearLayout>
@@ -787,7 +801,7 @@
                                             android:layout_height="wrap_content" >
 
                                             <RadioButton
-                                                android:id="@+id/rgPPIUCDPFYes"
+                                                android:id="@+id/rbPPIUCDPFYes"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="Yes"
@@ -798,6 +812,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 style="@style/text_style"
+                                                android:checked="true"
                                                 android:text="No" />
                                         </RadioGroup>
                                     </LinearLayout>
@@ -856,6 +871,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 style="@style/text_style"
+                                                android:checked="true"
                                                 android:text="No" />
                                         </RadioGroup>
                                     </LinearLayout>
@@ -886,7 +902,7 @@
                                             android:layout_height="wrap_content" >
 
                                             <RadioButton
-                                                android:id="@+id/rgImplantPFYes"
+                                                android:id="@+id/rbImplantPFYes"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="Yes"
@@ -897,6 +913,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 style="@style/text_style"
+                                                android:checked="true"
                                                 android:text="No" />
                                         </RadioGroup>
                                     </LinearLayout>
@@ -961,6 +978,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>
@@ -995,7 +1013,7 @@
                                         android:layout_height="wrap_content" >
 
                                         <RadioButton
-                                            android:id="@+id/rgLOAPFYes"
+                                            android:id="@+id/rbLOAPFYes"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Yes"
@@ -1006,6 +1024,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>
@@ -1068,6 +1087,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>
@@ -1102,7 +1122,7 @@
                                         android:layout_height="wrap_content" >
 
                                         <RadioButton
-                                            android:id="@+id/rgPHCCPFYes"
+                                            android:id="@+id/rbPHCCPFYes"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Yes"
@@ -1113,6 +1133,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>
@@ -1173,6 +1194,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>
@@ -1207,7 +1229,7 @@
                                         android:layout_height="wrap_content" >
 
                                         <RadioButton
-                                            android:id="@+id/rgQTVActionPlanPFYes"
+                                            android:id="@+id/rbQTVActionPlanPFYes"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Yes"
@@ -1218,6 +1240,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>
@@ -1278,6 +1301,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>
@@ -1312,7 +1336,7 @@
                                         android:layout_height="wrap_content" >
 
                                         <RadioButton
-                                            android:id="@+id/rgRecruitmentFormPFYes"
+                                            android:id="@+id/rbRecruitmentFormPFYes"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Yes"
@@ -1323,6 +1347,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             style="@style/text_style"
+                                            android:checked="true"
                                             android:text="No" />
                                     </RadioGroup>
                                 </LinearLayout>

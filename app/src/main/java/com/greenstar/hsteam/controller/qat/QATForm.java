@@ -3,7 +3,9 @@ package com.greenstar.hsteam.controller.qat;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -45,6 +47,8 @@ import java.util.List;
 import java.util.Map;
 
 public class QATForm extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
+
+    ProgressDialog progressBar = null;
 
     LinearLayout llHistoryArea = null;
     LinearLayout llQuestion = null;
@@ -190,8 +194,10 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
         LayoutInflater inflater = LayoutInflater.from(QATForm.this);
 
         llQuestionBank = findViewById(R.id.llQuestionBank);
+
         if(llQuestionBank.getChildCount() > 0)
             llQuestionBank.removeAllViews();
+
         btnSubmit = findViewById(R.id.btnSubmit);
         btnSubmit.setOnClickListener(this);
 
@@ -239,14 +245,22 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
             for(Question quest : questions){
                 View rowQuestion = inflater.inflate(R.layout.qat_question, null);
                 llQuestion = rowQuestion.findViewById(R.id.llQuestion);
-                if(getHistoryQuestionAnswer(approvalQATFormQuestions,quest.getId())){
-                    llQuestion.setBackgroundResource(R.drawable.customborderred);
-                }
 
-                llQuestion.setBackgroundResource(R.drawable.customborderred);
+
                 rbAnswerYes = rowQuestion.findViewById(R.id.rbAnswerYes);
                 rbAnswerYes.setOnCheckedChangeListener(this);
                 tvQuestionText = rowQuestion.findViewById(R.id.tvQuestionText);
+                if(approvalQATFormQuestions.size()>0){
+                    if(getHistoryQuestionAnswer(approvalQATFormQuestions,quest.getId())){
+                        tvQuestionText.setTextColor(getResources().getColor(R.color.black));
+                    }else{
+
+                        tvQuestionText.setTextColor(getResources().getColor(R.color.darkOrange));
+                    }
+                }else{
+                    tvQuestionText.setTextColor(getResources().getColor(R.color.black));
+                }
+
                 tvQuestionText.setText(quest.getQuestion());
                 if(quest.getIsCritical()==1){
                     tvQuestionText.setTypeface(null, Typeface.BOLD);
@@ -254,6 +268,9 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
                 mapRadioButtonQuestion.put(rbAnswerYes,quest);
 
                 combineAreaQuestion.addView(llQuestion);
+                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) llQuestion.getLayoutParams();
+                lp.setMargins(0, 10, 0, 0);
+                llQuestion.setLayoutParams(lp);
             }
 
             tvAreaHeading = areaView.findViewById(R.id.tvAreaHeading);
@@ -358,7 +375,7 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
     }
 
     private void saveForm(){
-
+        String ids = "";
         long formId = Util.getNextID(this,Codes.QATFORM);
         QATFormHeader qatFormHeader = new QATFormHeader();
         qatFormHeader.setId(formId);
@@ -434,7 +451,7 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
             for (Map.Entry<RadioButton, Question> entry : questions.entrySet()) {
                 questionLoop++;
                 long questionFormId =Long.valueOf(String.valueOf(areaId)+questionLoop);
-
+                ids +=String.valueOf(questionFormId)+",";
                 qatFormQuestion = new QATFormQuestion();
                 rbYes = (RadioButton) entry.getKey();
                 question = (Question) entry.getValue();
@@ -455,7 +472,11 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
         db.getQatFormQuestionDAO().insertMultiple(qatFormQuestions);
 
         Toast.makeText(this, "Form submitted successfully", Toast.LENGTH_SHORT).show();
+
         finish();
+        Intent intent = new Intent(this, TCForm.class);
+        intent.putExtra("providerCode", provider.getCode());
+        startActivity(intent);
     }
 
     @Override
@@ -468,7 +489,7 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(parent.getId()==R.id.spProviderCodeName && spProviderCodeName.getSelectedItemPosition()!=0){
-            ProgressDialog progressBar = new ProgressDialog(this);
+            progressBar = new ProgressDialog(this);
             progressBar.setCancelable(false);//you can cancel it by pressing back button
             progressBar.setMessage("Populating questions..");
             progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);

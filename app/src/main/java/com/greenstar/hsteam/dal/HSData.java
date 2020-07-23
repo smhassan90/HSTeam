@@ -1,5 +1,6 @@
 package com.greenstar.hsteam.dal;
 
+import com.greenstar.hsteam.model.QATTCForm;
 import com.greenstar.hsteam.model.approval.ApprovalQATArea;
 import com.greenstar.hsteam.model.approval.ApprovalQATForm;
 import com.greenstar.hsteam.model.approval.ApprovalQATFormQuestion;
@@ -29,6 +30,8 @@ public class HSData implements Serializable {
     List<ApprovalQATFormQuestion> approvalQATFormQuestions;
     List<Question> questions;
     List<Area> areas;
+    List<QATTCForm> qattcForms;
+
 
     public String getName() {
         return name;
@@ -148,5 +151,13 @@ public class HSData implements Serializable {
 
     public void setApprovalQATFormQuestions(List<ApprovalQATFormQuestion> approvalQATFormQuestions) {
         this.approvalQATFormQuestions = approvalQATFormQuestions;
+    }
+
+    public List<QATTCForm> getQattcForms() {
+        return qattcForms;
+    }
+
+    public void setQattcForms(List<QATTCForm> qattcForms) {
+        this.qattcForms = qattcForms;
     }
 }

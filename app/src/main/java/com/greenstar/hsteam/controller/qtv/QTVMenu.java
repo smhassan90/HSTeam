@@ -2,6 +2,8 @@ package com.greenstar.hsteam.controller.qtv;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,7 +28,7 @@ import java.util.Date;
 
 import io.fabric.sdk.android.Fabric;
 
-public class QTVMenu extends AppCompatActivity implements View.OnClickListener, WebserviceResponse {
+public class QTVMenu extends AppCompatActivity implements View.OnClickListener, WebserviceResponse, View.OnLongClickListener {
 
         LinearLayout llSync;
         LinearLayout llBasket;
@@ -51,6 +53,7 @@ public class QTVMenu extends AppCompatActivity implements View.OnClickListener, 
 
         llSync = findViewById(R.id.llSync);
         llSync.setOnClickListener(this);
+        llSync.setOnLongClickListener(this);
 
         llBasket = findViewById(R.id.llBasket);
         llBasket.setOnClickListener(this);
@@ -173,5 +176,14 @@ public class QTVMenu extends AppCompatActivity implements View.OnClickListener, 
         }
         progressBar.dismiss();
 
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("syncData", Util.getCTSSyncData(this));
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(this,"All forms copied!", Toast.LENGTH_LONG).show();
+        return false;
     }
 }

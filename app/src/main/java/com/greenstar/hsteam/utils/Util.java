@@ -15,6 +15,7 @@ import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.model.QATAreaDetail;
 import com.greenstar.hsteam.model.QATFormHeader;
 import com.greenstar.hsteam.model.QATFormQuestion;
+import com.greenstar.hsteam.model.QATTCForm;
 import com.greenstar.hsteam.model.QTVForm;
 import com.greenstar.hsteam.model.SyncObject;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -64,27 +65,55 @@ public class Util {
             editor.apply();
             try{
                 db = AppDatabase.getAppDatabase(activity);
-                db.getProvidersDAO().nukeTable();
-                db.getApprovalQTVFormDAO().nukeTable();
-                db.getQuestionsDAO().nukeTable();
-                db.getAreaDAO().nukeTable();
-                db.getDashboardDAO().nukeTable();
 
-                db.getApprovalQATFormDAO().nukeTable();
-                db.getApprovalQATAreaDAO().nukeTable();
-                db.getApprovalQATFormQuestionDAO().nukeTable();
+                if(dataObj.getQattcForms() !=null && dataObj.getQattcForms().size()>0){
+                    db.getQattcFormDAO().nukeTable();
+                    db.getQattcFormDAO().insertMultiple(dataObj.getQattcForms());
+                }
 
-                db.getProvidersDAO().insertMultiple(dataObj.getProviders());
-                db.getAreaDAO().insertMultiple(dataObj.getAreas());
-                db.getQuestionsDAO().insertMultiple(dataObj.getQuestions());
-                db.getApprovalQATFormDAO().insertMultiple(dataObj.getApprovalQATForms());
-                db.getApprovalQATAreaDAO().insertMultiple(dataObj.getApprovalQATAreas());
-                db.getApprovalQATFormQuestionDAO().insertMultiple(dataObj.getApprovalQATFormQuestions());
+                if(dataObj.getProviders()!=null && dataObj.getProviders().size()>0){
+                    db.getProvidersDAO().nukeTable();
+                    db.getProvidersDAO().insertMultiple(dataObj.getProviders());
+                }
+
+                if(dataObj.getAreas()!=null && dataObj.getAreas().size()>0){
+                    db.getAreaDAO().nukeTable();
+                    db.getAreaDAO().insertMultiple(dataObj.getAreas());
+                }
+
+                if(dataObj.getQuestions()!=null && dataObj.getQuestions().size()>0){
+                    db.getQuestionsDAO().nukeTable();
+                    db.getQuestionsDAO().insertMultiple(dataObj.getQuestions());
+                }
+
+                if(dataObj.getApprovalQATForms()!=null && dataObj.getApprovalQATForms().size()>0){
+                    db.getApprovalQATFormDAO().nukeTable();
+                    db.getApprovalQATFormDAO().insertMultiple(dataObj.getApprovalQATForms());
+                }
+
+                if(dataObj.getApprovalQATAreas()!=null && dataObj.getApprovalQATAreas().size()>0){
+                    db.getApprovalQATAreaDAO().nukeTable();
+                    db.getApprovalQATAreaDAO().insertMultiple(dataObj.getApprovalQATAreas());
+                }
+
+                if(dataObj.getApprovalQATFormQuestions()!=null && dataObj.getApprovalQATFormQuestions().size()>0){
+                    db.getApprovalQATFormQuestionDAO().nukeTable();
+                    db.getApprovalQATFormQuestionDAO().insertMultiple(dataObj.getApprovalQATFormQuestions());
+                }
+
                 if (dataObj.getQtvForms()!=null && dataObj.getQtvForms().size()>0){
+                    db.getApprovalQTVFormDAO().nukeTable();
                     db.getApprovalQTVFormDAO().insertMultiple(dataObj.getQtvForms());
                 }
+
                 if (dataObj.getDashboard()!=null ){
+                    db.getDashboardDAO().nukeTable();
                     db.getDashboardDAO().insert(dataObj.getDashboard());
+                }
+
+                if(dataObj.getQattcForms()!=null && dataObj.getQattcForms().size()>0){
+                    db.getQattcFormDAO().nukeTable();
+                    db.getQattcFormDAO().insertMultiple(dataObj.getQattcForms());
                 }
             }catch(Exception e){
                 Toast.makeText(activity,"Something went wrong. Please sync later",Toast.LENGTH_SHORT).show();
@@ -102,12 +131,10 @@ public class Util {
         rp.add("code", code);
         rp.add("token",token);
 
-
         SyncObject syncObject = new SyncObject();
 
         final String data = new Gson().toJson(syncObject);
         rp.add("data",data);
-
 
         HttpUtils.get("hssync", rp, new JsonHttpResponseHandler() {
             @Override
@@ -169,6 +196,26 @@ public class Util {
 
     }
 
+    public static String getCTSSyncData(Activity context){
+        AppDatabase db = AppDatabase.getAppDatabase(context);
+
+        List<QTVForm> qtvForms = db.getQTVFormDAO().getAllPendingForms();
+        List<QATFormHeader> qatFormHeaders = db.getQatFormHeaderDAO().getAllPending();
+        List<Long> ids = getAllFormIds(qatFormHeaders);
+        List<QATFormQuestion> qatFormQuestions = db.getQatFormQuestionDAO().getAllPending(ids);
+        List<QATAreaDetail> qatAreaDetails = db.getAreaDetailDAO().getAllPending(ids);
+        List<QATTCForm> qattcForms = db.getQattcFormDAO().getAllPending();
+        SyncObject syncObject = new SyncObject();
+        syncObject.setQtvForms(qtvForms);
+        syncObject.setQatAreaDetails(qatAreaDetails);
+        syncObject.setQatFormHeaders(qatFormHeaders);
+        syncObject.setQatFormQuestions(qatFormQuestions);
+        syncObject.setQattcForms(qattcForms);
+
+        final String data = new Gson().toJson(syncObject);
+        return data;
+    }
+
     public void performSync(final Activity context){
         SharedPreferences editor = context.getSharedPreferences(Codes.PREF_NAME, Context.MODE_PRIVATE);
         String code = editor.getString("code","");
@@ -177,21 +224,8 @@ public class Util {
         rp.add("code", code);
         rp.add("token",token);
 
-        AppDatabase db = AppDatabase.getAppDatabase(context);
 
-        List<QTVForm> qtvForms = db.getQTVFormDAO().getAllPendingForms();
-        List<QATFormHeader> qatFormHeaders = db.getQatFormHeaderDAO().getAllPending();
-        List<Long> ids = getAllFormIds(qatFormHeaders);
-        List<QATFormQuestion> qatFormQuestions = db.getQatFormQuestionDAO().getAllPending(ids);
-        List<QATAreaDetail> qatAreaDetails = db.getAreaDetailDAO().getAllPending(ids);
-        SyncObject syncObject = new SyncObject();
-        syncObject.setQtvForms(qtvForms);
-        syncObject.setQatAreaDetails(qatAreaDetails);
-        syncObject.setQatFormHeaders(qatFormHeaders);
-        syncObject.setQatFormQuestions(qatFormQuestions);
-
-        final String data = new Gson().toJson(syncObject);
-        rp.add("data",data);
+        rp.add("data",getCTSSyncData(context));
 
         HttpUtils.get("hssync", rp, new JsonHttpResponseHandler() {
             @Override
@@ -332,7 +366,7 @@ public class Util {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    private List<Long> getAllFormIds(List<QATFormHeader> qatFormHeaders){
+    private static List<Long> getAllFormIds(List<QATFormHeader> qatFormHeaders){
         List<Long> formIds = new ArrayList<>();
         for(QATFormHeader qatFormHeader : qatFormHeaders){
             formIds.add(qatFormHeader.getId());

@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 @Entity
 public class QATAreaDetail {
     @NonNull
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private long formId;
     private int areaId;

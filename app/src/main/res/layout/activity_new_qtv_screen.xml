@@ -29,7 +29,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Visit Date"/>
@@ -54,7 +54,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Staff Code / Name"/>
@@ -62,7 +62,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:id="@+id/tvStaffCodeName"
@@ -79,7 +79,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Supervisor Name"/>
@@ -88,6 +88,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:id="@+id/tvSupervisorName"
+                            android:textColor="@color/black"
                             android:text="">
                         </TextView>
                     </TableRow>
@@ -102,7 +103,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Region"/>
@@ -110,6 +111,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
+                            android:textColor="@color/black"
                             android:id="@+id/tvRegion"
                             android:text="">
                         </TextView>
@@ -150,7 +152,7 @@
                         android:layout_height="wrap_content"
                         style="@style/medium_text_style"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                         android:text="@string/basicInformation"
                         android:id="@+id/tvBasicInfo"/>
                 </LinearLayout>
@@ -229,7 +231,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Current Users"/>
@@ -237,7 +239,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etTotalCurrentUser"
                             android:text="0">
                         </EditText>
@@ -252,7 +254,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Method Switchers"/>
@@ -260,7 +262,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etMethodSwitcher"
                             android:text="0">
                         </EditText>
@@ -275,7 +277,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Miso Cases"/>
@@ -284,7 +286,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:id="@+id/etMisoCases"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:text="0">
                         </EditText>
                     </TableRow>
@@ -298,7 +300,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of PAC Cases"/>
@@ -306,7 +308,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etPACCases"
                             android:text="0">
                         </EditText>
@@ -321,7 +323,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Ever Users (less than 12 months)"/>
@@ -330,7 +332,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:id="@+id/etEverUserLess"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:text="0">
                         </EditText>
                     </TableRow>
@@ -344,7 +346,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Ever Users (greater than 12 months)"/>
@@ -353,7 +355,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:id="@+id/etEverUserGreater"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:text="0">
                         </EditText>
                     </TableRow>
@@ -367,7 +369,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Never Users"/>
@@ -375,7 +377,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etNeverUser"
                             android:text="0">
                         </EditText>
@@ -391,7 +393,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total New Users"/>
@@ -400,7 +402,7 @@
                             android:layout_height="match_parent"
                             style="@style/text_style"
                             android:id="@+id/tvTotalNewUsers"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="3"
                             android:text="0">
@@ -416,7 +418,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total Deliveries Conducted"/>
@@ -424,7 +426,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etDeliveriesConducted"
                             android:text="0">
                         </EditText>
@@ -440,7 +442,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total FP Clients"/>
@@ -449,7 +451,7 @@
                             android:layout_height="match_parent"
                             style="@style/text_style"
                             android:id="@+id/tvTotalFPClients"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="3"
                             android:text="0">
@@ -466,7 +468,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of counseling Clients"/>
@@ -475,7 +477,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:id="@+id/etTotalCounselingClients"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:text="0">
                         </EditText>
                     </TableRow>
@@ -490,7 +492,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Clients"/>
@@ -499,7 +501,7 @@
                             android:layout_height="match_parent"
                             style="@style/text_style"
                             android:id="@+id/tvTotalClients"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="3"
                             android:text="0">
@@ -516,7 +518,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total Condom Clients"/>
@@ -525,7 +527,7 @@
                             android:layout_height="match_parent"
                             style="@style/text_style"
                             android:id="@+id/tvTotalCondomClients"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="3"
                             android:text="0">
@@ -542,7 +544,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total Pill Clients "/>
@@ -551,7 +553,7 @@
                             android:layout_height="match_parent"
                             style="@style/text_style"
                             android:id="@+id/tvTotalPillClients"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="3"
                             android:text="0">
@@ -568,7 +570,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total IUD Clients "/>
@@ -577,7 +579,7 @@
                             android:layout_height="match_parent"
                             style="@style/text_style"
                             android:id="@+id/tvTotalIUDClients"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="3"
                             android:text="0">
@@ -594,7 +596,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total Implant Clients "/>
@@ -603,7 +605,7 @@
                             android:layout_height="match_parent"
                             style="@style/text_style"
                             android:id="@+id/tvTotalImplantClients"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="3"
                             android:text="0">
@@ -620,7 +622,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total Injectable Client"/>
@@ -629,7 +631,7 @@
                             android:layout_height="match_parent"
                             style="@style/text_style"
                             android:id="@+id/tvTotalInjectablesClientsSum"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="3"
                             android:text="0">
@@ -646,7 +648,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total VSC Clients "/>
@@ -655,7 +657,7 @@
                             android:layout_height="match_parent"
                             style="@style/text_style"
                             android:id="@+id/tvTotalVSCClients"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="3"
                             android:text="0">
@@ -672,7 +674,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of PPIUD Clients"/>
@@ -681,7 +683,7 @@
                             android:layout_height="match_parent"
                             style="@style/text_style"
                             android:id="@+id/tvTotalPPIUCDClients"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="3"
                             android:text="0">
@@ -703,7 +705,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 style="@style/text_style"
-                                android:textColor="@color/black"
+                                android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                                 android:gravity="center_vertical"
                                 android:layout_weight="7"
                                 android:text="Total # of Injectable Clients "/>
@@ -712,7 +714,7 @@
                                 android:layout_height="match_parent"
                                 style="@style/text_style"
                                 android:id="@+id/tvTotalInjectablesClients"
-                                android:textColor="@color/black"
+                                android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                                 android:gravity="center_vertical"
                                 android:layout_weight="3"
                                 android:text="0">
@@ -728,7 +730,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 style="@style/text_style"
-                                android:textColor="@color/black"
+                                android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                                 android:gravity="center_vertical"
                                 android:layout_weight="7"
                                 android:text="One Month"/>
@@ -737,7 +739,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="3"
                                 android:id="@+id/etOneMonth"
-                                android:inputType="number"
+                                android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                                 android:text="0">
                             </EditText>
                         </TableRow>
@@ -751,7 +753,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 style="@style/text_style"
-                                android:textColor="@color/black"
+                                android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                                 android:gravity="center_vertical"
                                 android:layout_weight="7"
                                 android:text="Two Months"/>
@@ -759,7 +761,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="3"
-                                android:inputType="number"
+                                android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                                 android:id="@+id/etTwoMonth"
                                 android:text="0">
                             </EditText>
@@ -774,7 +776,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 style="@style/text_style"
-                                android:textColor="@color/black"
+                                android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                                 android:gravity="center_vertical"
                                 android:layout_weight="7"
                                 android:text="Three Months"/>
@@ -782,7 +784,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="3"
-                                android:inputType="number"
+                                android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                                 android:id="@+id/etThreeMonths"
                                 android:text="0">
                             </EditText>
@@ -798,7 +800,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of PAC LTM adopted (within 01 week)"/>
@@ -807,7 +809,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:id="@+id/etPACLTMAdoptedOneWeek"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:text="0">
                         </EditText>
                     </TableRow>
@@ -821,7 +823,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of PAC LTM adopted (24 Hours)"/>
@@ -830,7 +832,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:id="@+id/etPACLTMAdoptedHours"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:text="0">
                         </EditText>
                     </TableRow>
@@ -844,7 +846,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Post PAC FP (STM) adopted (One Week)"/>
@@ -852,7 +854,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etPACFPAdoptedOneWeek"
                             android:text="0">
                         </EditText>
@@ -867,7 +869,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="Total # of Post PAC FP (STM) adopted (24 Hours)"/>
@@ -875,7 +877,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etPACFPAdoptedHours"
                             android:text="0">
                         </EditText>
@@ -898,7 +900,7 @@
                         android:layout_height="wrap_content"
                         style="@style/medium_text_style"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                         android:text="2. IUD Discontinuation"
                         android:id="@+id/tvNewUser"/>
                 </LinearLayout>
@@ -916,7 +918,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="2.1 # of IUD removed due to side effects"/>
@@ -924,7 +926,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etIUDRemovedSide"
                             android:text="0">
                         </EditText>
@@ -939,7 +941,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="2.2 # of IUD removed due to desire for pregnancy"/>
@@ -947,7 +949,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etIUDRemovedDesire"
                             android:text="0">
                         </EditText>
@@ -962,7 +964,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="2.3 # of IUD removed due to adverse events"/>
@@ -970,7 +972,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etIUDRemovedAdverse"
                             android:text="0">
                         </EditText>
@@ -985,7 +987,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="2.4 # of IUD removed for any other reasons"/>
@@ -993,7 +995,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etIUDRemovedOther"
                             android:text="0">
                         </EditText>
@@ -1010,7 +1012,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="2.5 Total IUD Removal Cases"/>
@@ -1019,7 +1021,7 @@
                             android:layout_height="match_parent"
                             style="@style/text_style"
                             android:id="@+id/tvTotalIUDRemoved"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="3"
                             android:text="0">
@@ -1043,7 +1045,7 @@
                         android:layout_height="wrap_content"
                         style="@style/medium_text_style"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                         android:text="3. PPIUD Insertion and Expulsion"/>
                 </LinearLayout>
 
@@ -1060,7 +1062,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="3.1 Placental Insertion (within 10 mins)"/>
@@ -1069,7 +1071,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:id="@+id/etPlacentalInsertion"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:text="0">
                         </EditText>
                     </TableRow>
@@ -1083,7 +1085,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="3.2 Immediate post-partum insertion (within 10 mins to 48 hours)"/>
@@ -1091,7 +1093,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etImmediatePostPartumInsertion"
                             android:text="0">
                         </EditText>
@@ -1106,7 +1108,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="3.3 Post-partum insertion (48 hours to 40 days)"/>
@@ -1114,7 +1116,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etPostPartumInsertion48Hours"
                             android:text="0">
                         </EditText>
@@ -1129,7 +1131,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="3.4 Extended Post-partum insertion (40 days to 1 year)"/>
@@ -1137,7 +1139,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="3"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:id="@+id/etExtendedPostPartumInsertion"
                             android:text="0">
                         </EditText>
@@ -1153,7 +1155,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="3.5 Immediate expulsion (within 24 hours)"/>
@@ -1162,7 +1164,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:id="@+id/etImmediateExpulsion"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:text="0">
                         </EditText>
                     </TableRow>
@@ -1176,7 +1178,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="3.6 Delayed expulsion (up to 3 months)"/>
@@ -1185,7 +1187,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:id="@+id/etDelayedExpulsion"
-                            android:inputType="number"
+                            android:inputType="number" android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:text="0">
                         </EditText>
                     </TableRow>
@@ -1207,7 +1209,7 @@
                         android:layout_height="wrap_content"
                         style="@style/medium_text_style"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                         android:text="Inspection during the visit"/>
                 </LinearLayout>
                 <LinearLayout
@@ -1219,7 +1221,7 @@
                         android:layout_height="wrap_content"
                         style="@style/medium_text_style"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                         android:text="4. IEC (Visible) "/>
                 </LinearLayout>
 
@@ -1236,7 +1238,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="4.1 IEC material (PPIUCD, PAC etc.) "/>
@@ -1252,7 +1254,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbIECMaterialYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1260,7 +1262,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbIECMaterialNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1281,7 +1283,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="4.2 Copy of last QAT available with action plan "/>
@@ -1297,7 +1299,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbLastQATYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1305,7 +1307,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbLastQATNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1326,7 +1328,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="4.3 Client Record Book  "/>
@@ -1342,7 +1344,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbRecordBookYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1350,7 +1352,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbRecordBookNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1371,7 +1373,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="4.4 Clients details completely filled  "/>
@@ -1387,7 +1389,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbDetailFilledYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1395,7 +1397,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbDetailFilledNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1416,7 +1418,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="4.5 Training certificates/Academic"/>
@@ -1432,7 +1434,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbTrainingCertYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1440,7 +1442,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbTrainingCertNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1461,7 +1463,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="4.6 Adverse event referral system "/>
@@ -1477,7 +1479,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbAdverseEventYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1485,7 +1487,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbAdverseEventNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1506,7 +1508,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="4.7 Counselling Flip Chart "/>
@@ -1522,7 +1524,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbFlipChartYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1530,7 +1532,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbFlipChartNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1559,7 +1561,7 @@
                         android:layout_height="wrap_content"
                         style="@style/medium_text_style"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                         android:text="5. Sterilization/Supplies/Instruments** "/>
                 </LinearLayout>
 
@@ -1576,7 +1578,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="5.1 Autoclave /Boiler with lid  "/>
@@ -1592,7 +1594,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbAutoclaveYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1600,7 +1602,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbAutoclaveNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1621,7 +1623,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="5.2 0.5% chlorine used for decontamination of instruments "/>
@@ -1637,7 +1639,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbChlorineYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1645,7 +1647,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbChlorineNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1666,7 +1668,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="5.3 Instruments stored as per QAT protocol  "/>
@@ -1682,7 +1684,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbInstrumentYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1690,7 +1692,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbInstrumentNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1711,7 +1713,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="5.4 Boiling of instruments for 20 minutes  "/>
@@ -1727,7 +1729,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbBoilingInstYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1735,7 +1737,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbBoilingInstNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1756,7 +1758,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="5.5 Gloves in use"/>
@@ -1772,7 +1774,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbGloveUseYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1780,7 +1782,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbGloveUseNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1801,7 +1803,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="5.6 Safety Box in use "/>
@@ -1817,7 +1819,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbSafetyBoxYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1825,7 +1827,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbSafetyBoxNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1846,7 +1848,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             style="@style/text_style"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                             android:gravity="center_vertical"
                             android:layout_weight="7"
                             android:text="5.7 Dustbin and Polythene Bags for Waste Disposal "/>
@@ -1862,7 +1864,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" >
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbDustbinYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1870,7 +1872,7 @@
                                     style="@style/text_style"
                                     android:checked="true" />
 
-                                <RadioButton
+                                <RadioButton android:buttonTint="@color/darkGreen"
                                     android:id="@+id/rbDustbinNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1899,7 +1901,7 @@
                         android:layout_height="wrap_content"
                         style="@style/medium_text_style"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                         android:text="6.1 Availability of Stock"/>
                 </LinearLayout>
                 <include android:id="@+id/glAvailabilityStock" android:layout_width="match_parent" android:layout_height="match_parent" layout="@layout/grid_availability_stock"/>
@@ -1920,7 +1922,7 @@
                         android:layout_height="wrap_content"
                         style="@style/medium_text_style"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black" android:backgroundTint="@color/darkGreen"
                         android:text="6.2 Stock Expiry"/>
                 </LinearLayout>
                 <include android:id="@+id/glStockPurchase" android:layout_width="match_parent" android:layout_height="match_parent" layout="@layout/grid_stock_purchase"/>
@@ -1936,6 +1938,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/customborder"
+                    android:textColor="@color/black"
                     android:padding="@dimen/padding_10"
                     android:id="@+id/etComments"
                     android:hint="Comments"

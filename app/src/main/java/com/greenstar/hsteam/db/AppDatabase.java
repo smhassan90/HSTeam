@@ -12,11 +12,13 @@ import com.greenstar.hsteam.dao.DashboardDAO;
 import com.greenstar.hsteam.dao.ProvidersDAO;
 import com.greenstar.hsteam.dao.QATFormHeaderDAO;
 import com.greenstar.hsteam.dao.QATFormQuestionDAO;
+import com.greenstar.hsteam.dao.QATTCFormDAO;
 import com.greenstar.hsteam.dao.QTVFormDAO;
 import com.greenstar.hsteam.dao.QuestionsDAO;
 import com.greenstar.hsteam.dao.approval.ApprovalQATAreaDAO;
 import com.greenstar.hsteam.dao.approval.ApprovalQATFormDAO;
 import com.greenstar.hsteam.dao.approval.ApprovalQATFormQuestionDAO;
+import com.greenstar.hsteam.model.QATTCForm;
 import com.greenstar.hsteam.model.approval.ApprovalQATArea;
 import com.greenstar.hsteam.model.approval.ApprovalQATForm;
 import com.greenstar.hsteam.model.approval.ApprovalQATFormQuestion;
@@ -31,8 +33,8 @@ import com.greenstar.hsteam.model.QTVForm;
 import com.greenstar.hsteam.model.Question;
 
 @Database(entities = {Providers.class, QTVForm.class, ApprovalQTVForm.class, Dashboard.class, Question.class, Area.class, QATFormHeader.class,
-        QATFormQuestion.class, QATAreaDetail.class, ApprovalQATForm.class, ApprovalQATArea.class, ApprovalQATFormQuestion.class},
-        version = 2)
+        QATFormQuestion.class, QATAreaDetail.class, ApprovalQATForm.class, ApprovalQATArea.class, ApprovalQATFormQuestion.class, QATTCForm.class},
+        version = 4)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "hsteamdb";
     private static AppDatabase INSTANCE;
@@ -46,6 +48,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract AreaDetailDAO getAreaDetailDAO();
     public abstract QATFormHeaderDAO getQatFormHeaderDAO();
     public abstract QATFormQuestionDAO getQatFormQuestionDAO();
+    public abstract QATTCFormDAO getQattcFormDAO();
 
     public abstract ApprovalQATFormQuestionDAO getApprovalQATFormQuestionDAO();
     public abstract ApprovalQATAreaDAO getApprovalQATAreaDAO();

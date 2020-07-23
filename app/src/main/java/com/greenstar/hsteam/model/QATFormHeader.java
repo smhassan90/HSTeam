@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 @Entity
 public class QATFormHeader {
     @NonNull
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String supervisorCode;
     private String supervisorName;

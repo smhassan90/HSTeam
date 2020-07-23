@@ -7,7 +7,15 @@ public class SyncObject {
     List<QATFormHeader> qatFormHeaders;
     List<QATFormQuestion> qatFormQuestions;
     List<QATAreaDetail> qatAreaDetails;
+    List<QATTCForm> qattcForms;
 
+    public List<QATTCForm> getQattcForms() {
+        return qattcForms;
+    }
+
+    public void setQattcForms(List<QATTCForm> qattcForms) {
+        this.qattcForms = qattcForms;
+    }
 
     public List<QTVForm> getQtvForms() {
         return qtvForms;

@@ -107,6 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:textColorHint="@color/darkGreen"
                 android:id="@+id/etHistoryComments"
                 style="@style/medium_text_style"
                 android:textStyle="bold"
@@ -123,7 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/colorAccent"
+        android:background="@color/lightBlue"
         android:layout_marginTop="@dimen/padding_10"
         android:id="@+id/llQuestionSeries">
 
@@ -211,7 +212,9 @@
             android:textColor="@color/black"
             android:id="@+id/etComments"
             style="@style/medium_text_style"
+            android:backgroundTint="@android:color/holo_green_light"
             android:textStyle="bold"
+            android:textColorHint="@color/darkGreen"
             android:hint="Comments"
             android:text=""/>
     </LinearLayout>

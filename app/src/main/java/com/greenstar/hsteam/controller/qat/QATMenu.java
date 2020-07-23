@@ -2,6 +2,8 @@ package com.greenstar.hsteam.controller.qat;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,13 +31,14 @@ import java.util.Date;
 
 import io.fabric.sdk.android.Fabric;
 
-public class QATMenu extends AppCompatActivity implements View.OnClickListener, WebserviceResponse {
+public class QATMenu extends AppCompatActivity implements View.OnClickListener, WebserviceResponse, View.OnLongClickListener {
 
     LinearLayout llSync;
     LinearLayout llBasket;
     LinearLayout llProfile;
     LinearLayout llDashboard;
     LinearLayout llQATForm;
+    LinearLayout llTCForm;
     ProgressDialog progressBar = null;
     AppDatabase db =null;
     Activity activity;
@@ -54,6 +57,7 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
 
         llSync = findViewById(R.id.llSync);
         llSync.setOnClickListener(this);
+        llSync.setOnLongClickListener(this);
 
         llBasket = findViewById(R.id.llBasket);
         llBasket.setOnClickListener(this);
@@ -63,6 +67,10 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
 
         llQATForm = findViewById(R.id.llForm);
         llQATForm.setOnClickListener(this);
+
+        llTCForm = findViewById(R.id.llTechnicalCompetence);
+        llTCForm.setOnClickListener(this);
+
     }
 
     @Override
@@ -132,13 +140,16 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
             Intent myIntent = new Intent(this, QATSubmittedForms.class);
             startActivity(myIntent);
         }else if(v.getId()==R.id.llApprovalStatus){
+            /*
             Intent myIntent = new Intent(this, ApprovalStatus.class);
             startActivity(myIntent);
+            */
+            Toast.makeText(this,"Under development", Toast.LENGTH_LONG).show();
         }else if(v.getId()==R.id.llForm){
             Intent myIntent = new Intent(activity, QATForm.class);
             startActivity(myIntent);
         }else if(v.getId()==R.id.llTechnicalCompetence){
-            Intent myIntent = new Intent(activity, QATForm.class);
+            Intent myIntent = new Intent(activity, TCForm.class);
             startActivity(myIntent);
         }
     }
@@ -179,5 +190,14 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
         }
         progressBar.dismiss();
 
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("syncData", Util.getCTSSyncData(this));
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(this,"All forms copied!", Toast.LENGTH_LONG).show();
+        return false;
     }
 }
