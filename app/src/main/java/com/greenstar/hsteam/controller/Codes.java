@@ -12,4 +12,5 @@ public interface Codes {
     final public static int QATFORM = 2;
     final public static int QATAREA = 3;
     final public static int QATQUESTION = 4;
+    public static final String SINGLE_QAT_FORM = "QAT_FORM";
 }

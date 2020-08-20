@@ -30,6 +30,9 @@ public interface QATFormHeaderDAO {
     @Query("DELETE FROM QATFormHeader WHERE id=:id")
     public void deleteFormById(long id);
 
+    @Query("SELECT * FROM QATFormHeader WHERE id=:id")
+    public List<QATFormHeader> getFormById(long id);
+
     @Query("SELECT * FROM QATFormHeader")
     List<QATFormHeader> getQatFormHeaders();
 

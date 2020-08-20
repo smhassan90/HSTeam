@@ -196,6 +196,25 @@ public class Util {
 
     }
 
+    public static String getSingleQATFormData(Activity context, long formId){
+        AppDatabase db = AppDatabase.getAppDatabase(context);
+
+        List<QATFormHeader> qatFormHeaders = db.getQatFormHeaderDAO().getFormById(formId);
+        List<Long> ids = new ArrayList<>();
+        ids.add(formId);
+        List<QATFormQuestion> qatFormQuestions = db.getQatFormQuestionDAO().getAllPending(ids);
+        List<QATAreaDetail> qatAreaDetails = db.getAreaDetailDAO().getAllPending(ids);
+        SyncObject syncObject = new SyncObject();
+        syncObject.setQtvForms(null);
+        syncObject.setQatAreaDetails(qatAreaDetails);
+        syncObject.setQatFormHeaders(qatFormHeaders);
+        syncObject.setQatFormQuestions(qatFormQuestions);
+        syncObject.setQattcForms(null);
+
+        final String data = new Gson().toJson(syncObject);
+        return data;
+    }
+
     public static String getCTSSyncData(Activity context){
         AppDatabase db = AppDatabase.getAppDatabase(context);
 
@@ -214,6 +233,66 @@ public class Util {
 
         final String data = new Gson().toJson(syncObject);
         return data;
+    }
+
+    public void performSingleFormSync(final Activity context, long formId, String syncType){
+        SharedPreferences editor = context.getSharedPreferences(Codes.PREF_NAME, Context.MODE_PRIVATE);
+        String token = editor.getString("token","");
+        RequestParams rp = new RequestParams();
+        rp.add("syncType", syncType);
+        rp.add("token",token);
+
+
+        rp.add("data",getSingleQATFormData(context,formId));
+
+        HttpUtils.get("singleFormSync", rp, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                String message = "";
+                long qatId =0;
+                String data = "";
+                String codeReceived = "";
+
+                try {
+                    message = response.get("message").toString();
+
+                    codeReceived = response.get("status").toString();
+                    if(codeReceived.equals(Codes.ALL_OK)){
+                        qatId = Long.valueOf(response.get("qatID") == null || response.get("qatID").toString() == null || response.get("qatID").toString()=="" ? "0":response.get("qatID").toString() );
+                    }
+
+                }catch(Exception e){
+                    Toast.makeText(context,"Something went wrong while sync",Toast.LENGTH_SHORT).show();
+                    Crashlytics.log("Sync Issue at "+ new Date());
+                    Crashlytics.logException(e);
+                }
+                if(qatId != 0){
+                    AppDatabase db = AppDatabase.getAppDatabase(context);
+                    db.getQatFormHeaderDAO().markQATSuccessful(qatId);
+                }
+                responseListener.responseAlert(message);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray timeline) {
+                Crashlytics.log("Sync Successful but not handled at "+ new Date());
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                responseListener.responseAlert(Codes.SOMETHINGWENTWRONG);
+                Crashlytics.log("Sync failed and got Something went wrong at  "+ new Date());
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                responseListener.responseAlert(Codes.TIMEOUT);
+                Crashlytics.log("Sync failed and Timeout at "+ new Date());
+            }
+        });
     }
 
     public void performSync(final Activity context){

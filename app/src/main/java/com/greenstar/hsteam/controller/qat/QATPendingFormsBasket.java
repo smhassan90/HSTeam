@@ -1,8 +1,10 @@
 package com.greenstar.hsteam.controller.qat;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,19 +18,23 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.adapters.qat.QATPendingFormAdapter;
+import com.greenstar.hsteam.controller.Codes;
 import com.greenstar.hsteam.dao.FormDeleteListener;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.model.QATFormHeader;
+import com.greenstar.hsteam.utils.Util;
+import com.greenstar.hsteam.utils.WebserviceResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QATPendingFormsBasket extends Fragment implements FormDeleteListener {
+public class QATPendingFormsBasket extends Fragment implements FormDeleteListener, WebserviceResponse {
     View view= null;
     ListView lvBasket;
     QATPendingFormAdapter basketAdapter;
     AppDatabase db =null;
     List<QATFormHeader> forms = new ArrayList<>();
+    ProgressDialog progressBar = null;
 
     private QATPendingFormsBasket.OnFragmentInteractionListener mListener;
     Activity activity;
@@ -119,6 +125,30 @@ public class QATPendingFormsBasket extends Fragment implements FormDeleteListene
                 .show();
 
 
+    }
+
+    @Override
+    public void SyncForm(long id) {
+        if(Util.isNetworkAvailable(getActivity())){
+            Util util = new Util();
+            util.setResponseListener(this);
+            progressBar = new ProgressDialog(getActivity());
+            progressBar.setCancelable(false);//you can cancel it by pressing back button
+            progressBar.setMessage("Syncing this form");
+            progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressBar.show();//displays the progress bar
+            util.performSingleFormSync(getActivity(),id, Codes.SINGLE_QAT_FORM);
+
+        }
+    }
+
+    @Override
+    public void responseAlert(String response) {
+        basketAdapter = new QATPendingFormAdapter(getActivity(),getData(), this);
+        lvBasket.setAdapter(basketAdapter);
+        basketAdapter.notifyDataSetChanged();
+        progressBar.dismiss();
+        Toast.makeText(getActivity(),response,Toast.LENGTH_SHORT).show();
     }
 
     public interface OnFragmentInteractionListener {

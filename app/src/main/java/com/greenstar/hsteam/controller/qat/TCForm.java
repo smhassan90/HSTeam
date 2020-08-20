@@ -194,7 +194,8 @@ public class TCForm extends AppCompatActivity implements View.OnClickListener, C
                 QATTCForm qattcForm = new QATTCForm();
                 qattcForm.setDateOfAssessment(etDateOFAssessment.getText().toString());
                 qattcForm.setMobileDate(sdf.format(myCalendar.getTime()));
-                qattcForm.setQAMCode(tvQAMName.getText().toString());
+                qattcForm.setQAMCode(tvQAMCode.getText().toString());
+                qattcForm.setQAMName(tvQAMName.getText().toString());
                 qattcForm.setRegion(tvRegion.getText().toString());
                 qattcForm.setSupervisorCode(tvSupervisorCode.getText().toString());
                 qattcForm.setSupervisorName(tvSupervisorName.getText().toString());

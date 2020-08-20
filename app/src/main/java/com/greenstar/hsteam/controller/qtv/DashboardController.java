@@ -27,8 +27,6 @@ public class DashboardController extends AppCompatActivity {
         }catch(Exception e){
             Crashlytics.logException(e);
         }
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

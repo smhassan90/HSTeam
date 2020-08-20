@@ -106,9 +106,11 @@ public class QTVMenu extends AppCompatActivity implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.llDashboard){
-
+/*
            Intent myIntent = new Intent(this, DashboardController.class);
             startActivity(myIntent);
+            */
+        Toast.makeText(this,"Under development", Toast.LENGTH_SHORT).show();
 
         }else if(v.getId()==R.id.llSync){
             try{

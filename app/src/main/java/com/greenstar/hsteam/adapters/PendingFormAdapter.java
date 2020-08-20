@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -66,7 +67,8 @@ public class PendingFormAdapter extends ArrayAdapter<QTVForm> implements View.On
         TextView tvProviderCode = (TextView) v.findViewById(R.id.tvProviderCode);
         TextView tvVisitDate = (TextView) v.findViewById(R.id.tvVisitDate);
         ImageView btnDelete = v.findViewById(R.id.btnDelete);
-
+        Button btnSyncSingle = v.findViewById(R.id.btnSyncSingle);
+        btnSyncSingle.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
         if(list!=null && list.size()>0){
             QTVForm i = list.get(position);
@@ -78,6 +80,7 @@ public class PendingFormAdapter extends ArrayAdapter<QTVForm> implements View.On
                     tvVisitDate.setText("Visit Date : " + i.getVisitDate());
 
                     btnDelete.setTag(i.getId());
+                    btnSyncSingle.setTag(i.getId());
                 }catch(Exception e){
                     Crashlytics.logException(e);
                 }
@@ -88,6 +91,7 @@ public class PendingFormAdapter extends ArrayAdapter<QTVForm> implements View.On
                 tvProviderCode.setVisibility(View.GONE);
                 tvVisitDate.setVisibility(View.GONE);
                 btnDelete.setVisibility(View.GONE);
+                btnSyncSingle.setVisibility(View.GONE);
             }
 
         }else{
@@ -96,6 +100,7 @@ public class PendingFormAdapter extends ArrayAdapter<QTVForm> implements View.On
             tvProviderCode.setVisibility(View.GONE);
             tvVisitDate.setVisibility(View.GONE);
             btnDelete.setVisibility(View.GONE);
+            btnSyncSingle.setVisibility(View.GONE);
         }
 
         return v;
@@ -110,6 +115,14 @@ public class PendingFormAdapter extends ArrayAdapter<QTVForm> implements View.On
                 deleteForm.deleteForm(formId);
             }else{
                 Toast.makeText(mActivity, "Something went wrong while deleting Form",Toast.LENGTH_SHORT).show();
+            }
+        }else if(v.getId()==R.id.btnSyncSingle){
+            Object obj =  v.getTag()==null?"0":v.getTag();
+            long formId = (long)obj;
+            if(formId!=0){
+                deleteForm.SyncForm(formId);
+            }else{
+                Toast.makeText(mActivity, "Something went wrong while Syncing Form",Toast.LENGTH_SHORT).show();
             }
         }
     }

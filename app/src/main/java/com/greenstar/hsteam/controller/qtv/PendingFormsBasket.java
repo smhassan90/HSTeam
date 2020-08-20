@@ -126,6 +126,11 @@ public class PendingFormsBasket extends Fragment implements FormDeleteListener {
 
     }
 
+    @Override
+    public void SyncForm(long id) {
+        Toast.makeText(getActivity(),"Under development",Toast.LENGTH_SHORT).show();
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
