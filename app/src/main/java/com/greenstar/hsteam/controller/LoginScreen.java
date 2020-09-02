@@ -67,7 +67,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         rp.add("uniqueId",HttpUtils.getUniqueId());
         rp.add("staffType", Codes.STAFFTYPE);
         dialog.show();
-        HttpUtils.get("login", rp, new JsonHttpResponseHandler() {
+        HttpUtils.get("loginOnly", rp, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

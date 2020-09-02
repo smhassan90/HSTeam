@@ -25,4 +25,5 @@
     <string name="QTVForm">QTVForm</string>
     <string name="QATForm">QAT Form</string>
     <string name="TechnicalCompetence">Technical Competence</string>
+    <string name="PartialSynchronization">Partial Synchronization</string>
 </resources>

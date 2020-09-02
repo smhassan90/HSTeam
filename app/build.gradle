@@ -20,8 +20,8 @@ android {
         applicationId "com.greenstar.hsteam"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 21
-        versionName "3.13"
+        versionCode 22
+        versionName "3.14"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

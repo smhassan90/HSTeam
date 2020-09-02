@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.controller.Codes;
+import com.greenstar.hsteam.controller.PartialSync;
 import com.greenstar.hsteam.controller.qtv.ApprovalStatus;
 import com.greenstar.hsteam.controller.qtv.DashboardController;
 import com.greenstar.hsteam.controller.qtv.SubmittedForms;
@@ -39,6 +40,7 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
     LinearLayout llDashboard;
     LinearLayout llQATForm;
     LinearLayout llTCForm;
+    LinearLayout llPartialSynchronization;
     ProgressDialog progressBar = null;
     AppDatabase db =null;
     Activity activity;
@@ -71,6 +73,8 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
         llTCForm = findViewById(R.id.llTechnicalCompetence);
         llTCForm.setOnClickListener(this);
 
+        llPartialSynchronization = findViewById(R.id.llPartialSynchronization);
+        llPartialSynchronization.setOnClickListener(this);
     }
 
     @Override
@@ -120,6 +124,7 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
 
         }else if(v.getId()==R.id.llSync){
             try{
+
                 if(Util.isNetworkAvailable(this)){
                     Util util = new Util();
                     util.setResponseListener(this);
@@ -132,6 +137,7 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
                 }else{
                     Toast.makeText(this,"Please connect to the internet service and try again.", Toast.LENGTH_SHORT).show();
                 }
+
             }catch (Exception e){
                 Crashlytics.logException(e);
             }
@@ -150,6 +156,9 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
             startActivity(myIntent);
         }else if(v.getId()==R.id.llTechnicalCompetence){
             Intent myIntent = new Intent(activity, TCForm.class);
+            startActivity(myIntent);
+        }else if(v.getId()==R.id.llPartialSynchronization){
+            Intent myIntent = new Intent(activity, PartialSync.class);
             startActivity(myIntent);
         }
     }
