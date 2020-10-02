@@ -24,7 +24,7 @@ public interface QATFormHeaderDAO {
     @Query("SELECT * FROM QATFormHeader WHERE approvalStatus=1")
     List<QATFormHeader> getAllSuccessful();
 
-    @Query("SELECT * FROM QATFormHeader WHERE approvalStatus=2 || approvalStatus=20")
+    @Query("SELECT * FROM QATFormHeader WHERE approvalStatus=2 OR approvalStatus=20")
     List<QATFormHeader> getAllRejected();
 
     @Query("DELETE FROM QATFormHeader WHERE id=:id")
@@ -42,6 +42,6 @@ public interface QATFormHeaderDAO {
     @Query("UPDATE QATFormHeader SET approvalStatus=1 WHERE id=:id")
     public void markQATSuccessful(long id);
 
-    @Query("UPDATE QATFormHeader SET approvalStatus=2 WHERE id=:id")
+    @Query("UPDATE QATFormHeader SET approvalStatus=20 WHERE id=:id")
     public void markQATRejected(long id);
 }

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.controller.Codes;
+import com.greenstar.hsteam.controller.PartialSync;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.utils.Util;
 import com.greenstar.hsteam.utils.WebserviceResponse;
@@ -35,6 +36,7 @@ public class QTVMenu extends AppCompatActivity implements View.OnClickListener, 
         LinearLayout llProfile;
         LinearLayout llDashboard;
         LinearLayout llQTVForm;
+        LinearLayout llPartialSynchronization;
         ProgressDialog progressBar = null;
         AppDatabase db =null;
         Activity activity;
@@ -63,6 +65,9 @@ public class QTVMenu extends AppCompatActivity implements View.OnClickListener, 
 
         llQTVForm = findViewById(R.id.llForm);
         llQTVForm.setOnClickListener(this);
+
+        llPartialSynchronization = findViewById(R.id.llPartialSynchronization);
+        llPartialSynchronization.setOnClickListener(this);
     }
 
     @Override
@@ -138,6 +143,9 @@ public class QTVMenu extends AppCompatActivity implements View.OnClickListener, 
             startActivity(myIntent);
         }else if(v.getId()==R.id.llForm){
             Intent myIntent = new Intent(activity, NewQTVForm.class);
+            startActivity(myIntent);
+        }else if(v.getId()==R.id.llPartialSynchronization){
+            Intent myIntent = new Intent(activity, PartialSync.class);
             startActivity(myIntent);
         }
     }

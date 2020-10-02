@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,5 +86,17 @@ public class RejectedFormBasket extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            List<QTVForm> qtvForms = new ArrayList<>();
+            qtvForms = getData();
+            basketAdapter = new RejectedFormAdapter(getActivity(), qtvForms);
+            lvBasket.setAdapter(basketAdapter);
+            basketAdapter.notifyDataSetChanged();
+        }
     }
 }

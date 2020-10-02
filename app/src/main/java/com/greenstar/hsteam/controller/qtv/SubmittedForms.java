@@ -24,6 +24,7 @@ public class SubmittedForms extends AppCompatActivity implements PendingFormsBas
         tlStatusTab.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager vpStatus = findViewById(R.id.vpStatusPager);
+
         SubmittedFormAdapter submittedFormAdapter = new SubmittedFormAdapter(getSupportFragmentManager());
         vpStatus.setAdapter(submittedFormAdapter);
         vpStatus.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tlStatusTab));

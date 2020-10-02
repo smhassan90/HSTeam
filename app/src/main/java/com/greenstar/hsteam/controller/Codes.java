@@ -13,6 +13,7 @@ public interface Codes {
     final public static int QATAREA = 3;
     final public static int QATQUESTION = 4;
     public static final String SINGLE_QAT_FORM = "QAT_FORM";
+    public static final String SINGLE_QTV_FORM = "QTV_FORM";
     //Partial Sync
     public static final String ALL_OK_PS_BASICINFO = "2001";
     public static final String ERROR_PS_BASICINFO = "5021";

@@ -79,6 +79,16 @@ public class SuccessfulFormBasket extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
+        List<QTVForm> qtvForms = new ArrayList<>();
+        if(lvBasket!=null) {
+            if (db == null)
+                db = AppDatabase.getAppDatabase(getActivity());
+            qtvForms = getData();
+            basketAdapter = new SuccessfulFormAdapter(getActivity(), qtvForms);
+            lvBasket.setAdapter(basketAdapter);
+            basketAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -92,4 +102,5 @@ public class SuccessfulFormBasket extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

@@ -209,20 +209,29 @@ public class Util {
 
     }
 
-    public static String getSingleQATFormData(Activity context, long formId){
+    public static String getSingleFormData(Activity context, long formId, String syncType){
         AppDatabase db = AppDatabase.getAppDatabase(context);
-
-        List<QATFormHeader> qatFormHeaders = db.getQatFormHeaderDAO().getFormById(formId);
-        List<Long> ids = new ArrayList<>();
-        ids.add(formId);
-        List<QATFormQuestion> qatFormQuestions = db.getQatFormQuestionDAO().getAllPending(ids);
-        List<QATAreaDetail> qatAreaDetails = db.getAreaDetailDAO().getAllPending(ids);
         SyncObject syncObject = new SyncObject();
-        syncObject.setQtvForms(null);
-        syncObject.setQatAreaDetails(qatAreaDetails);
-        syncObject.setQatFormHeaders(qatFormHeaders);
-        syncObject.setQatFormQuestions(qatFormQuestions);
-        syncObject.setQattcForms(null);
+        if(syncType.equals(Codes.SINGLE_QAT_FORM)){
+            List<QATFormHeader> qatFormHeaders = db.getQatFormHeaderDAO().getFormById(formId);
+            List<Long> ids = new ArrayList<>();
+            ids.add(formId);
+            List<QATFormQuestion> qatFormQuestions = db.getQatFormQuestionDAO().getAllPending(ids);
+            List<QATAreaDetail> qatAreaDetails = db.getAreaDetailDAO().getAllPending(ids);
+
+            syncObject.setQtvForms(null);
+            syncObject.setQatAreaDetails(qatAreaDetails);
+            syncObject.setQatFormHeaders(qatFormHeaders);
+            syncObject.setQatFormQuestions(qatFormQuestions);
+            syncObject.setQattcForms(null);
+        }else if(syncType.equals(Codes.SINGLE_QTV_FORM)){
+            List<QTVForm> forms = new ArrayList<>();
+            forms = db.getQTVFormDAO().getQTVFormByID(formId);
+            if(forms!=null && forms.size()>0){
+                syncObject.setQtvForms(forms);
+            }
+        }
+
 
         final String data = new Gson().toJson(syncObject);
         return data;
@@ -248,21 +257,24 @@ public class Util {
         return data;
     }
 
-    public void performSingleFormSync(final Activity context, long formId, String syncType){
+    public void performSingleFormSync(final Activity context, long formId, final String syncType){
         SharedPreferences editor = context.getSharedPreferences(Codes.PREF_NAME, Context.MODE_PRIVATE);
         String token = editor.getString("token","");
         RequestParams rp = new RequestParams();
         rp.add("syncType", syncType);
         rp.add("token",token);
+        rp.add("data",getSingleFormData(context,formId,syncType));
 
 
-        rp.add("data",getSingleQATFormData(context,formId));
 
         HttpUtils.get("singleFormSync", rp, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 String message = "";
-                long qatId =0;
+                long qatSuccessfulId =0;
+                long qatRejectedId =0;
+                int SuccessfulQTVID =0;
+                int RejectedQTVID= 0;
                 String data = "";
                 String codeReceived = "";
 
@@ -271,17 +283,31 @@ public class Util {
 
                     codeReceived = response.get("status").toString();
                     if(codeReceived.equals(Codes.ALL_OK)){
-                        qatId = Long.valueOf(response.get("qatID") == null || response.get("qatID").toString() == null || response.get("qatID").toString()=="" ? "0":response.get("qatID").toString() );
+                        if(syncType.equals(Codes.SINGLE_QAT_FORM)){
+                            qatSuccessfulId = Long.valueOf(response.optString("qatSuccessfulId") == null || response.optString("qatSuccessfulId").toString() == null || response.optString("qatSuccessfulId").toString()=="" ? "0":response.optString("qatSuccessfulId").toString() );
+                            qatRejectedId = Long.valueOf(response.optString("qatRejectedId") == null || response.optString("qatRejectedId").toString() == null || response.optString("qatRejectedId").toString()=="" ? "0":response.optString("qatRejectedId").toString() );
+                        }else if(syncType.equals(Codes.SINGLE_QTV_FORM)){
+                            SuccessfulQTVID = Integer.valueOf(response.optString("SuccessfulQTVID") == null || response.get("SuccessfulQTVID")== null || response.optString("SuccessfulQTVID")=="" ? "0":response.optString("SuccessfulQTVID"));
+                            RejectedQTVID = Integer.valueOf(response.optString("RejectedQTVID") == null || response.get("RejectedQTVID") == null || response.optString("RejectedQTVID")=="" ? "0":response.optString("RejectedQTVID") );
+                        }
+
                     }
 
                 }catch(Exception e){
                     Toast.makeText(context,"Something went wrong while sync",Toast.LENGTH_SHORT).show();
                     Crashlytics.log("Sync Issue at "+ new Date());
                 }
-                if(qatId != 0){
                     AppDatabase db = AppDatabase.getAppDatabase(context);
-                    db.getQatFormHeaderDAO().markQATSuccessful(qatId);
-                }
+                    if(syncType.equals(Codes.SINGLE_QAT_FORM)){
+                        if(qatSuccessfulId!=0)
+                            db.getQatFormHeaderDAO().markQATSuccessful(qatSuccessfulId);
+                        if(qatRejectedId!=0)
+                            db.getQatFormHeaderDAO().markQATRejected(qatRejectedId);
+                    }else if(syncType.equals(Codes.SINGLE_QTV_FORM)) {
+                        db.getQTVFormDAO().markQTVSuccessful(SuccessfulQTVID);
+                        db.getQTVFormDAO().markQTVRejected(RejectedQTVID);
+                    }
+
                 responseListener.responseAlert(message);
             }
 
@@ -334,10 +360,8 @@ public class Util {
                     message = response.get("message").toString();
                     codeReceived = response.get("status").toString();
                     data =  response.get("data").toString();
-                    staffName = response.get("staffName").toString();
                     params.put("message", message);
                     params.put("data", data);
-                    params.put("staffName",staffName);
                     params.put("status",codeReceived);
                     params.put("isQTVAllowed",isQTVAllowed);
                     params.put("isQATAllowed", isQATAllowed);

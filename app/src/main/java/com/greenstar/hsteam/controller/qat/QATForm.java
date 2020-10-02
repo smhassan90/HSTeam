@@ -434,7 +434,7 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
 
             QATAreaDetail areaDetail = new QATAreaDetail();
             areaDetail.setFormId(formId);
-            areaDetail.setId(areaId);
+            areaDetail.setId(0);
             areaDetail.setAreaId(Integer.valueOf(tvAreaIdInner.getText().toString()));
             areaDetail.setTotalIndicators(totalIndicators);
             areaDetail.setTotalIndicatorsAchieved(totalAchievedIndicators);
@@ -460,10 +460,10 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
                 }else{
                     qatFormQuestion.setAnswer(0);
                 }
-                qatFormQuestion.setAreaId(areaId);
+                qatFormQuestion.setAreaId(areaDetail.getAreaId());
                 qatFormQuestion.setFormId(formId);
                 qatFormQuestion.setQuestionId(question.getId());
-                qatFormQuestion.setId(questionFormId);
+                qatFormQuestion.setId(0);
                 qatFormQuestions.add(qatFormQuestion);
             }
         }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +73,9 @@ public class PartialSync extends AppCompatActivity implements View.OnClickListen
 
     String partialSyncType = "";
 
+    LinearLayout psQAT;
+    LinearLayout psQTV;
+
     SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy 'at' HH:mm:ss z");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +90,19 @@ public class PartialSync extends AppCompatActivity implements View.OnClickListen
     }
 
     private void Initialization() {
+        psQAT = findViewById(R.id.psQAT);
+        psQTV = findViewById(R.id.psQTV);
+
+        SharedPreferences shared = getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE);
+        int isQATAllowed = (shared.getInt("isQATAllowed", 0));
+        int isQTVAllowed = (shared.getInt("isQTVAllowed", 0));
+        if(isQATAllowed==0){
+            psQAT.setVisibility(View.GONE);
+        }
+        if(isQTVAllowed==0){
+            psQTV.setVisibility(View.GONE);
+        }
+
         //PS Basic Info
         viewPSBasicInfo = findViewById(R.id.ps_basic_info);
         btnPSBasicInfo = (Button)viewPSBasicInfo.findViewById(R.id.btnPSync);

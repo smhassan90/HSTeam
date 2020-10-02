@@ -20,14 +20,17 @@ public interface QTVFormDAO {
     @Query("SELECT * FROM QTVForm")
     List<QTVForm> getAll();
 
-    @Query("SELECT * FROM QTVForm WHERE status = 1")
+    @Query("SELECT * FROM QTVForm WHERE approvalStatus = 1")
     List<QTVForm> getAllSuccessfulForms();
 
-    @Query("SELECT * FROM QTVForm WHERE status = 2")
+    @Query("SELECT * FROM QTVForm WHERE approvalStatus=2 OR approvalStatus=20")
     List<QTVForm> getAllRejectedForms();
 
-    @Query("SELECT * FROM QTVForm WHERE status = 0")
+    @Query("SELECT * FROM QTVForm WHERE approvalStatus = 0")
     List<QTVForm> getAllPendingForms();
+
+    @Query("SELECT * FROM QTVForm WHERE id =:formId")
+    List<QTVForm> getQTVFormByID(long formId);
 
     @Query("DELETE FROM QTVForm")
     public void nukeTable();
@@ -35,10 +38,10 @@ public interface QTVFormDAO {
     @Query("DELETE FROM QTVForm WHERE id=:id")
     public void deleteQtvFormById(long id);
 
-    @Query("UPDATE QTVForm SET status=1 WHERE id=:id")
+    @Query("UPDATE QTVForm SET approvalStatus=1 WHERE id=:id")
     public void markQTVSuccessful(int id);
 
-    @Query("UPDATE QTVForm SET status=2 WHERE id=:id")
+    @Query("UPDATE QTVForm SET approvalStatus=20 WHERE id=:id")
     public void markQTVRejected(long id);
 
 }

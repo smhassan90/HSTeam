@@ -183,7 +183,7 @@
                         style="@style/text_style"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:text="1.2 Post- Partum Family Planning (PPIUD Clients)"/>
+                        android:text="1.2 Post- Partum Family Planning"/>
                 </LinearLayout>
                 <include android:id="@+id/glMatrix2" android:layout_width="match_parent" android:layout_height="match_parent" layout="@layout/matrix2"/>
 

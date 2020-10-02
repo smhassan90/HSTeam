@@ -49,8 +49,9 @@ public class QATRejectedFormBasket extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.pending_forms_basket, container, false);
         db = AppDatabase.getAppDatabase(getActivity());
+        view = inflater.inflate(R.layout.pending_forms_basket, container, false);
+
         lvBasket = view.findViewById(R.id.lvBasket);
 
         List<QATFormHeader> qatForms = new ArrayList<>();
@@ -89,5 +90,20 @@ public class QATRejectedFormBasket extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            if (db == null)
+                db = AppDatabase.getAppDatabase(getActivity());
+            List<QATFormHeader> qatForms = new ArrayList<>();
+            qatForms = getData();
+            basketAdapter = new QATRejectedFormAdapter(getActivity(), qatForms);
+            lvBasket.setAdapter(basketAdapter);
+            basketAdapter.notifyDataSetChanged();
+        }
+
     }
 }

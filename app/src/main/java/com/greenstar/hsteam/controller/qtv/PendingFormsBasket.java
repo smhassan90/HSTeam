@@ -1,11 +1,13 @@
 package com.greenstar.hsteam.controller.qtv;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +18,13 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.adapters.PendingFormAdapter;
+import com.greenstar.hsteam.adapters.qat.QATPendingFormAdapter;
+import com.greenstar.hsteam.controller.Codes;
 import com.greenstar.hsteam.dao.FormDeleteListener;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.model.QTVForm;
+import com.greenstar.hsteam.utils.Util;
+import com.greenstar.hsteam.utils.WebserviceResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +34,8 @@ import java.util.List;
  * 15th July, 2019
  */
 
-public class PendingFormsBasket extends Fragment implements FormDeleteListener {
+public class PendingFormsBasket extends Fragment implements FormDeleteListener,WebserviceResponse {
+    ProgressDialog progressBar = null;
     View view= null;
     ListView lvBasket;
     PendingFormAdapter basketAdapter;
@@ -128,7 +135,27 @@ public class PendingFormsBasket extends Fragment implements FormDeleteListener {
 
     @Override
     public void SyncForm(long id) {
-        Toast.makeText(getActivity(),"Under development",Toast.LENGTH_SHORT).show();
+
+        if(Util.isNetworkAvailable(getActivity())){
+            Util util = new Util();
+            util.setResponseListener(this);
+            progressBar = new ProgressDialog(getActivity());
+            progressBar.setCancelable(false);//you can cancel it by pressing back button
+            progressBar.setMessage("Syncing this form");
+            progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressBar.show();//displays the progress bar
+            util.performSingleFormSync(getActivity(),id, Codes.SINGLE_QTV_FORM);
+
+        }
+    }
+
+    @Override
+    public void responseAlert(String response) {
+        basketAdapter = new PendingFormAdapter(getActivity(),getData(), this);
+        lvBasket.setAdapter(basketAdapter);
+        basketAdapter.notifyDataSetChanged();
+        progressBar.dismiss();
+        Toast.makeText(getActivity(),response,Toast.LENGTH_SHORT).show();
     }
 
     public interface OnFragmentInteractionListener {
