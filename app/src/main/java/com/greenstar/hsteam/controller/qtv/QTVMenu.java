@@ -142,8 +142,19 @@ public class QTVMenu extends AppCompatActivity implements View.OnClickListener, 
             Intent myIntent = new Intent(this, ApprovalStatus.class);
             startActivity(myIntent);
         }else if(v.getId()==R.id.llForm){
-            Intent myIntent = new Intent(activity, NewQTVForm.class);
-            startActivity(myIntent);
+            if(db!=null){
+                SharedPreferences prefs = this.getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE);
+                String region = prefs.getString("AMCode", "");
+                int count = db.getProvidersDAO().getCount();
+
+                if(count==0 || region == null || region == ""){
+                    Toast.makeText(this, "Kindly Sync providers and Basic info from Partial Sync option", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent myIntent = new Intent(activity, NewQTVForm.class);
+                    startActivity(myIntent);
+                }
+            }
+
         }else if(v.getId()==R.id.llPartialSynchronization){
             Intent myIntent = new Intent(activity, PartialSync.class);
             startActivity(myIntent);

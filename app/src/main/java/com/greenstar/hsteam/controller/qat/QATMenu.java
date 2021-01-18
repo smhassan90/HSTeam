@@ -18,9 +18,7 @@ import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.controller.Codes;
 import com.greenstar.hsteam.controller.PartialSync;
-import com.greenstar.hsteam.controller.qtv.ApprovalStatus;
 import com.greenstar.hsteam.controller.qtv.DashboardController;
-import com.greenstar.hsteam.controller.qtv.SubmittedForms;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.utils.Util;
 import com.greenstar.hsteam.utils.WebserviceResponse;
@@ -152,8 +150,21 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
             */
             Toast.makeText(this,"Under development", Toast.LENGTH_LONG).show();
         }else if(v.getId()==R.id.llForm){
-            Intent myIntent = new Intent(activity, QATForm.class);
-            startActivity(myIntent);
+            if(db!=null){
+                SharedPreferences prefs = this.getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE);
+                String region = prefs.getString("AMCode", "");
+                int providerCount = db.getProvidersDAO().getCount();
+                int areasCount = db.getAreaDAO().getCount();
+                int questionCount = db.getQuestionsDAO().getCount();
+
+                if(providerCount==0 || region == null || region == "" || questionCount==0 || areasCount ==0){
+                    Toast.makeText(this, "Kindly Sync providers, Basic info, Questions and Areas from Partial Sync option", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent myIntent = new Intent(activity, QATForm.class);
+                    startActivity(myIntent);
+                }
+            }
+
         }else if(v.getId()==R.id.llTechnicalCompetence){
             Intent myIntent = new Intent(activity, TCForm.class);
             startActivity(myIntent);

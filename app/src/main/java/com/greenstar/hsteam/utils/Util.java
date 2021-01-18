@@ -69,12 +69,21 @@ public class Util {
 
                 if(dataObj.getRegion()!=null && !"".equals(dataObj.getRegion()))
                     editor.putString("region", dataObj.getRegion());
+                if(dataObj.getIsQTVAllowed()==1 ||
+                        dataObj.getIsQATAllowed()==1 ||
+                        dataObj.getIsQATAMAllowed()==1){
+                    if( !"".equals(dataObj.getIsQTVAllowed()))
+                        editor.putInt("isQTVAllowed", dataObj.getIsQTVAllowed());
 
-                if(dataObj.getIsQTVAllowed()!=0 && !"".equals(dataObj.getIsQTVAllowed()))
-                    editor.putInt("isQTVAllowed", dataObj.getIsQTVAllowed());
 
-                if(dataObj.getIsQATAllowed()!=0 && !"".equals(dataObj.getIsQATAllowed()))
-                    editor.putInt("isQATAllowed", dataObj.getIsQATAllowed());
+                    if(dataObj.getIsQATAllowed()==1 || dataObj.getIsQATAMAllowed()==1){
+                        editor.putInt("isQATAllowed", 1);
+                    }else{
+                        editor.putInt("isQATAllowed", 0);
+                    }
+                }
+
+
 
                 editor.apply();
                 try {
@@ -350,6 +359,7 @@ public class Util {
                 String staffName = "";
                 int isQTVAllowed = 0;
                 int isQATAllowed = 0;
+                int isQATAMAllowed = 0;
                 JSONObject params = new JSONObject();
                 List<Integer> successfulIDs = new ArrayList<>();
                 List<Integer> rejectedIDs = new ArrayList<>();
@@ -365,7 +375,7 @@ public class Util {
                     params.put("status",codeReceived);
                     params.put("isQTVAllowed",isQTVAllowed);
                     params.put("isQATAllowed", isQATAllowed);
-
+                    params.put(Codes.ISQATAMALLOWED, isQATAMAllowed);
                     for(int i=0;i<response.getJSONArray("rejectedIDs").length();i++){
                         rejectedIDs.add(response.getJSONArray("rejectedIDs").getInt(i));
                     }

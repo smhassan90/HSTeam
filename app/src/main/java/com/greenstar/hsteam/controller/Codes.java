@@ -26,4 +26,14 @@ public interface Codes {
     public static final String PS_TYPE_Question = "706";
     public static final String PS_TYPE_Area = "707";
     public static final String PS_TYPE_QATTCForm = "708";
+
+    final public static int QATISSUESTATUS_INCOMPLETEAREAS = 10;
+    final public static int QATISSUESTATUS_INCOMPLETEQUESTIONS = 20;
+    final public static int QATISSUESTATUS_INCOMPLETEQUESTIONSANDAREAS = 30;
+
+    final public static int QATISSUESTATUS_INCOMPLETEQUESTIONSPULL = 40;
+    final public static int QATISSUESTATUS_INCOMPLETEAREASPULL = 50;
+    final public static int QATISSUESTATUS_INCOMPLETEQUESTIONSANDAREASPULL = 60;
+
+    final public static String ISQATAMALLOWED = "isQATAMAllowed";
 }

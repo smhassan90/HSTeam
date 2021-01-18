@@ -19,6 +19,9 @@ public interface QATFormQuestionDAO {
     @Query("SELECT * FROM QATFormQuestion WHERE formId IN(:formIds)")
     List<QATFormQuestion> getAllPending(List<Long> formIds);
 
+    @Query("SELECT * FROM QATFormQuestion WHERE formId =:formId")
+    List<QATFormQuestion> getFormQuestions(long formId);
+
     @Query("SELECT * FROM QATFormQuestion")
     List<QATFormQuestion> getQatFormQuestions();
 

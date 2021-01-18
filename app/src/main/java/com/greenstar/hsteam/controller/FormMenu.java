@@ -99,6 +99,7 @@ public class FormMenu extends AppCompatActivity implements View.OnClickListener,
         SharedPreferences editor = this.getSharedPreferences(Codes.PREF_NAME, Context.MODE_PRIVATE);
         int isQTVAllowed = editor.getInt("isQTVAllowed",0);
         int isQATAllowed = editor.getInt("isQATAllowed",0);
+        int isQATAMAllowed = editor.getInt("isQATAMAllowed",0);
 
 
         if(v.getId()==R.id.llQTVForm){
@@ -111,7 +112,7 @@ public class FormMenu extends AppCompatActivity implements View.OnClickListener,
 
 
         }else if(v.getId()==R.id.llQATForm){
-            if(isQATAllowed==1){
+            if(isQATAllowed==1 || isQATAMAllowed==1){
                 Intent myIntent = new Intent(this, QATMenu.class);
                 startActivity(myIntent);
             }else{

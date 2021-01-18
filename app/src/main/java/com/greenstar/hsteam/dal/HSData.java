@@ -22,6 +22,7 @@ public class HSData implements Serializable {
     private Dashboard dashboard;
     private int isQTVAllowed;
     private int isQATAllowed;
+    private int isQATAMAllowed;
 
     List<Providers> providers;
     List<ApprovalQTVForm> qtvForms;
@@ -32,6 +33,13 @@ public class HSData implements Serializable {
     List<Area> areas;
     List<QATTCForm> qattcForms;
 
+    public int getIsQATAMAllowed() {
+        return isQATAMAllowed;
+    }
+
+    public void setIsQATAMAllowed(int isQATAMAllowed) {
+        this.isQATAMAllowed = isQATAMAllowed;
+    }
 
     public String getName() {
         return name;

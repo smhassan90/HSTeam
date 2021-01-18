@@ -25,4 +25,7 @@ public interface QuestionsDAO {
 
     @Query("DELETE FROM Question")
     public void nukeTable();
+
+    @Query("SELECT count(*) FROM Question")
+    public int getCount();
 }

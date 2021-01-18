@@ -96,7 +96,8 @@ public class PartialSync extends AppCompatActivity implements View.OnClickListen
         SharedPreferences shared = getSharedPreferences(Codes.PREF_NAME, MODE_PRIVATE);
         int isQATAllowed = (shared.getInt("isQATAllowed", 0));
         int isQTVAllowed = (shared.getInt("isQTVAllowed", 0));
-        if(isQATAllowed==0){
+        int isQATAMAllowed = (shared.getInt(Codes.ISQATAMALLOWED, 0));
+        if(isQATAllowed==0 && isQATAMAllowed==0){
             psQAT.setVisibility(View.GONE);
         }
         if(isQTVAllowed==0){

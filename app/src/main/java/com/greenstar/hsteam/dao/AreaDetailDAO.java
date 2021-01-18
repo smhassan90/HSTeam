@@ -19,6 +19,9 @@ public interface AreaDetailDAO {
     @Query("SELECT * FROM QATAreaDetail WHERE formId IN(:formIds)")
     List<QATAreaDetail> getAllPending(List<Long> formIds);
 
+    @Query("SELECT * FROM QATAreaDetail WHERE formId =:formId")
+    List<QATAreaDetail> getSingleFormAreas(long formId);
+
     @Query("SELECT * FROM QATAreaDetail")
     List<QATAreaDetail> getAreaDetails();
 

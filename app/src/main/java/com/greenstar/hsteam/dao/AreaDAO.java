@@ -16,6 +16,9 @@ public interface AreaDAO {
     @Query("SELECT * FROM Area")
     List<Area> getAll();
 
+    @Query("SELECT count(*) FROM Area")
+    int getCount();
+
     @Query("SELECT * FROM Area where status=1")
     List<Area> getActiveAreas();
 

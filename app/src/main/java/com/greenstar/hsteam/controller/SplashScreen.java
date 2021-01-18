@@ -24,38 +24,33 @@ public class SplashScreen extends AppCompatActivity {
         boolean isLoggedIn = (shared.getBoolean("isLoggedIn", false));
         int isQATAllowed = (shared.getInt("isQATAllowed", 0));
         int isQTVAllowed = (shared.getInt("isQTVAllowed", 0));
+        int isQATAMAllowed = (shared.getInt("isQATAMAllowed", 0));
+        Intent intent = null;
         if(isLoggedIn){
             if(isQTVAllowed==1 && isQATAllowed==1){
-                Intent intent = new Intent(getApplicationContext(),
+                intent = new Intent(getApplicationContext(),
                         FormMenu.class);
 
-                startActivity(intent);
-                finish();
             }else if(isQTVAllowed==0 && isQATAllowed==1){
-                Intent intent = new Intent(getApplicationContext(),
+                intent = new Intent(getApplicationContext(),
                         QATMenu.class);
 
-                startActivity(intent);
-                finish();
             }else if(isQTVAllowed==1 && isQATAllowed==0){
-                Intent intent = new Intent(getApplicationContext(),
+                intent = new Intent(getApplicationContext(),
                         QTVMenu.class);
 
-                startActivity(intent);
-                finish();
             }else{
-                Intent intent = new Intent(getApplicationContext(),
+                intent = new Intent(getApplicationContext(),
                         FormMenu.class);
 
-                startActivity(intent);
-                finish();
             }
         }else{
-            Intent intent = new Intent(this,
+            intent = new Intent(this,
                     LoginScreen.class);
 
-            startActivity(intent);
-            finish();
+
         }
+        startActivity(intent);
+        finish();
     }
 }
