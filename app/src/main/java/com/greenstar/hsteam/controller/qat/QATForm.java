@@ -179,6 +179,8 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
     }
 
     private void populateQuestions() {
+        areaQuestions.clear();
+        areaQuestions = new ArrayList<>();
         Providers provider = (Providers) spProviderCodeName.getSelectedItem();
         ApprovalQATForm approvalQATForm = db.getApprovalQATFormDAO().getForm(provider.getCode());
         List<ApprovalQATArea> approvalQATAreas = new ArrayList<>();
@@ -495,6 +497,7 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
             progressBar.show();//displays the progress bar
             populateQuestions();
             progressBar.dismiss();
+
         }
     }
 

@@ -18,6 +18,7 @@ import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.controller.Codes;
 import com.greenstar.hsteam.controller.PartialSync;
+import com.greenstar.hsteam.controller.ProviderProfile;
 import com.greenstar.hsteam.controller.qtv.DashboardController;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.utils.Util;
@@ -117,7 +118,7 @@ public class QATMenu extends AppCompatActivity implements View.OnClickListener, 
     public void onClick(View v) {
         if(v.getId()==R.id.llDashboard){
 
-            Intent myIntent = new Intent(this, DashboardController.class);
+            Intent myIntent = new Intent(this, ProviderProfile.class);
             startActivity(myIntent);
 
         }else if(v.getId()==R.id.llSync){

@@ -26,4 +26,6 @@
     <string name="QATForm">QAT Form</string>
     <string name="TechnicalCompetence">Technical Competence</string>
     <string name="PartialSynchronization">Partial Synchronization</string>
+    <string name="showProfile">Show Profile</string>
+    <string name="providerProfile">Provider Profile</string>
 </resources>

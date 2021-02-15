@@ -18,6 +18,7 @@ import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.controller.Codes;
 import com.greenstar.hsteam.controller.PartialSync;
+import com.greenstar.hsteam.controller.ProviderProfile;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.utils.Util;
 import com.greenstar.hsteam.utils.WebserviceResponse;
@@ -111,11 +112,10 @@ public class QTVMenu extends AppCompatActivity implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.llDashboard){
-/*
-           Intent myIntent = new Intent(this, DashboardController.class);
+
+           Intent myIntent = new Intent(this, ProviderProfile.class);
             startActivity(myIntent);
-            */
-        Toast.makeText(this,"Under development", Toast.LENGTH_SHORT).show();
+
 
         }else if(v.getId()==R.id.llSync){
             try{
