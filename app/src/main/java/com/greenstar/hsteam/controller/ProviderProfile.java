@@ -63,9 +63,6 @@ public class ProviderProfile  extends AppCompatActivity implements View.OnClickL
         wvPP.setWebViewClient(new MyBrowser());
         wvPP.getSettings().setJavaScriptEnabled(true);
 
-
-
-
         wvPP.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
