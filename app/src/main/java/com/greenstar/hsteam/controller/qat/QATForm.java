@@ -9,6 +9,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -261,8 +263,9 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
                 }else{
                     tvQuestionText.setTextColor(getResources().getColor(R.color.black));
                 }
+                String questionStr =quest.getQuestion();
 
-                tvQuestionText.setText(quest.getQuestion());
+                tvQuestionText.setText(fromHtml(questionStr));
                 if(quest.getIsCritical()==1){
                     tvQuestionText.setTypeface(null, Typeface.BOLD);
                 }
@@ -504,5 +507,16 @@ public class QATForm extends AppCompatActivity implements View.OnClickListener, 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String html){
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html,Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html);
+        }
+        return result;
     }
 }

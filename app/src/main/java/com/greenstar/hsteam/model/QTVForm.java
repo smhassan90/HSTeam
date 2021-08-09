@@ -29,6 +29,19 @@ public class QTVForm {
     private String supervisorName;
 
     /*
+    Matrix Diarrhea
+    */
+    /*
+    private String diarrhea2To5;
+    private String diarrhea6To10;
+    private String diarrhea11To14;
+    private String diarrheaTotal;
+    */
+    /*
+    Matrix Ends
+     */
+
+    /*
     Matrix 1
      */
     private String deliveryDataCondoms;
@@ -1067,4 +1080,5 @@ public class QTVForm {
     public void setChoCode(String choCode) {
         this.choCode = choCode;
     }
+
 }

@@ -20,13 +20,13 @@ android {
         applicationId "com.greenstar.hsteam"
         minSdkVersion 17
         targetSdkVersion 29
-        versionCode 25
-        versionName "4.1"
+        versionCode 27
+        versionName "5.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

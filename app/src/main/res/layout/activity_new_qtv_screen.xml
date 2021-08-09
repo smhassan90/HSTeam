@@ -156,6 +156,26 @@
                         android:text="@string/basicInformation"
                         android:id="@+id/tvBasicInfo"/>
                 </LinearLayout>
+
+                <!-- Diarrhea Matrix starts Here -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/table_header_size"
+                    android:background="@color/orange"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/text_style"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:text="Diarrhea Information Matrix"/>
+                </LinearLayout>
+
+                <include android:id="@+id/glMatrixDiarrhea" android:layout_width="match_parent" android:layout_height="match_parent" layout="@layout/matrix_diarrhea"/>
+
+                <!-- Diarrhea matrix ends here-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/table_header_size"

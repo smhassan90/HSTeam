@@ -64,6 +64,9 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
     final static int COLUMN_LENGTH = 6;
     final static int ROW_LENGTH = 9;
 
+    final static int COLUMN_LENGTH_DIARRHEA = 7;
+    final static int ROW_LENGTH_DIARRHEA = 3;
+
     final static int COLUMN_EDITTEXT_LENGTH = 5;
     final static int ROW_EDITTEXT_AVAILABILITY_LENGTH = 10;
     final static int ROW_EDITTEXT_EXPIRY_LENGTH = 9;
@@ -71,15 +74,40 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
     private static final int[] tvTotalRowsIds = {R.id.total1, R.id.total2, R.id.total3, R.id.total4, R.id.total5,
             R.id.total6, R.id.total7, R.id.total8, R.id.total9, R.id.total10};
     private static final int[] tvTotalColumnsIds = {R.id.tv81, R.id.tv82, R.id.tv83, R.id.tv84, R.id.tv85, R.id.tv86};
+
+    private static final int[] tvTotalRowsDiarrheaIds = {R.id.tvDiarrheaTotal1, R.id.tvDiarrheaTotal2, R.id.tvDiarrheaTotal3, R.id.tvDiarrheaTotal4, R.id.tvDiarrheaTotal5,
+            R.id.tvDiarrheaTotal6, R.id.tvDiarrheaTotal7};
     /*
     Matrix Common elements initialization ENDS
      */
     /*
+    Matrix 0 - Diarrhea matrix
     Matrix1 - Overall Method Mix Disaggregated by Age
     Matrix2 - Post- Partum Family Planning (PPIUD Clients)
     Matrix3 - Post PAC Family Planning (Both Miso and MVA Clients)
     Matrix4 - New Users Method Mix
      */
+
+    /*
+    Diarrhea matrix Starts
+
+     */
+
+    private static final int[][] btnMatrixDiarrheaIds = {
+            {R.id.btnD11, R.id.btnD12, R.id.btnD13, R.id.btnD14, R.id.btnD15, R.id.btnD16, R.id.btnD17},
+            {R.id.btnD21, R.id.btnD22, R.id.btnD23, R.id.btnD24, R.id.btnD25, R.id.btnD26, R.id.btnD27},
+            {R.id.btnD31, R.id.btnD32, R.id.btnD33, R.id.btnD34, R.id.btnD35, R.id.btnD36, R.id.btnD37}
+    };
+
+
+
+    Button btnMatrixDiarrhea[][] = new Button[ROW_LENGTH_DIARRHEA][COLUMN_LENGTH_DIARRHEA];
+
+    View glMatrixDiarrhea;
+
+    TextView[] totalRowDiarrhea = new TextView[COLUMN_LENGTH_DIARRHEA + 1];
+
+    //Diarrhea matrix ends here
 
     // Matrix1 - Overall Method Mix Disaggregated by Age
     //Declaration Starts
@@ -94,6 +122,8 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
             {R.id.btn181, R.id.btn182, R.id.btn183, R.id.btn184, R.id.btn185, R.id.btn186},
             {R.id.btn191, R.id.btn192, R.id.btn193, R.id.btn194, R.id.btn195, R.id.btn196}
     };
+
+
 
     Button btnMatrix1[][] = new Button[ROW_LENGTH][COLUMN_LENGTH];
 
@@ -293,7 +323,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         etComments = findViewById(R.id.etComments);
         populateFirstSection();
         //End of First section initialization
-
+        glMatrixDiarrhea =  findViewById(R.id.glMatrixDiarrhea);
 
         glMatrix1 = findViewById(R.id.glMatrix1);
         glMatrix2 = findViewById(R.id.glMatrix2);
@@ -782,8 +812,27 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         Total FP clients initialize elements in a matrix1
      */
     private void initializeMatrix1Elements() {
+        /*
+        Diarrhea matrix initialization
+        Its structure is different than other matrix so its declaration will be in different loop
+
+         */
+        for (int i = 0; i < ROW_LENGTH_DIARRHEA; i++) {
+            for (int j = 0; j < COLUMN_LENGTH_DIARRHEA; j++) {
+                btnMatrixDiarrhea[i][j] = glMatrixDiarrhea.findViewById(btnMatrixDiarrheaIds[i][j]);
+                btnMatrixDiarrhea[i][j].setOnLongClickListener(this);
+                btnMatrixDiarrhea[i][j].setOnClickListener(this);
+            }
+        }
+        for (int i = 0; i < COLUMN_LENGTH_DIARRHEA; i++) {
+            totalRowDiarrhea[i] = glMatrixDiarrhea.findViewById(tvTotalRowsDiarrheaIds[i]);
+        }
+        //Ends declaration
+
         for (int i = 0; i < ROW_LENGTH; i++) {
             for (int j = 0; j < COLUMN_LENGTH; j++) {
+
+
                 //Matrix1 initialization
                 btnMatrix1[i][j] = glMatrix1.findViewById(btnMatrix1Ids[i][j]);
                 btnMatrix1[i][j].setOnLongClickListener(this);
@@ -854,11 +903,44 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
     }
 
     private boolean isValid() {
+        int totalMaleFemale = 0;
+        int totalDiarrheaNonDiarrhea = 0;
+        int medicationNonMedication = 0;
+        int totalCounseling = 0;
+
+        totalMaleFemale = Integer.valueOf(totalRowDiarrhea[0].getText().toString()) +
+                Integer.valueOf(totalRowDiarrhea[1].getText().toString());
+        totalDiarrheaNonDiarrhea = Integer.valueOf(totalRowDiarrhea[2].getText().toString()) +
+                Integer.valueOf(totalRowDiarrhea[3].getText().toString());
+        medicationNonMedication = Integer.valueOf(totalRowDiarrhea[4].getText().toString()) +
+                Integer.valueOf(totalRowDiarrhea[5].getText().toString());
+        totalCounseling = Integer.valueOf(totalRowDiarrhea[6].getText().toString());
+
         boolean isValid = true;
+
         if (spProviderCodeName.getSelectedItemPosition() == 0) {
             isValid = false;
             Toast.makeText(this, "Please select Provider", Toast.LENGTH_SHORT).show();
-        } else if (Integer.valueOf(totalRow4[ROW_LENGTH].getText().toString()) > Integer.valueOf(tvNewUsers.getText().toString())) {
+        }else if(totalMaleFemale!=totalCounseling){
+            isValid = false;
+            Toast.makeText(this, "Sum of Male and Female patients should be equal to Total Counseling.", Toast.LENGTH_SHORT).show();
+        }else if(medicationNonMedication!=totalCounseling){
+            isValid = false;
+            Toast.makeText(this, "Sum of ORS + Zinc prescribed patients and no medication patients should be equal to Total Counseling.", Toast.LENGTH_SHORT).show();
+        }else if(totalCounseling<totalDiarrheaNonDiarrhea){
+            isValid = false;
+            Toast.makeText(this, "Total Counseling should always be greater than sum of Diarrhea and Non Diarrhea patients", Toast.LENGTH_SHORT).show();
+        }else if(totalDiarrheaNonDiarrhea<medicationNonMedication){
+            isValid = false;
+            Toast.makeText(this,
+                    "Diarrhea + non Diarrhea patients should always be greater than or equal to sum of ORS + Zinc patients and no medication patients",
+                    Toast.LENGTH_LONG).show();
+        }else if(totalMaleFemale!=totalDiarrheaNonDiarrhea){
+            isValid = false;
+            Toast.makeText(this,
+                    "Male patients + Female patients should always be equal to sum of Diarrhea and non diarrhea patients",
+                    Toast.LENGTH_LONG).show();
+        }else if (Integer.valueOf(totalRow4[ROW_LENGTH].getText().toString()) > Integer.valueOf(tvNewUsers.getText().toString())) {
             Toast.makeText(this, "Total new User Method mix from matrix is greater than Total New users. Both should be equal", Toast.LENGTH_LONG).show();
             isValid = false;
         } else if (Integer.valueOf(totalRow4[ROW_LENGTH].getText().toString()) < Integer.valueOf(tvNewUsers.getText().toString())) {
@@ -877,6 +959,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
             isValid = false;
             Toast.makeText(this, "Total PAC cases should be greater than matrix 3 total(MVA)", Toast.LENGTH_LONG).show();
         }
+
         return isValid;
 
     }
@@ -890,10 +973,53 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         Providers provider = (Providers) spProviderCodeName.getSelectedItem();
         qtvForm.setProviderCode(provider.getCode());
         qtvForm.setProviderName(provider.getName());
+
+        /*
+        Diarrhea Matrix
+         */
+
+        String count = "";
+        for (int i = 0; i < COLUMN_LENGTH_DIARRHEA; i++) {
+            if (count != "")
+                count += "-";
+            count += btnMatrixDiarrhea[0][i].getText().toString();
+        }
+        //qtvForm.setDiarrhea2To5(String.valueOf(count));
+
+        count = "";
+        for (int i = 0; i < COLUMN_LENGTH_DIARRHEA; i++) {
+            if (count != "")
+                count += "-";
+            count += btnMatrixDiarrhea[1][i].getText().toString();
+        }
+        //qtvForm.setDiarrhea6To10(String.valueOf(count));
+
+        count = "";
+        for (int i = 0; i < COLUMN_LENGTH_DIARRHEA; i++) {
+            if (count != "")
+                count += "-";
+            count += btnMatrixDiarrhea[2][i].getText().toString();
+        }
+        //qtvForm.setDiarrhea11To14(String.valueOf(count));
+
+        count = "";
+
+
+        for (int i = 0; i < COLUMN_LENGTH_DIARRHEA; i++) {
+            if (count != "")
+                count += "-";
+            count += totalRowDiarrhea[i].getText().toString();
+        }
+      //  qtvForm.setDiarrheaTotal(String.valueOf(count));
+
+        /*
+        ENDS Matrix Diarrhea
+         */
+
         /*
         Count condoms of 1st matrix
          */
-        String count = "";
+        count="";
         for (int i = 0; i < ROW_LENGTH; i++) {
             if (count != "")
                 count += "-";
@@ -1465,33 +1591,54 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
      */
     private void handleMatrixClick(int id) {
         int count=0;
+        boolean isDiarrheaMatrix = true;
 
-        for(int i=0; i<ROW_LENGTH;i++){
+        for(int i=0; i<ROW_LENGTH && isDiarrheaMatrix==true;i++){
             for(int j=0; j<COLUMN_LENGTH;j++){
                 if(id == btnMatrix1[i][j].getId()){
                     count = Integer.valueOf(btnMatrix1[i][j].getText().toString())+1;
                     btnMatrix1[i][j].setText(String.valueOf(count));
                     // Calculate Total.
                     calculateTotalMatrix1();
+                    isDiarrheaMatrix = false;
+                    break;
                 }else if(id == btnMatrix2[i][j].getId()){
                     count = Integer.valueOf(btnMatrix2[i][j].getText().toString())+1;
                     btnMatrix2[i][j].setText(String.valueOf(count));
                     // Calculate Total.
                     calculateTotalMatrix2();
+                    isDiarrheaMatrix = false;
+                    break;
                 }else if(id == btnMatrix3[i][j].getId()){
                     count = Integer.valueOf(btnMatrix3[i][j].getText().toString())+1;
                     btnMatrix3[i][j].setText(String.valueOf(count));
                     // Calculate Total.
                     calculateTotalMatrix3();
+                    isDiarrheaMatrix = false;
+                    break;
                 }else if(id == btnMatrix4[i][j].getId()){
                     count = Integer.valueOf(btnMatrix4[i][j].getText().toString())+1;
                     btnMatrix4[i][j].setText(String.valueOf(count));
                     // Calculate Total.
                     calculateTotalMatrix4();
+                    isDiarrheaMatrix = false;
+                    break;
                 }
             }
         }
 
+        if(isDiarrheaMatrix){
+            for(int i=0; i<ROW_LENGTH_DIARRHEA;i++) {
+                for (int j = 0; j < COLUMN_LENGTH_DIARRHEA; j++) {
+                    if(id == btnMatrixDiarrhea[i][j].getId()) {
+                        count = Integer.valueOf(btnMatrixDiarrhea[i][j].getText().toString()) + 1;
+                        btnMatrixDiarrhea[i][j].setText(String.valueOf(count));
+                        // Calculate Total.
+                        calculateTotalDiarrheaMatrix();
+                    }
+                }
+            }
+        }
     }
 
     /*
@@ -1501,43 +1648,60 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
             int count=0;
             int currentValue=0;
+        boolean isDiarrhea = false;
+        for(int i=0; i<ROW_LENGTH_DIARRHEA;i++){
+            for(int j=0; j<COLUMN_LENGTH_DIARRHEA;j++){
+                if(id == btnMatrixDiarrhea[i][j].getId()){
+                    currentValue = Integer.valueOf(btnMatrixDiarrhea[i][j].getText().toString());
+                    if(currentValue>0) {
+                        count = currentValue-1;
+                        btnMatrixDiarrhea[i][j].setText(String.valueOf(count));
 
-            for(int i=0; i<ROW_LENGTH;i++){
-                for(int j=0; j<COLUMN_LENGTH;j++){
-                    if(id == btnMatrix1[i][j].getId()){
+                        // Calculate Total.
+                        calculateTotalDiarrheaMatrix();
+                        isDiarrhea = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if(!isDiarrhea) {
+            for (int i = 0; i < ROW_LENGTH; i++) {
+                for (int j = 0; j < COLUMN_LENGTH; j++) {
+                    if (id == btnMatrix1[i][j].getId()) {
                         currentValue = Integer.valueOf(btnMatrix1[i][j].getText().toString());
-                        if(currentValue>0) {
-                            count = currentValue-1;
+                        if (currentValue > 0) {
+                            count = currentValue - 1;
                             btnMatrix1[i][j].setText(String.valueOf(count));
 
                             // Calculate Total.
                             calculateTotalMatrix1();
                             break;
                         }
-                    }else if(id == btnMatrix2[i][j].getId()){
+                    } else if (id == btnMatrix2[i][j].getId()) {
                         currentValue = Integer.valueOf(btnMatrix2[i][j].getText().toString());
-                        if(currentValue>0) {
-                            count = currentValue-1;
+                        if (currentValue > 0) {
+                            count = currentValue - 1;
                             btnMatrix2[i][j].setText(String.valueOf(count));
 
                             // Calculate Total.
                             calculateTotalMatrix2();
                             break;
                         }
-                    }else if(id == btnMatrix3[i][j].getId()){
+                    } else if (id == btnMatrix3[i][j].getId()) {
                         currentValue = Integer.valueOf(btnMatrix3[i][j].getText().toString());
-                        if(currentValue>0) {
-                            count = currentValue-1;
+                        if (currentValue > 0) {
+                            count = currentValue - 1;
                             btnMatrix3[i][j].setText(String.valueOf(count));
 
                             // Calculate Total.
                             calculateTotalMatrix3();
                             break;
                         }
-                    }else if(id == btnMatrix4[i][j].getId()){
+                    } else if (id == btnMatrix4[i][j].getId()) {
                         currentValue = Integer.valueOf(btnMatrix4[i][j].getText().toString());
-                        if(currentValue>0) {
-                            count = currentValue-1;
+                        if (currentValue > 0) {
+                            count = currentValue - 1;
                             btnMatrix4[i][j].setText(String.valueOf(count));
 
                             // Calculate Total.
@@ -1547,6 +1711,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
                     }
                 }
             }
+        }
 
     }
 
@@ -1704,6 +1869,19 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         }
 
         totalRow4[ROW_LENGTH].setText(String.valueOf(count));
+    }
+
+    private void calculateTotalDiarrheaMatrix(){
+        int count = 0;
+
+        //Sum all rows
+        for(int i =0 ; i<COLUMN_LENGTH_DIARRHEA;i++){
+            count = 0;
+            for(int j=0; j < ROW_LENGTH_DIARRHEA; j++){
+                count += Integer.valueOf(btnMatrixDiarrhea[j][i].getText().toString());
+            }
+            totalRowDiarrhea[i].setText(String.valueOf(count));
+        }
     }
 
     @Override
