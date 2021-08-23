@@ -64,8 +64,8 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
     final static int COLUMN_LENGTH = 6;
     final static int ROW_LENGTH = 9;
 
-    final static int COLUMN_LENGTH_DIARRHEA = 7;
-    final static int ROW_LENGTH_DIARRHEA = 3;
+    final static int COLUMN_LENGTH_DIARRHEA = 5;
+    final static int ROW_LENGTH_DIARRHEA = 2;
 
     final static int COLUMN_EDITTEXT_LENGTH = 5;
     final static int ROW_EDITTEXT_AVAILABILITY_LENGTH = 10;
@@ -75,8 +75,6 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
             R.id.total6, R.id.total7, R.id.total8, R.id.total9, R.id.total10};
     private static final int[] tvTotalColumnsIds = {R.id.tv81, R.id.tv82, R.id.tv83, R.id.tv84, R.id.tv85, R.id.tv86};
 
-    private static final int[] tvTotalRowsDiarrheaIds = {R.id.tvDiarrheaTotal1, R.id.tvDiarrheaTotal2, R.id.tvDiarrheaTotal3, R.id.tvDiarrheaTotal4, R.id.tvDiarrheaTotal5,
-            R.id.tvDiarrheaTotal6, R.id.tvDiarrheaTotal7};
     /*
     Matrix Common elements initialization ENDS
      */
@@ -94,9 +92,8 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
      */
 
     private static final int[][] btnMatrixDiarrheaIds = {
-            {R.id.btnD11, R.id.btnD12, R.id.btnD13, R.id.btnD14, R.id.btnD15, R.id.btnD16, R.id.btnD17},
-            {R.id.btnD21, R.id.btnD22, R.id.btnD23, R.id.btnD24, R.id.btnD25, R.id.btnD26, R.id.btnD27},
-            {R.id.btnD31, R.id.btnD32, R.id.btnD33, R.id.btnD34, R.id.btnD35, R.id.btnD36, R.id.btnD37}
+            {R.id.btnD11, R.id.btnD12, R.id.btnD13, R.id.btnD14},
+            {R.id.btnD21, R.id.btnD22, R.id.btnD23, R.id.btnD24}
     };
 
 
@@ -105,7 +102,9 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
     View glMatrixDiarrhea;
 
-    TextView[] totalRowDiarrhea = new TextView[COLUMN_LENGTH_DIARRHEA + 1];
+    TextView[] totalRowDiarrhea = new TextView[ROW_LENGTH_DIARRHEA + 1];
+
+    TextView[] totalColumnDiarrhea = new TextView[COLUMN_LENGTH_DIARRHEA];
 
     //Diarrhea matrix ends here
 
@@ -818,14 +817,18 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
          */
         for (int i = 0; i < ROW_LENGTH_DIARRHEA; i++) {
-            for (int j = 0; j < COLUMN_LENGTH_DIARRHEA; j++) {
+            for (int j = 0; j < COLUMN_LENGTH_DIARRHEA-1; j++) {
                 btnMatrixDiarrhea[i][j] = glMatrixDiarrhea.findViewById(btnMatrixDiarrheaIds[i][j]);
                 btnMatrixDiarrhea[i][j].setOnLongClickListener(this);
                 btnMatrixDiarrhea[i][j].setOnClickListener(this);
             }
         }
         for (int i = 0; i < COLUMN_LENGTH_DIARRHEA; i++) {
-            totalRowDiarrhea[i] = glMatrixDiarrhea.findViewById(tvTotalRowsDiarrheaIds[i]);
+            totalColumnDiarrhea[i] = glMatrixDiarrhea.findViewById(tvTotalColumnsIds[i]);
+        }
+
+        for (int i = 0; i <= ROW_LENGTH_DIARRHEA; i++) {
+            totalRowDiarrhea[i] = glMatrixDiarrhea.findViewById(tvTotalRowsIds[i]);
         }
         //Ends declaration
 
@@ -864,7 +867,10 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
             totalColumn2[i] = glMatrix2.findViewById(tvTotalColumnsIds[i]);
             totalColumn3[i] = glMatrix3.findViewById(tvTotalColumnsIds[i]);
             totalColumn4[i] = glMatrix4.findViewById(tvTotalColumnsIds[i]);
+
+
         }
+
     }
 
     @Override
@@ -903,44 +909,21 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
     }
 
     private boolean isValid() {
-        int totalMaleFemale = 0;
         int totalDiarrheaNonDiarrhea = 0;
         int medicationNonMedication = 0;
         int totalCounseling = 0;
-
-        totalMaleFemale = Integer.valueOf(totalRowDiarrhea[0].getText().toString()) +
-                Integer.valueOf(totalRowDiarrhea[1].getText().toString());
-        totalDiarrheaNonDiarrhea = Integer.valueOf(totalRowDiarrhea[2].getText().toString()) +
-                Integer.valueOf(totalRowDiarrhea[3].getText().toString());
-        medicationNonMedication = Integer.valueOf(totalRowDiarrhea[4].getText().toString()) +
-                Integer.valueOf(totalRowDiarrhea[5].getText().toString());
-        totalCounseling = Integer.valueOf(totalRowDiarrhea[6].getText().toString());
 
         boolean isValid = true;
 
         if (spProviderCodeName.getSelectedItemPosition() == 0) {
             isValid = false;
             Toast.makeText(this, "Please select Provider", Toast.LENGTH_SHORT).show();
-        }else if(totalMaleFemale!=totalCounseling){
+        }else if(totalRowDiarrhea[0].getCurrentTextColor() == getResources().getColor(R.color.redError)
+        || totalRowDiarrhea[1].getCurrentTextColor() == getResources().getColor(R.color.redError)){
+            Toast.makeText(this, "Error in Diarrhea matrix", Toast.LENGTH_LONG).show();
             isValid = false;
-            Toast.makeText(this, "Sum of Male and Female patients should be equal to Total Counseling.", Toast.LENGTH_SHORT).show();
-        }else if(medicationNonMedication!=totalCounseling){
-            isValid = false;
-            Toast.makeText(this, "Sum of ORS + Zinc prescribed patients and no medication patients should be equal to Total Counseling.", Toast.LENGTH_SHORT).show();
-        }else if(totalCounseling<totalDiarrheaNonDiarrhea){
-            isValid = false;
-            Toast.makeText(this, "Total Counseling should always be greater than sum of Diarrhea and Non Diarrhea patients", Toast.LENGTH_SHORT).show();
-        }else if(totalDiarrheaNonDiarrhea<medicationNonMedication){
-            isValid = false;
-            Toast.makeText(this,
-                    "Diarrhea + non Diarrhea patients should always be greater than or equal to sum of ORS + Zinc patients and no medication patients",
-                    Toast.LENGTH_LONG).show();
-        }else if(totalMaleFemale!=totalDiarrheaNonDiarrhea){
-            isValid = false;
-            Toast.makeText(this,
-                    "Male patients + Female patients should always be equal to sum of Diarrhea and non diarrhea patients",
-                    Toast.LENGTH_LONG).show();
-        }else if (Integer.valueOf(totalRow4[ROW_LENGTH].getText().toString()) > Integer.valueOf(tvNewUsers.getText().toString())) {
+        }
+        else if (Integer.valueOf(totalRow4[ROW_LENGTH].getText().toString()) > Integer.valueOf(tvNewUsers.getText().toString())) {
             Toast.makeText(this, "Total new User Method mix from matrix is greater than Total New users. Both should be equal", Toast.LENGTH_LONG).show();
             isValid = false;
         } else if (Integer.valueOf(totalRow4[ROW_LENGTH].getText().toString()) < Integer.valueOf(tvNewUsers.getText().toString())) {
@@ -979,38 +962,38 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
          */
 
         String count = "";
-        for (int i = 0; i < COLUMN_LENGTH_DIARRHEA; i++) {
+        for (int i = 0; i < COLUMN_LENGTH_DIARRHEA-1; i++) {
             if (count != "")
                 count += "-";
             count += btnMatrixDiarrhea[0][i].getText().toString();
         }
-        //qtvForm.setDiarrhea2To5(String.valueOf(count));
-
+       // qtvForm.setDiarrhea2To5(String.valueOf(count));
+        qtvForm.setDiarrhea2To5("0-0-0-0-0");
         count = "";
-        for (int i = 0; i < COLUMN_LENGTH_DIARRHEA; i++) {
+        for (int i = 0; i < COLUMN_LENGTH_DIARRHEA-1; i++) {
             if (count != "")
                 count += "-";
             count += btnMatrixDiarrhea[1][i].getText().toString();
         }
-        //qtvForm.setDiarrhea6To10(String.valueOf(count));
-
+        qtvForm.setDiarrhea6To10(String.valueOf(count));
+/*
         count = "";
         for (int i = 0; i < COLUMN_LENGTH_DIARRHEA; i++) {
             if (count != "")
                 count += "-";
             count += btnMatrixDiarrhea[2][i].getText().toString();
         }
-        //qtvForm.setDiarrhea11To14(String.valueOf(count));
-
+        qtvForm.setDiarrhea11To14(String.valueOf(count));
+*/
         count = "";
 
 
-        for (int i = 0; i < COLUMN_LENGTH_DIARRHEA; i++) {
+        for (int i = 0; i < COLUMN_LENGTH_DIARRHEA-1; i++) {
             if (count != "")
                 count += "-";
-            count += totalRowDiarrhea[i].getText().toString();
+            count+=totalColumnDiarrhea[i].getText().toString();
         }
-      //  qtvForm.setDiarrheaTotal(String.valueOf(count));
+        qtvForm.setDiarrheaTotal(String.valueOf(count));
 
         /*
         ENDS Matrix Diarrhea
@@ -1629,7 +1612,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
         if(isDiarrheaMatrix){
             for(int i=0; i<ROW_LENGTH_DIARRHEA;i++) {
-                for (int j = 0; j < COLUMN_LENGTH_DIARRHEA; j++) {
+                for (int j = 0; j < COLUMN_LENGTH_DIARRHEA-1; j++) {
                     if(id == btnMatrixDiarrhea[i][j].getId()) {
                         count = Integer.valueOf(btnMatrixDiarrhea[i][j].getText().toString()) + 1;
                         btnMatrixDiarrhea[i][j].setText(String.valueOf(count));
@@ -1650,7 +1633,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
             int currentValue=0;
         boolean isDiarrhea = false;
         for(int i=0; i<ROW_LENGTH_DIARRHEA;i++){
-            for(int j=0; j<COLUMN_LENGTH_DIARRHEA;j++){
+            for(int j=0; j<COLUMN_LENGTH_DIARRHEA-1;j++){
                 if(id == btnMatrixDiarrhea[i][j].getId()){
                     currentValue = Integer.valueOf(btnMatrixDiarrhea[i][j].getText().toString());
                     if(currentValue>0) {
@@ -1873,15 +1856,39 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
 
     private void calculateTotalDiarrheaMatrix(){
         int count = 0;
-
-        //Sum all rows
-        for(int i =0 ; i<COLUMN_LENGTH_DIARRHEA;i++){
+        //Sum all columns
+        for(int i =0 ; i<COLUMN_LENGTH_DIARRHEA-1;i++){
             count = 0;
             for(int j=0; j < ROW_LENGTH_DIARRHEA; j++){
                 count += Integer.valueOf(btnMatrixDiarrhea[j][i].getText().toString());
             }
-            totalRowDiarrhea[i].setText(String.valueOf(count));
+            totalColumnDiarrhea[i].setText(String.valueOf(count));
         }
+
+        //Sum all rows
+        for(int i =0 ; i<ROW_LENGTH_DIARRHEA;i++){
+            count = 0;
+          //  for(int j=0; j < COLUMN_LENGTH_DIARRHEA-1; j++){
+            //    count += Integer.valueOf(btnMatrixDiarrhea[i][j].getText().toString());
+           // }
+            count = Integer.valueOf(btnMatrixDiarrhea[i][0].getText().toString()) +
+                    Integer.valueOf(btnMatrixDiarrhea[i][1].getText().toString());
+
+            totalRowDiarrhea[i].setText(String.valueOf(count));
+            int totalmedNoMedORS = Integer.valueOf(btnMatrixDiarrhea[i][2].getText().toString()) +
+                    Integer.valueOf(btnMatrixDiarrhea[i][3].getText().toString());
+            if(count!=totalmedNoMedORS){
+                totalRowDiarrhea[i].setTextColor(getResources().getColor(R.color.redError));
+            }else{
+                totalRowDiarrhea[i].setTextColor(getResources().getColor(R.color.white));
+            }
+        }
+
+        count=0;
+        //Sum of total Counseling
+        count = Integer.valueOf(totalRowDiarrhea[0].getText().toString()) + Integer.valueOf(totalRowDiarrhea[1].getText().toString());
+
+        totalRowDiarrhea[ROW_LENGTH_DIARRHEA].setText(String.valueOf(count));
     }
 
     @Override
@@ -1889,7 +1896,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         try{
             decrementValue(v.getId());
         }catch(Exception e){
-            Crashlytics.logException(e);
+            int i = 9;
         }
 
         return true;

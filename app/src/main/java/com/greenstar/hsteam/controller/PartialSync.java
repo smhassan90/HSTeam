@@ -5,12 +5,14 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.greenstar.hsteam.R;
 import com.greenstar.hsteam.db.AppDatabase;
 import com.greenstar.hsteam.utils.PartialSyncResponse;
@@ -289,6 +291,8 @@ public class PartialSync extends AppCompatActivity implements View.OnClickListen
         }
         else if (Codes.TIMEOUT.equals(responseCode)){
             Toast.makeText(this,"Session Timeout", Toast.LENGTH_SHORT).show();
+        }else if(responseCode.equals(Codes.INVALID_VERSION)){
+            Toast.makeText(this, "Please update the application from playstore",Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(this,"Something went wrong", Toast.LENGTH_SHORT).show();
         }

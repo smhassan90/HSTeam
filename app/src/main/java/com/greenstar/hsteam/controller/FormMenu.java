@@ -154,7 +154,10 @@ public class FormMenu extends AppCompatActivity implements View.OnClickListener,
         }else if(response.equals(Codes.SOMETHINGWENTWRONG)){
             Crashlytics.log(Log.ERROR, name," Something went wrong at "+new Date());
             Toast.makeText(this, "Something went wrong. Please contact Admin",Toast.LENGTH_LONG).show();
-        }else{
+        }else if(response.equals(Codes.INVALID_VERSION)){
+            Crashlytics.log(Log.ERROR, name,"Invalid version "+new Date());
+            Toast.makeText(this, "Please update the application from playstore",Toast.LENGTH_LONG).show();
+        } else{
             JSONObject responseObj=null;
             String status="";
             String message = "";

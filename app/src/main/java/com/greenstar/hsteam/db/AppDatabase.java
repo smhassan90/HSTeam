@@ -34,7 +34,7 @@ import com.greenstar.hsteam.model.Question;
 
 @Database(entities = {Providers.class, QTVForm.class, ApprovalQTVForm.class, Dashboard.class, Question.class, Area.class, QATFormHeader.class,
         QATFormQuestion.class, QATAreaDetail.class, ApprovalQATForm.class, ApprovalQATArea.class, ApprovalQATFormQuestion.class, QATTCForm.class},
-        version = 4)
+        version = 5)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "hsteamdb";
     private static AppDatabase INSTANCE;

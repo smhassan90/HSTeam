@@ -31,12 +31,12 @@ public class QTVForm {
     /*
     Matrix Diarrhea
     */
-    /*
+
     private String diarrhea2To5;
     private String diarrhea6To10;
     private String diarrhea11To14;
     private String diarrheaTotal;
-    */
+
     /*
     Matrix Ends
      */
@@ -1081,4 +1081,35 @@ public class QTVForm {
         this.choCode = choCode;
     }
 
+    public String getDiarrhea2To5() {
+        return diarrhea2To5;
+    }
+
+    public void setDiarrhea2To5(String diarrhea2To5) {
+        this.diarrhea2To5 = diarrhea2To5;
+    }
+
+    public String getDiarrhea6To10() {
+        return diarrhea6To10;
+    }
+
+    public void setDiarrhea6To10(String diarrhea6To10) {
+        this.diarrhea6To10 = diarrhea6To10;
+    }
+
+    public String getDiarrhea11To14() {
+        return diarrhea11To14;
+    }
+
+    public void setDiarrhea11To14(String diarrhea11To14) {
+        this.diarrhea11To14 = diarrhea11To14;
+    }
+
+    public String getDiarrheaTotal() {
+        return diarrheaTotal;
+    }
+
+    public void setDiarrheaTotal(String diarrheaTotal) {
+        this.diarrheaTotal = diarrheaTotal;
+    }
 }
