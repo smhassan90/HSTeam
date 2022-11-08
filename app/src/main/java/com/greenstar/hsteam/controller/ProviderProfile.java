@@ -82,9 +82,9 @@ public class ProviderProfile  extends AppCompatActivity implements View.OnClickL
                 CookieManager cookieManager = CookieManager.getInstance();
                 cookieManager.setAcceptCookie(true);
                 cookieManager.removeSessionCookie();
-                cookieManager.setCookie("http://greenstar.ikonbusiness.com/provider/profile.html?providercode=" + provider.getCode(),"username=99998 ; Domain=.greenstar.ikonbusiness.com");
+                cookieManager.setCookie("https://greenstar.ikonbusiness.com/provider/profile.html?providercode=" + provider.getCode(),"username=99998 ; Domain=.greenstar.ikonbusiness.com");
                 cookieSyncManager.sync();
-                wvPP.loadUrl("http://greenstar.ikonbusiness.com/provider/profile.html?providercode="+provider.getCode());
+                wvPP.loadUrl("https://greenstar.ikonbusiness.com/provider/profile.html?providercode="+provider.getCode());
             }
         }
     }

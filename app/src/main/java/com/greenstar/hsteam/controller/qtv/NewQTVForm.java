@@ -919,7 +919,9 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
             isValid = false;
             Toast.makeText(this, "Please select Provider", Toast.LENGTH_SHORT).show();
         }else if(totalRowDiarrhea[0].getCurrentTextColor() == getResources().getColor(R.color.redError)
-        || totalRowDiarrhea[1].getCurrentTextColor() == getResources().getColor(R.color.redError)){
+        || totalRowDiarrhea[1].getCurrentTextColor() == getResources().getColor(R.color.redError)
+        || btnMatrixDiarrhea[0][0].getCurrentTextColor() == getResources().getColor(R.color.redError)
+        || btnMatrixDiarrhea[1][0].getCurrentTextColor() == getResources().getColor(R.color.redError)){
             Toast.makeText(this, "Error in Diarrhea matrix", Toast.LENGTH_LONG).show();
             isValid = false;
         }
@@ -942,6 +944,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
             isValid = false;
             Toast.makeText(this, "Total PAC cases should be greater than matrix 3 total(MVA)", Toast.LENGTH_LONG).show();
         }
+
 
         return isValid;
 
@@ -967,8 +970,7 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
                 count += "-";
             count += btnMatrixDiarrhea[0][i].getText().toString();
         }
-       // qtvForm.setDiarrhea2To5(String.valueOf(count));
-        qtvForm.setDiarrhea2To5("0-0-0-0-0");
+        qtvForm.setDiarrhea2To5(String.valueOf(count));
         count = "";
         for (int i = 0; i < COLUMN_LENGTH_DIARRHEA-1; i++) {
             if (count != "")
@@ -1889,6 +1891,25 @@ public class NewQTVForm extends AppCompatActivity implements View.OnClickListene
         count = Integer.valueOf(totalRowDiarrhea[0].getText().toString()) + Integer.valueOf(totalRowDiarrhea[1].getText().toString());
 
         totalRowDiarrhea[ROW_LENGTH_DIARRHEA].setText(String.valueOf(count));
+
+
+        /*
+        Total Male diarrhea should be equal or greater than Male Medication
+         */
+        if(Integer.valueOf(btnMatrixDiarrhea[0][0].getText().toString())<Integer.valueOf(btnMatrixDiarrhea[0][2].getText().toString())){
+            btnMatrixDiarrhea[0][0].setTextColor(getResources().getColor(R.color.redError));
+        }else {
+            btnMatrixDiarrhea[0][0].setTextColor(getResources().getColor(R.color.white));
+        }
+
+        /*
+        Total Female diarrhea should be equal or greater than Female Medication
+         */
+        if(Integer.valueOf(btnMatrixDiarrhea[1][0].getText().toString())<Integer.valueOf(btnMatrixDiarrhea[1][2].getText().toString())){
+            btnMatrixDiarrhea[1][0].setTextColor(getResources().getColor(R.color.redError));
+        }else{
+            btnMatrixDiarrhea[1][0].setTextColor(getResources().getColor(R.color.white));
+        }
     }
 
     @Override

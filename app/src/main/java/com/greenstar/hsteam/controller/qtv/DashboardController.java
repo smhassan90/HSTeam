@@ -23,6 +23,7 @@ public class DashboardController extends AppCompatActivity {
             Dashboard dashboard = db.getDashboardDAO().getAll();
 
             wvDashboard = findViewById(R.id.wvDashboard);
+
             wvDashboard.loadData(dashboard.getHtml(), "text/html", null);
         }catch(Exception e){
             Crashlytics.logException(e);

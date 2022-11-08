@@ -83,8 +83,6 @@ public class Util {
                     }
                 }
 
-
-
                 editor.apply();
                 try {
                     db = AppDatabase.getAppDatabase(activity);
